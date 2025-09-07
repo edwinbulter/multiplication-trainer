@@ -232,9 +232,93 @@ const App = () => {
                 }
               }}
               placeholder="Jouw antwoord"
+              className="answer-input"
               autoFocus
             />
-            <button type="submit">Controleer</button>
+            <div className="virtual-keyboard">
+              <div className="keyboard-row">
+                {[1, 2, 3].map(num => (
+                  <button
+                    key={num}
+                    type="button"
+                    className="keyboard-btn number-btn"
+                    onClick={() => {
+                      if (userAnswer.length < 10) {
+                        setUserAnswer(userAnswer + num.toString());
+                      }
+                    }}
+                  >
+                    {num}
+                  </button>
+                ))}
+              </div>
+              <div className="keyboard-row">
+                {[4, 5, 6].map(num => (
+                  <button
+                    key={num}
+                    type="button"
+                    className="keyboard-btn number-btn"
+                    onClick={() => {
+                      if (userAnswer.length < 10) {
+                        setUserAnswer(userAnswer + num.toString());
+                      }
+                    }}
+                  >
+                    {num}
+                  </button>
+                ))}
+              </div>
+              <div className="keyboard-row">
+                {[7, 8, 9].map(num => (
+                  <button
+                    key={num}
+                    type="button"
+                    className="keyboard-btn number-btn"
+                    onClick={() => {
+                      if (userAnswer.length < 10) {
+                        setUserAnswer(userAnswer + num.toString());
+                      }
+                    }}
+                  >
+                    {num}
+                  </button>
+                ))}
+              </div>
+              <div className="keyboard-row">
+                <button
+                  type="button"
+                  className="keyboard-btn comma-btn"
+                  onClick={() => {
+                    if (!userAnswer.includes(',') && userAnswer.length > 0 && userAnswer.length < 9) {
+                      setUserAnswer(userAnswer + ',');
+                    }
+                  }}
+                >
+                  ,
+                </button>
+                <button
+                  type="button"
+                  className="keyboard-btn number-btn"
+                  onClick={() => {
+                    if (userAnswer.length < 10) {
+                      setUserAnswer(userAnswer + '0');
+                    }
+                  }}
+                >
+                  0
+                </button>
+                <button
+                  type="button"
+                  className="keyboard-btn backspace-btn"
+                  onClick={() => {
+                    setUserAnswer(userAnswer.slice(0, -1));
+                  }}
+                >
+                  ⌫
+                </button>
+              </div>
+            </div>
+            <button type="submit" className="submit-btn">Controleer</button>
           </form>
           <p className="progress">Vraag {currentQuestionIndex + 1} van {questions.length}</p>
         </div>
