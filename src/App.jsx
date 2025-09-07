@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import './App.css';
 
 const App = () => {
@@ -33,12 +33,23 @@ const App = () => {
     localStorage.setItem('scores', JSON.stringify(scores));
   };
 
+  // Clear all scores
+  const clearScores = () => {
+    if (window.confirm('Weet je zeker dat je alle scores wilt wissen? Dit kan niet ongedaan worden gemaakt.')) {
+      localStorage.removeItem('scores');
+      // Force re-render by updating a state that affects the scoreboard
+      setShowScores(false);
+      setTimeout(() => setShowScores(true), 100);
+    }
+  };
+
   // Save username to localStorage
   const handleUsernameSubmit = (e) => {
     e.preventDefault();
     if (inputUsername.trim()) {
-      localStorage.setItem('username', inputUsername.trim());
-      setUsername(inputUsername.trim());
+      const formattedName = inputUsername.trim().toLowerCase().charAt(0).toUpperCase() + inputUsername.trim().toLowerCase().slice(1);
+      localStorage.setItem('username', formattedName);
+      setUsername(formattedName);
       setInputUsername('');
     }
   };
@@ -163,18 +174,29 @@ const App = () => {
         <div className="scoreboard">
           <h2>Scorebord</h2>
           <div className="scores-list">
-            {getSortedScores().map((score, index) => (
-              <div key={index} className="score-item">
-                <span className="score-name">{score.username}</span>
-                <span className="score-table">Tafel van {score.table.toString().replace('.', ',')}</span>
-                <span className="score-time">{score.duration.toFixed(1)} seconden</span>
-                <span className="score-date">{new Date(score.timestamp).toLocaleString('nl-NL')}</span>
-              </div>
-            ))}
+            {getSortedScores().length > 0 ? (
+              getSortedScores().map((score, index) => (
+                <div key={index} className="score-item">
+                  <span className="score-name">{score.username}</span>
+                  <span className="score-table">Tafel van {score.table.toString().replace('.', ',')}</span>
+                  <span className="score-time">{score.duration.toFixed(1)} seconden</span>
+                  <span className="score-date">{new Date(score.timestamp).toLocaleString('nl-NL')}</span>
+                </div>
+              ))
+            ) : (
+              <p className="no-scores">Nog geen scores beschikbaar. Speel een spel om je eerste score te behalen!</p>
+            )}
           </div>
-          <button className="back-button" onClick={() => setShowScores(false)}>
-            Terug naar Tafels
-          </button>
+          <div className="scoreboard-buttons">
+            {getSortedScores().length > 0 && (
+              <button className="clear-scores-button" onClick={clearScores}>
+                Wis Scorebord
+              </button>
+            )}
+            <button className="back-button" onClick={() => setShowScores(false)}>
+              Terug naar Tafels
+            </button>
+          </div>
         </div>
       ) : isComplete ? (
         <div className="completion">
