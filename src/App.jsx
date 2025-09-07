@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import './App.css';
 
 const App = () => {
@@ -14,6 +14,19 @@ const App = () => {
   const [isComplete, setIsComplete] = useState(false);
   const [feedback, setFeedback] = useState('');
   const [feedbackType, setFeedbackType] = useState('');
+  const [isMobile, setIsMobile] = useState(false);
+  
+  // Detect if virtual keyboard should be shown (mobile screens)
+  useEffect(() => {
+    const checkScreenSize = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    
+    checkScreenSize();
+    window.addEventListener('resize', checkScreenSize);
+    
+    return () => window.removeEventListener('resize', checkScreenSize);
+  }, []);
   
   // Load scores from localStorage
   const getScores = () => {
@@ -116,7 +129,7 @@ const App = () => {
     } else {
       // Wrong answer - clear input for retry and show error message
       setUserAnswer('');
-      setFeedback('Fout, geef het juiste antwoord');
+      setFeedback('Fout, probeer opnieuw');
       setFeedbackType('error');
     }
   };
@@ -215,11 +228,9 @@ const App = () => {
           <div className="question">
             <p>{questions[currentQuestionIndex].multiplicand.toString().replace('.', ',')} × {questions[currentQuestionIndex].multiplier} = ?</p>
           </div>
-          {feedback && (
-            <div className={`feedback ${feedbackType}`}>
-              {feedback}
-            </div>
-          )}
+          <div className={`feedback ${feedbackType}`}>
+            {feedback}
+          </div>
           <form onSubmit={handleSubmit}>
             <input
               type="text"
@@ -234,6 +245,7 @@ const App = () => {
               placeholder="Jouw antwoord"
               className="answer-input"
               autoFocus
+              readOnly={isMobile}
             />
             <div className="virtual-keyboard">
               <div className="keyboard-row">
