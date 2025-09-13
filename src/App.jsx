@@ -226,27 +226,28 @@ const App = () => {
         <div className="bg-white rounded-xl p-4 shadow-lg w-full max-w-2xl mx-auto box-border overflow-x-hidden flex flex-col items-center text-center sm:p-3 small-mobile:p-2 small-mobile:rounded-lg small-mobile:mx-auto small-mobile:w-11/12">
           <h2 className="text-teal-600 text-3xl mb-6 font-semibold sm:text-2xl sm:mb-4 small-mobile:text-xl small-mobile:mb-2">Tafel van {selectedTable.toString().replace('.', ',')}</h2>
           <div className="text-3xl my-8 font-bold sm:text-2xl sm:my-4 small-mobile:text-xl small-mobile:my-2">
-            <p>{questions[currentQuestionIndex].multiplicand.toString().replace('.', ',')} × {questions[currentQuestionIndex].multiplier} = ?</p>
+            <p>{questions[currentQuestionIndex].multiplicand.toString().replace('.', ',')} × {questions[currentQuestionIndex].multiplier} = <span className="text-blue-600 border-b-2 border-blue-600 min-w-8 inline-block text-center">{userAnswer}</span></p>
           </div>
           <div className={`my-4 p-3 rounded-lg font-bold min-h-12 w-4/5 max-w-sm box-border text-center flex items-center justify-center sm:min-h-11 sm:p-2 sm:text-sm xs:min-h-10 small-mobile:my-2 small-mobile:p-2 small-mobile:min-h-8 small-mobile:text-xs ${feedbackType === 'success' ? 'bg-green-600 text-white animate-pulse' : feedbackType === 'error' ? 'bg-red-600 text-white' : ''}`}>
             {feedback}
           </div>
           <form onSubmit={handleSubmit} className="flex flex-col items-center gap-4 my-8 sm:gap-3 sm:my-4 small-mobile:gap-2 small-mobile:my-3">
-            <input
-              type="text"
-              value={userAnswer}
-              onChange={(e) => {
-                // Allow only numbers and at most one comma
-                const value = e.target.value;
-                if (value === '' || /^\d*,?\d*$/.test(value)) {
-                  setUserAnswer(value);
-                }
-              }}
-              placeholder="Jouw antwoord"
-              className={`w-72 p-4 text-xl border-2 border-gray-300 rounded-lg text-center box-border focus:border-blue-600 focus:outline-none text-gray-900 ${isMobile ? 'w-44 text-lg bg-gray-50 cursor-default border-blue-600 p-3' : ''} sm:w-36 sm:text-base sm:p-2 small-mobile:w-32 small-mobile:text-sm small-mobile:p-2`}
-              autoFocus
-              readOnly={isMobile}
-            />
+            {!isMobile && (
+              <input
+                type="text"
+                value={userAnswer}
+                onChange={(e) => {
+                  // Allow only numbers and at most one comma
+                  const value = e.target.value;
+                  if (value === '' || /^\d*,?\d*$/.test(value)) {
+                    setUserAnswer(value);
+                  }
+                }}
+                placeholder="Jouw antwoord"
+                className="w-72 p-4 text-xl border-2 border-gray-300 rounded-lg text-center box-border focus:border-blue-600 focus:outline-none text-gray-900 sm:w-36 sm:text-base sm:p-2"
+                autoFocus
+              />
+            )}
             {isMobile && (
               <div className="block my-4 max-w-full w-full box-border mx-auto small-mobile:my-2">
                 <div className="flex justify-center gap-2 mb-2 sm:gap-1 small-mobile:gap-1 small-mobile:mb-1">
