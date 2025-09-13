@@ -140,7 +140,7 @@ const App = () => {
   };
 
   return (
-    <div className="min-h-screen w-full overflow-x-hidden bg-slate-50 text-slate-800 p-4 text-center box-border flex flex-col justify-center items-center small-mobile:p-2 small-mobile:min-h-screen">
+    <div className="min-h-screen w-full overflow-x-hidden bg-slate-50 text-slate-800 p-4 text-center box-border flex flex-col justify-center items-center mx-auto small-mobile:p-2 small-mobile:min-h-screen small-mobile:justify-center small-mobile:items-center">
       <h1 className="text-blue-600 text-4xl mb-8 font-bold md:text-5xl sm:text-3xl sm:mb-4 small-mobile:text-2xl small-mobile:mb-3">Tafels Oefenen</h1>
       
       {!username ? (
@@ -223,7 +223,7 @@ const App = () => {
           </button>
         </div>
       ) : (
-        <div className="bg-white rounded-xl p-4 shadow-lg w-full max-w-2xl mx-auto box-border overflow-x-hidden flex flex-col items-center sm:p-3 small-mobile:p-2 small-mobile:rounded-lg">
+        <div className="bg-white rounded-xl p-4 shadow-lg w-full max-w-2xl mx-auto box-border overflow-x-hidden flex flex-col items-center text-center sm:p-3 small-mobile:p-2 small-mobile:rounded-lg small-mobile:mx-auto small-mobile:w-11/12">
           <h2 className="text-teal-600 text-3xl mb-6 font-semibold sm:text-2xl sm:mb-4 small-mobile:text-xl small-mobile:mb-2">Tafel van {selectedTable.toString().replace('.', ',')}</h2>
           <div className="text-3xl my-8 font-bold sm:text-2xl sm:my-4 small-mobile:text-xl small-mobile:my-2">
             <p>{questions[currentQuestionIndex].multiplicand.toString().replace('.', ',')} × {questions[currentQuestionIndex].multiplier} = ?</p>
