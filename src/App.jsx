@@ -243,7 +243,7 @@ const App = () => {
                 }
               }}
               placeholder="Jouw antwoord"
-              className={`w-72 p-4 text-xl border-2 border-gray-300 rounded-lg text-center box-border focus:border-blue-600 focus:outline-none ${isMobile ? 'w-44 text-lg bg-gray-50 cursor-default border-blue-600 p-3' : ''} sm:w-36 sm:text-base sm:p-2 small-mobile:w-32 small-mobile:text-sm small-mobile:p-2`}
+              className={`w-72 p-4 text-xl border-2 border-gray-300 rounded-lg text-center box-border focus:border-blue-600 focus:outline-none text-gray-900 ${isMobile ? 'w-44 text-lg bg-gray-50 cursor-default border-blue-600 p-3' : ''} sm:w-36 sm:text-base sm:p-2 small-mobile:w-32 small-mobile:text-sm small-mobile:p-2`}
               autoFocus
               readOnly={isMobile}
             />
