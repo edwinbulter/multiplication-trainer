@@ -1,6 +1,6 @@
 # Multiplication Trainer
 
-Een React-applicatie voor het oefenen van tafels van vermenigvuldiging.
+Een React-applicatie voor het oefenen van tafels van vermenigvuldiging, gebouwd met **React**, **Vite** en **Tailwind CSS**.
 
 ## Hoe de applicatie te gebruiken
 
@@ -37,6 +37,53 @@ Om de productie-versie lokaal te bekijken:
 ```bash
 npm run preview
 ```
+
+## Technische Stack
+
+Deze applicatie is gebouwd met moderne web technologieën:
+
+- **React 19** - Frontend framework voor interactieve gebruikersinterfaces
+- **Vite** - Snelle build tool en development server
+- **Tailwind CSS (CDN)** - Utility-first CSS framework voor responsive design
+
+### Tailwind CSS Implementatie
+
+De applicatie gebruikt **Tailwind CSS via CDN** voor optimale betrouwbaarheid en eenvoud:
+
+**CDN Configuratie:**
+- Tailwind CSS wordt geladen via `https://cdn.tailwindcss.com`
+- Custom configuratie wordt inline gedefinieerd in `index.html`
+- Geen lokale build configuratie nodig - werkt altijd
+
+**Custom Utilities:**
+- `w-15` en `h-15` (3.75rem/60px) - Voor keyboard button afmetingen
+- `xs` breakpoint (320px) - Voor extra kleine schermen
+
+**Voordelen van CDN implementatie:**
+- ✅ Geen build configuratie problemen
+- ✅ Altijd up-to-date Tailwind versie
+- ✅ Snelle development zonder compilation tijd
+- ✅ Betrouwbaar en stabiel
+- ✅ Custom configuratie behouden
+
+De Tailwind configuratie bevindt zich inline in `index.html`:
+```javascript
+tailwind.config = {
+  theme: {
+    extend: {
+      width: { '15': '3.75rem' },
+      height: { '15': '3.75rem' },
+      screens: { 'xs': '320px' }
+    }
+  }
+}
+```
+
+**Features:**
+- **Responsive design** - Automatische aanpassing aan verschillende schermformaten
+- **Custom breakpoints** - Extra kleine schermen (xs: 320px) voor optimale mobiele ervaring
+- **Custom utilities** - Aangepaste width/height classes (w-15, h-15) voor keyboard buttons
+- **Mobile-first approach** - Ontworpen voor mobiele apparaten met virtual keyboard functionaliteit
 
 ## AWS S3 Hosting Setup
 

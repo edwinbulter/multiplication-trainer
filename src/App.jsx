@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import './App.css';
 
 const App = () => {
   const [inputUsername, setInputUsername] = useState('');
@@ -141,42 +140,43 @@ const App = () => {
   };
 
   return (
-    <div className="app">
-      <h1>Tafels Oefenen</h1>
+    <div className="min-h-screen w-full overflow-x-hidden bg-slate-50 text-slate-800 p-4 text-center box-border flex flex-col justify-center items-center small-mobile:p-2 small-mobile:min-h-screen">
+      <h1 className="text-blue-600 text-4xl mb-8 font-bold md:text-5xl sm:text-3xl sm:mb-4 small-mobile:text-2xl small-mobile:mb-3">Tafels Oefenen</h1>
       
       {!username ? (
-        <div className="username-form">
-          <h2>Voer je naam in</h2>
-          <form onSubmit={handleUsernameSubmit}>
+        <div className="max-w-md mx-auto my-8 p-8 bg-white rounded-xl shadow-lg">
+          <h2 className="text-teal-600 text-3xl mb-6 font-semibold sm:text-2xl sm:mb-4">Voer je naam in</h2>
+          <form onSubmit={handleUsernameSubmit} className="flex flex-col items-center gap-4">
             <input
               type="text"
               value={inputUsername}
               onChange={(e) => setInputUsername(e.target.value)}
               placeholder="Jouw naam"
               required
+              className="w-full max-w-xs text-xl p-3 border-2 border-gray-300 rounded-lg text-center focus:border-blue-600 focus:outline-none"
             />
-            <button type="submit">Start</button>
+            <button type="submit" className="bg-teal-600 text-white border-none rounded-lg px-6 py-3 text-lg cursor-pointer transition-colors hover:bg-teal-700">Start</button>
           </form>
         </div>
       ) : !selectedTable && !showScores ? (
-        <div className="table-selection">
-          <h2>Welkom {username}!</h2>
-          <h3>Welk tafeltje wil je oefenen?</h3>
-          <button className="scoreboard-button" onClick={() => setShowScores(true)}>
+        <div className="my-8 flex flex-col items-stretch w-full text-center max-w-4xl">
+          <h2 className="text-teal-600 text-3xl mb-6 font-semibold sm:text-2xl sm:mb-4">Welkom {username}!</h2>
+          <h3 className="text-slate-800 text-2xl mb-4 sm:text-xl">Welk tafeltje wil je oefenen?</h3>
+          <button className="bg-teal-600 text-white border-none rounded-lg px-6 py-3 text-base cursor-pointer transition-all hover:bg-teal-700 hover:shadow-lg shadow-md mx-4 my-4" onClick={() => setShowScores(true)}>
             Bekijk Scorebord
           </button>
-          <div className="table-buttons">
+          <div className="grid grid-cols-3 gap-4 my-8 px-4 w-full text-center sm:gap-3 sm:px-2 xs:gap-2">
             {[0.125, 0.25, 1, 2, 2.5, 3, 4, 5, 6, 7, 8, 9, 10, 12, 15, 25].map((num) => (
               <button
                 key={num}
                 onClick={() => startPractice(num)}
-                className="table-button"
+                className="bg-blue-600 text-white border-none rounded-lg p-4 text-lg cursor-pointer transition-all hover:bg-blue-700 hover:-translate-y-0.5 hover:shadow-lg w-full flex items-center justify-center text-center break-words shadow-md sm:p-3 sm:text-base sm:min-h-12 xs:p-2 xs:text-sm xs:min-h-10"
               >
                 Tafel van {num.toString().replace('.', ',')}
               </button>
             ))}
           </div>
-          <button className="logout-button" onClick={() => {
+          <button className="bg-red-600 text-white border-none rounded-lg px-5 py-2.5 text-sm cursor-pointer transition-all hover:bg-red-700" onClick={() => {
             setUsername('');
             localStorage.removeItem('username');
           }}>
@@ -184,54 +184,54 @@ const App = () => {
           </button>
         </div>
       ) : showScores ? (
-        <div className="scoreboard">
-          <h2>Scorebord</h2>
-          <div className="scores-list">
+        <div className="bg-white rounded-xl p-8 shadow-lg my-8 mx-auto max-w-4xl w-full sm:p-4">
+          <h2 className="text-teal-600 text-3xl mb-6 font-semibold sm:text-2xl sm:mb-4">Scorebord</h2>
+          <div className="my-8">
             {getSortedScores().length > 0 ? (
               getSortedScores().map((score, index) => (
-                <div key={index} className="score-item">
-                  <span className="score-name">{score.username}</span>
-                  <span className="score-table">Tafel van {score.table.toString().replace('.', ',')}</span>
-                  <span className="score-time">{score.duration.toFixed(1)} seconden</span>
-                  <span className="score-date">{new Date(score.timestamp).toLocaleString('nl-NL')}</span>
+                <div key={index} className="grid grid-cols-4 gap-4 p-4 border-b border-gray-200 items-center hover:bg-slate-50 sm:grid-cols-2 sm:gap-2 sm:p-2">
+                  <span className="font-bold text-blue-600">{score.username}</span>
+                  <span className="text-teal-600">Tafel van {score.table.toString().replace('.', ',')}</span>
+                  <span className="font-bold sm:col-span-1">{score.duration.toFixed(1)} seconden</span>
+                  <span className="text-gray-600 text-sm sm:col-span-1 sm:text-xs">{new Date(score.timestamp).toLocaleString('nl-NL')}</span>
                 </div>
               ))
             ) : (
-              <p className="no-scores">Nog geen scores beschikbaar. Speel een spel om je eerste score te behalen!</p>
+              <p className="text-gray-600 italic p-8 text-center bg-gray-50 rounded-lg my-4">Nog geen scores beschikbaar. Speel een spel om je eerste score te behalen!</p>
             )}
           </div>
-          <div className="scoreboard-buttons">
+          <div className="flex gap-4 justify-center mt-8 flex-wrap sm:flex-col sm:items-center">
             {getSortedScores().length > 0 && (
-              <button className="clear-scores-button" onClick={clearScores}>
+              <button className="bg-red-600 text-white border-none rounded-lg px-6 py-3 text-base cursor-pointer transition-all hover:bg-red-700 hover:-translate-y-0.5 sm:w-full sm:max-w-xs" onClick={clearScores}>
                 Wis Scorebord
               </button>
             )}
-            <button className="back-button" onClick={() => setShowScores(false)}>
+            <button className="bg-blue-600 text-white border-none rounded-lg px-6 py-3 text-base cursor-pointer transition-all hover:bg-blue-700 sm:w-full sm:max-w-xs" onClick={() => setShowScores(false)}>
               Terug naar Tafels
             </button>
           </div>
         </div>
       ) : isComplete ? (
-        <div className="completion">
-          <h2>Goed gedaan! 🎉</h2>
-          <p>Je hebt de tafel van {selectedTable.toString().replace('.', ',')} afgerond in {getDuration()} seconden!</p>
+        <div className="bg-white rounded-xl p-8 shadow-lg max-w-lg">
+          <h2 className="text-green-600 text-3xl mb-6 font-semibold sm:text-2xl">Goed gedaan! 🎉</h2>
+          <p className="mb-6 text-lg sm:text-base">Je hebt de tafel van {selectedTable.toString().replace('.', ',')} afgerond in {getDuration()} seconden!</p>
           <button
             onClick={() => setSelectedTable(null)}
-            className="restart-button"
+            className="bg-blue-600 text-white border-none rounded-lg px-6 py-3 text-lg cursor-pointer transition-colors hover:bg-blue-700"
           >
             Kies een andere tafel
           </button>
         </div>
       ) : (
-        <div className="practice">
-          <h2>Tafel van {selectedTable.toString().replace('.', ',')}</h2>
-          <div className="question">
+        <div className="bg-white rounded-xl p-4 shadow-lg w-full max-w-2xl mx-auto box-border overflow-x-hidden flex flex-col items-center sm:p-3 small-mobile:p-2 small-mobile:rounded-lg">
+          <h2 className="text-teal-600 text-3xl mb-6 font-semibold sm:text-2xl sm:mb-4 small-mobile:text-xl small-mobile:mb-2">Tafel van {selectedTable.toString().replace('.', ',')}</h2>
+          <div className="text-3xl my-8 font-bold sm:text-2xl sm:my-4 small-mobile:text-xl small-mobile:my-2">
             <p>{questions[currentQuestionIndex].multiplicand.toString().replace('.', ',')} × {questions[currentQuestionIndex].multiplier} = ?</p>
           </div>
-          <div className={`feedback ${feedbackType}`}>
+          <div className={`my-4 p-3 rounded-lg font-bold min-h-12 w-4/5 max-w-sm box-border text-center flex items-center justify-center sm:min-h-11 sm:p-2 sm:text-sm xs:min-h-10 small-mobile:my-2 small-mobile:p-2 small-mobile:min-h-8 small-mobile:text-xs ${feedbackType === 'success' ? 'bg-green-600 text-white animate-pulse' : feedbackType === 'error' ? 'bg-red-600 text-white' : ''}`}>
             {feedback}
           </div>
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={handleSubmit} className="flex flex-col items-center gap-4 my-8 sm:gap-3 sm:my-4 small-mobile:gap-2 small-mobile:my-3">
             <input
               type="text"
               value={userAnswer}
@@ -243,96 +243,98 @@ const App = () => {
                 }
               }}
               placeholder="Jouw antwoord"
-              className="answer-input"
+              className={`w-72 p-4 text-xl border-2 border-gray-300 rounded-lg text-center box-border focus:border-blue-600 focus:outline-none ${isMobile ? 'w-44 text-lg bg-gray-50 cursor-default border-blue-600 p-3' : ''} sm:w-36 sm:text-base sm:p-2 small-mobile:w-32 small-mobile:text-sm small-mobile:p-2`}
               autoFocus
               readOnly={isMobile}
             />
-            <div className="virtual-keyboard">
-              <div className="keyboard-row">
-                {[1, 2, 3].map(num => (
+            {isMobile && (
+              <div className="block my-4 max-w-full w-full box-border mx-auto small-mobile:my-2">
+                <div className="flex justify-center gap-2 mb-2 sm:gap-1 small-mobile:gap-1 small-mobile:mb-1">
+                  {[1, 2, 3].map(num => (
+                    <button
+                      key={num}
+                      type="button"
+                      className="w-15 h-15 text-2xl font-bold border-2 border-gray-300 rounded-lg cursor-pointer transition-all flex items-center justify-center bg-gray-50 text-slate-800 hover:bg-blue-600 hover:text-white hover:border-blue-600 hover:-translate-y-0.5 active:translate-y-0 active:bg-blue-700 sm:w-12 sm:h-12 sm:text-xl xs:w-11 xs:h-11 xs:text-lg small-mobile:w-10 small-mobile:h-10 small-mobile:text-base medium-mobile:w-12 medium-mobile:h-12 medium-mobile:text-lg large-mobile:w-15 large-mobile:h-15 large-mobile:text-xl"
+                      onClick={() => {
+                        if (userAnswer.length < 10) {
+                          setUserAnswer(userAnswer + num.toString());
+                        }
+                      }}
+                    >
+                      {num}
+                    </button>
+                  ))}
+                </div>
+                <div className="flex justify-center gap-2 mb-2 sm:gap-1 small-mobile:gap-1 small-mobile:mb-1">
+                  {[4, 5, 6].map(num => (
+                    <button
+                      key={num}
+                      type="button"
+                      className="w-15 h-15 text-2xl font-bold border-2 border-gray-300 rounded-lg cursor-pointer transition-all flex items-center justify-center bg-gray-50 text-slate-800 hover:bg-blue-600 hover:text-white hover:border-blue-600 hover:-translate-y-0.5 active:translate-y-0 active:bg-blue-700 sm:w-12 sm:h-12 sm:text-xl xs:w-11 xs:h-11 xs:text-lg small-mobile:w-10 small-mobile:h-10 small-mobile:text-base medium-mobile:w-12 medium-mobile:h-12 medium-mobile:text-lg large-mobile:w-15 large-mobile:h-15 large-mobile:text-xl"
+                      onClick={() => {
+                        if (userAnswer.length < 10) {
+                          setUserAnswer(userAnswer + num.toString());
+                        }
+                      }}
+                    >
+                      {num}
+                    </button>
+                  ))}
+                </div>
+                <div className="flex justify-center gap-2 mb-2 sm:gap-1 small-mobile:gap-1 small-mobile:mb-1">
+                  {[7, 8, 9].map(num => (
+                    <button
+                      key={num}
+                      type="button"
+                      className="w-15 h-15 text-2xl font-bold border-2 border-gray-300 rounded-lg cursor-pointer transition-all flex items-center justify-center bg-gray-50 text-slate-800 hover:bg-blue-600 hover:text-white hover:border-blue-600 hover:-translate-y-0.5 active:translate-y-0 active:bg-blue-700 sm:w-12 sm:h-12 sm:text-xl xs:w-11 xs:h-11 xs:text-lg small-mobile:w-10 small-mobile:h-10 small-mobile:text-base medium-mobile:w-12 medium-mobile:h-12 medium-mobile:text-lg large-mobile:w-15 large-mobile:h-15 large-mobile:text-xl"
+                      onClick={() => {
+                        if (userAnswer.length < 10) {
+                          setUserAnswer(userAnswer + num.toString());
+                        }
+                      }}
+                    >
+                      {num}
+                    </button>
+                  ))}
+                </div>
+                <div className="flex justify-center gap-2 mb-2 sm:gap-1 small-mobile:gap-1 small-mobile:mb-1">
                   <button
-                    key={num}
                     type="button"
-                    className="keyboard-btn number-btn"
+                    className="w-15 h-15 text-3xl font-bold border-2 border-gray-300 rounded-lg cursor-pointer transition-all flex items-center justify-center bg-gray-200 text-teal-600 hover:bg-blue-600 hover:text-white hover:border-blue-600 hover:-translate-y-0.5 active:translate-y-0 active:bg-blue-700 sm:w-12 sm:h-12 sm:text-2xl xs:w-11 xs:h-11 xs:text-xl small-mobile:w-10 small-mobile:h-10 small-mobile:text-lg medium-mobile:w-12 medium-mobile:h-12 medium-mobile:text-xl large-mobile:w-15 large-mobile:h-15 large-mobile:text-2xl"
                     onClick={() => {
-                      if (userAnswer.length < 10) {
-                        setUserAnswer(userAnswer + num.toString());
+                      if (!userAnswer.includes(',') && userAnswer.length > 0 && userAnswer.length < 9) {
+                        setUserAnswer(userAnswer + ',');
                       }
                     }}
                   >
-                    {num}
+                    ,
                   </button>
-                ))}
-              </div>
-              <div className="keyboard-row">
-                {[4, 5, 6].map(num => (
                   <button
-                    key={num}
                     type="button"
-                    className="keyboard-btn number-btn"
+                    className="w-15 h-15 text-2xl font-bold border-2 border-gray-300 rounded-lg cursor-pointer transition-all flex items-center justify-center bg-gray-50 text-slate-800 hover:bg-blue-600 hover:text-white hover:border-blue-600 hover:-translate-y-0.5 active:translate-y-0 active:bg-blue-700 sm:w-12 sm:h-12 sm:text-xl xs:w-11 xs:h-11 xs:text-lg small-mobile:w-10 small-mobile:h-10 small-mobile:text-base medium-mobile:w-12 medium-mobile:h-12 medium-mobile:text-lg large-mobile:w-15 large-mobile:h-15 large-mobile:text-xl"
                     onClick={() => {
                       if (userAnswer.length < 10) {
-                        setUserAnswer(userAnswer + num.toString());
+                        setUserAnswer(userAnswer + '0');
                       }
                     }}
                   >
-                    {num}
+                    0
                   </button>
-                ))}
-              </div>
-              <div className="keyboard-row">
-                {[7, 8, 9].map(num => (
                   <button
-                    key={num}
                     type="button"
-                    className="keyboard-btn number-btn"
+                    className="w-15 h-15 text-xl font-bold border-2 border-red-600 rounded-lg cursor-pointer transition-all flex items-center justify-center bg-red-600 text-white hover:bg-red-700 hover:border-red-700 hover:-translate-y-0.5 active:translate-y-0 active:bg-red-800 sm:w-12 sm:h-12 sm:text-lg xs:w-11 xs:h-11 xs:text-base small-mobile:w-10 small-mobile:h-10 small-mobile:text-sm medium-mobile:w-12 medium-mobile:h-12 medium-mobile:text-base large-mobile:w-15 large-mobile:h-15 large-mobile:text-lg"
                     onClick={() => {
-                      if (userAnswer.length < 10) {
-                        setUserAnswer(userAnswer + num.toString());
-                      }
+                      setUserAnswer(userAnswer.slice(0, -1));
                     }}
                   >
-                    {num}
+                    ⌫
                   </button>
-                ))}
+                </div>
               </div>
-              <div className="keyboard-row">
-                <button
-                  type="button"
-                  className="keyboard-btn comma-btn"
-                  onClick={() => {
-                    if (!userAnswer.includes(',') && userAnswer.length > 0 && userAnswer.length < 9) {
-                      setUserAnswer(userAnswer + ',');
-                    }
-                  }}
-                >
-                  ,
-                </button>
-                <button
-                  type="button"
-                  className="keyboard-btn number-btn"
-                  onClick={() => {
-                    if (userAnswer.length < 10) {
-                      setUserAnswer(userAnswer + '0');
-                    }
-                  }}
-                >
-                  0
-                </button>
-                <button
-                  type="button"
-                  className="keyboard-btn backspace-btn"
-                  onClick={() => {
-                    setUserAnswer(userAnswer.slice(0, -1));
-                  }}
-                >
-                  ⌫
-                </button>
-              </div>
-            </div>
-            <button type="submit" className="submit-btn">Controleer</button>
+            )}
+            <button type="submit" className="bg-green-600 text-white border-none rounded-lg px-8 py-4 text-xl cursor-pointer transition-colors hover:bg-green-700 sm:px-6 sm:py-3 sm:text-lg small-mobile:px-4 small-mobile:py-2 small-mobile:text-base">Controleer</button>
           </form>
-          <p className="progress">Vraag {currentQuestionIndex + 1} van {questions.length}</p>
+          <p className="text-gray-600 text-base mt-8 sm:mt-4 sm:text-sm small-mobile:mt-2 small-mobile:text-xs">Vraag {currentQuestionIndex + 1} van {questions.length}</p>
         </div>
       )}
     </div>

@@ -4,7 +4,32 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite + React</title>
+    <title>Multiplication Trainer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            width: {
+              '15': '3.75rem', // 60px for large mobile keyboards
+              '12': '3rem',    // 48px for medium mobile keyboards  
+              '10': '2.5rem',  // 40px for small mobile keyboards
+            },
+            height: {
+              '15': '3.75rem', // 60px for large mobile keyboards
+              '12': '3rem',    // 48px for medium mobile keyboards
+              '10': '2.5rem',  // 40px for small mobile keyboards
+            },
+            screens: {
+              'xs': '320px', // Extra small screens
+              'small-mobile': '360px', // Samsung S8, iPhone SE (360-389px)
+              'medium-mobile': '390px', // iPhone 12/13/14 (390-429px)
+              'large-mobile': '430px', // iPhone 14 Pro Max and larger (430px+)
+            },
+          }
+        }
+      }
+    </script>
   </head>
   <body>
     <div id="root"></div>
