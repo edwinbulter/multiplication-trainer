@@ -172,7 +172,7 @@ const App = () => {
                 onClick={() => startPractice(num)}
                 className="bg-blue-600 text-white border-none rounded-lg p-4 text-lg cursor-pointer transition-all hover:bg-blue-700 hover:-translate-y-0.5 hover:shadow-lg w-full flex items-center justify-center text-center break-words shadow-md sm:p-3 sm:text-base sm:min-h-12 xs:p-2 xs:text-sm xs:min-h-10"
               >
-                Tafel van {num.toString().replace('.', ',')}
+                {num.toString().replace('.', ',')}
               </button>
             ))}
           </div>
