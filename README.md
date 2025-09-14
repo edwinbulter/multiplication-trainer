@@ -44,46 +44,89 @@ Deze applicatie is gebouwd met moderne web technologieën:
 
 - **React 19** - Frontend framework voor interactieve gebruikersinterfaces
 - **Vite** - Snelle build tool en development server
-- **Tailwind CSS (CDN)** - Utility-first CSS framework voor responsive design
+- **Tailwind CSS** - Utility-first CSS framework voor responsive design (lokale setup)
+- **React Router Dom** - Client-side routing voor single-page application navigatie
+- **PostCSS** - CSS processing tool voor Tailwind CSS
 
 ### Tailwind CSS Implementatie
 
-De applicatie gebruikt **Tailwind CSS via CDN** voor optimale betrouwbaarheid en eenvoud:
+De applicatie gebruikt **lokale Tailwind CSS setup** voor optimale controle en performance:
 
-**CDN Configuratie:**
-- Tailwind CSS wordt geladen via `https://cdn.tailwindcss.com`
-- Custom configuratie wordt inline gedefinieerd in `index.html`
-- Geen lokale build configuratie nodig - werkt altijd
+**Lokale Configuratie:**
+- Tailwind CSS geïnstalleerd als development dependency
+- Custom configuratie in `tailwind.config.js`
+- PostCSS configuratie in `postcss.config.js`
+- Optimale bundle size door purging van ongebruikte CSS
 
 **Custom Utilities:**
 - `w-15` en `h-15` (3.75rem/60px) - Voor keyboard button afmetingen
 - `xs` breakpoint (320px) - Voor extra kleine schermen
+- Custom mobile breakpoints: `small-mobile`, `medium-mobile`, `large-mobile`
 
-**Voordelen van CDN implementatie:**
-- ✅ Geen build configuratie problemen
-- ✅ Altijd up-to-date Tailwind versie
-- ✅ Snelle development zonder compilation tijd
-- ✅ Betrouwbaar en stabiel
-- ✅ Custom configuratie behouden
+**Voordelen van lokale implementatie:**
+- ✅ Optimale bundle size door CSS purging
+- ✅ Volledige controle over configuratie
+- ✅ Betere development experience met IntelliSense
+- ✅ Geen externe dependencies tijdens runtime
+- ✅ Custom utilities en componenten mogelijk
 
-De Tailwind configuratie bevindt zich inline in `index.html`:
+De Tailwind configuratie bevindt zich in `tailwind.config.js`:
 ```javascript
-tailwind.config = {
+export default {
+  content: [
+    "./index.html",
+    "./src/**/*.{js,ts,jsx,tsx}",
+  ],
   theme: {
     extend: {
       width: { '15': '3.75rem' },
       height: { '15': '3.75rem' },
-      screens: { 'xs': '320px' }
+      screens: {
+        'xs': '320px',
+        'small-mobile': {'max': '480px', 'min-height': '700px'},
+        'medium-mobile': {'max': '600px'},
+        'large-mobile': {'max': '768px'}
+      }
     }
-  }
+  },
+  plugins: [],
 }
 ```
 
+### React Router Implementatie
+
+De applicatie gebruikt **React Router Dom** voor client-side routing:
+
+**Route Structuur:**
+- `/` - Login screen (redirect naar `/tables` als ingelogd)
+- `/tables` - Tafel selectie screen
+- `/practice/:table` - Oefensessie met URL parameter
+- `/scores` - Scorebord overzicht
+
+**Features:**
+- ✅ Browser back/forward button support
+- ✅ URL parameters voor tafel selectie
+- ✅ Programmatische navigatie tussen screens
+- ✅ Protected routes (login vereist)
+- ✅ Clean URLs voor elke app state
+
+### Component Architectuur
+
+De applicatie is opgebouwd uit modulaire React componenten:
+
+**Core Components:**
+- `LoginScreen.jsx` - Gebruikersnaam invoer en authenticatie
+- `TableSelection.jsx` - Tafel selectie met custom input mogelijkheid
+- `PracticeScreen.jsx` - Volledige oefensessie met virtual keyboard
+- `ScoreBoard.jsx` - Score overzicht met wis functionaliteit
+
 **Features:**
 - **Responsive design** - Automatische aanpassing aan verschillende schermformaten
+- **Component-based architecture** - Herbruikbare en onderhoudbare code structuur
 - **Custom breakpoints** - Extra kleine schermen (xs: 320px) voor optimale mobiele ervaring
 - **Custom utilities** - Aangepaste width/height classes (w-15, h-15) voor keyboard buttons
 - **Mobile-first approach** - Ontworpen voor mobiele apparaten met virtual keyboard functionaliteit
+- **State management** - Centralized state in App.jsx met localStorage persistence
 
 ## AWS S3 Hosting Setup
 
