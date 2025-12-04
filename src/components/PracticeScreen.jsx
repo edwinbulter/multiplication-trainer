@@ -142,6 +142,12 @@ const PracticeScreen = ({ onSaveScore }) => {
       <div className="text-3xl my-8 font-bold sm:text-2xl sm:my-4 small-mobile:text-xl small-mobile:my-2">
         <p>{questions[currentQuestionIndex].multiplicand.toString().replace('.', ',')} × {questions[currentQuestionIndex].multiplier} = <span className="text-blue-600 border-b-2 border-blue-600 min-w-8 inline-block text-center">{userAnswer}</span></p>
       </div>
+      <button
+        onClick={() => navigate('/tables')}
+        className="bg-gray-200 hover:bg-gray-300 text-gray-800 font-semibold py-2 px-4 rounded-lg transition-colors mb-4"
+      >
+        Stop Oefenen
+      </button>
       <div className={`my-4 p-3 rounded-lg font-bold min-h-12 w-4/5 max-w-sm box-border text-center flex items-center justify-center sm:min-h-11 sm:p-2 sm:text-sm xs:min-h-10 small-mobile:my-2 small-mobile:p-2 small-mobile:min-h-8 small-mobile:text-xs ${feedbackType === 'success' ? 'bg-green-600 text-white animate-pulse' : feedbackType === 'error' ? 'bg-red-600 text-white' : ''}`}>
         {feedback}
       </div>
