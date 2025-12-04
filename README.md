@@ -1,29 +1,29 @@
 # Multiplication Trainer
 
-Een React-applicatie voor het oefenen van tafels van vermenigvuldiging, gebouwd met **React**, **Vite** en **Tailwind CSS**.
+Een React-applicatie voor het oefenen van tafeltjes, gebouwd met **React**, **Vite** en **Tailwind CSS**.  
+Naast deze repository bestaat de [multiplication-trainer-infrastructure](https://github.com/edwinbulter/multiplication-trainer-infrastructure) repository die de terraform scripts voor deployment van de infrastructuur naar AWS bevat.
 
 ## Hoe de applicatie te gebruiken
 
 ### Installatie
-Zorg ervoor dat je Node.js hebt geïnstalleerd, installeer vervolgens de dependencies:
+Zorg ervoor dat je Node.js hebt geïnstalleerd, installeer vervolgens de dependencies dmv:
 ```bash
 npm install
 ```
 
 ### Applicatie starten
-Om de ontwikkelserver te starten:
+Om de development server te starten:
 ```bash
 npm run dev
 ```
 
 ### Applicatie openen in de browser
-Na het starten van de ontwikkelserver:
-1. Open je webbrowser
-2. Ga naar `http://localhost:5173` (of de URL die wordt getoond in de terminal)
-3. De applicatie wordt automatisch geladen
+Na het starten van de development server:
+1. Open de webbrowser
+2. Ga naar `http://localhost:5173` 
 
 ### Applicatie stoppen
-Om de ontwikkelserver te stoppen:
+Om de development server te stoppen:
 - Druk op `Ctrl + C` in de terminal waar de server draait
 - Of sluit het terminal venster
 
