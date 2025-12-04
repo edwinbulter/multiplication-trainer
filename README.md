@@ -1,6 +1,7 @@
 # Multiplication Trainer
 
 Een React-applicatie voor het oefenen van tafeltjes, gebouwd met **React**, **Vite** en **Tailwind CSS**.  
+De applicatie is gedeployed in AWS en kun je uitproberen op [Tafels Oefenen](https://d2zf8l8tihew58.cloudfront.net/).  
 Naast deze repository bestaat de [multiplication-trainer-infrastructure](https://github.com/edwinbulter/multiplication-trainer-infrastructure) repository die de terraform scripts voor deployment van de infrastructuur naar AWS bevat.
 
 ## Hoe de applicatie te gebruiken
