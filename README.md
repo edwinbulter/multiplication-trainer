@@ -4,6 +4,31 @@ Een React-applicatie voor het oefenen van tafeltjes, gebouwd met **React**, **Vi
 De applicatie is gedeployed in AWS en kun je uitproberen op [Tafels Oefenen](https://d2zf8l8tihew58.cloudfront.net/).  
 Naast deze repository bestaat de [multiplication-trainer-infrastructure](https://github.com/edwinbulter/multiplication-trainer-infrastructure) repository die de terraform scripts voor deployment van de infrastructuur naar AWS bevat.
 
+## Inhoudsopgave
+
+- [Hoe de applicatie te gebruiken](#hoe-de-applicatie-te-gebruiken)
+  - [Installatie](#installatie)
+  - [Applicatie starten](#applicatie-starten)
+  - [Applicatie openen in de browser](#applicatie-openen-in-de-browser)
+  - [Applicatie stoppen](#applicatie-stoppen)
+  - [Productie build](#productie-build)
+- [Technische Stack](#technische-stack)
+  - [Tailwind CSS Implementatie](#tailwind-css-implementatie)
+  - [React Router Implementatie](#react-router-implementatie)
+  - [Component Architectuur](#component-architectuur)
+- [AWS S3 Hosting Setup](#aws-s3-hosting-setup)
+  - [Optie 1: Handmatige Deployment via GitHub Actions](#optie-1-handmatige-deployment-via-github-actions-aanbevolen)
+  - [Optie 2: Handmatige Upload via AWS Console](#optie-2-handmatige-upload-via-aws-console)
+- [Handmatige Deployment via GitHub Actions](#handmatige-deployment-via-github-actions)
+  - [Setup GitHub Actions Deployment](#setup-github-actions-deployment)
+  - [Stap 1: AWS IAM User aanmaken voor GitHub Actions](#stap-1-aws-iam-user-aanmaken-voor-github-actions)
+  - [Stap 2: GitHub Secrets configureren](#stap-2-github-secrets-configureren)
+  - [Stap 3: Deployment starten](#stap-3-deployment-starten)
+  - [Stap 4: Deployment monitoren](#stap-4-deployment-monitoren)
+  - [Workflow Features](#workflow-features)
+  - [Voordelen van GitHub Actions](#voordelen-van-github-actions)
+- [Playwright tests](#playwright-tests)
+
 ## Hoe de applicatie te gebruiken
 
 ### Installatie
@@ -253,20 +278,24 @@ De GitHub Action kan **alleen handmatig** gestart worden:
 - **Gratis**: GitHub Actions is gratis voor publieke repositories
 - **Eenvoudig**: Één klik deployment vanuit GitHub console
 
+## Playwright tests
+Voor het testen van de user interface zijn Playwright tests toegevoegd.  
+Playwright is geïnstalleerd voor dit project dmv:
+```shell
+npm init playwright@latest
+```
+Om de Playwright tests uit te voeren:
+1. Start de application dmv:
+    ```shell
+    npm run dev
+    ```
+2. Run de tests dmv:
+    ```shell
+    npx playwright test
+    ```
+3. Bekijk report dmv:
+    ```shell
+    npx playwright show-report
+    ```
 
-
-
-
-
-# React + Vite
-
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
-
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript and enable type-aware lint rules. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+Voor de naamgeving van de tests zie [playwright-test-naming](/docs/playwright-test-naming.md)

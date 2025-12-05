@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 const TableSelection = ({ username, onLogout }) => {
   const [customTable, setCustomTable] = useState('');
   const navigate = useNavigate();
+  const DEFAULT_TABLES = [0.125, 0.25, 1, 2, 2.5, 3, 4, 5, 6, 7, 8, 9, 10, 12, 15, 25];
 
   const startPractice = (table) => {
     navigate(`/practice/${table}`);
@@ -29,7 +30,7 @@ const TableSelection = ({ username, onLogout }) => {
         Bekijk Scorebord
       </button>
       <div className="grid grid-cols-3 gap-3 my-4 px-4 w-full text-center sm:gap-2 sm:px-2 xs:gap-2">
-        {[0.125, 0.25, 1, 2, 2.5, 3, 4, 5, 6, 7, 8, 9, 10, 12, 15, 25].map((num) => (
+        {DEFAULT_TABLES.map((num) => (
           <button
             key={num}
             onClick={() => startPractice(num)}
