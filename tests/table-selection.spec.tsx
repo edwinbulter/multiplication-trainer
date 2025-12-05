@@ -6,7 +6,7 @@ const DEFAULT_TABLES = [0.125, 0.25, 1, 2, 2.5, 3, 4, 5, 6, 7, 8, 9, 10, 12, 15,
 test.describe('Table Selection Page', () => {
   test.beforeEach(async ({ page }) => {
     // Navigate to the table selection page by logging in first
-    await page.goto('http://localhost:5173');
+    await page.goto('/');
     await page.getByPlaceholder('Jouw naam').fill('Test User');
     await page.getByRole('button', { name: 'Start' }).click();
     await page.waitForURL('**/tables');
@@ -35,7 +35,7 @@ test.describe('Table Selection Page', () => {
     for (const table of testTables) {
       // Navigate back to tables page if not already there
       if (!page.url().includes('/tables')) {
-        await page.goto('http://localhost:5173/tables');
+        await page.goto('/tables');
       }
       
       // Format the table number to match the button text (comma as decimal separator)

@@ -1,12 +1,12 @@
 import { test, expect } from '@playwright/test';
 
 test('has title', async ({ page }) => {
-  await page.goto('http://localhost:5173');
+  await page.goto('/');
   await expect(page).toHaveTitle(/Multiplication Trainer/);
 });
 
 test('displays "Voer je naam in" text above the input field', async ({ page }) => {
-  await page.goto('http://localhost:5173');
+  await page.goto('/');
   
   // Find the heading with the text 'Voer je naam in'
   const heading = page.getByRole('heading', { name: 'Voer je naam in' });
@@ -30,23 +30,22 @@ test('displays "Voer je naam in" text above the input field', async ({ page }) =
 });
 
 test('logs in with username and shows properly capitalized welcome message', async ({ page }) => {
-  // Test different username cases
-  const testCases = [
-    { input: 'knappe kop', expected: 'Knappe kop' },
-    { input: 'kNAPPE kOP', expected: 'Knappe kop' },
-    { input: 'KnApPe KoP', expected: 'Knappe kop' },
-    { input: 'KNARRE KOP', expected: 'Knarre kop' },
-  ];
+    // Test different username cases
+    const testCases = [
+      { input: 'knappe kop', expected: 'Knappe kop' },
+      { input: 'kNAPPE kOP', expected: 'Knappe kop' },
+      { input: 'KnApPe KoP', expected: 'Knappe kop' },
+      { input: 'KNARRE KOP', expected: 'Knarre kop' },
+    ];
 
-  for (const { input, expected } of testCases) {
-    // Navigate to the login page
-    await page.goto('http://localhost:5173');
+    for (const { input, expected } of testCases) {
+      // Navigate to the login page
+      await page.goto('/');
 
     // Fill in the username with different cases
     const inputField = page.getByPlaceholder('Jouw naam');
     await inputField.fill(input);
     
-    // Click the start button
     const startButton = page.getByRole('button', { name: 'Start' });
     await startButton.click();
 
