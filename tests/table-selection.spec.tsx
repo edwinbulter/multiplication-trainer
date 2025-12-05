@@ -69,4 +69,87 @@ test.describe('Table Selection Page', () => {
       await expect(tableButton).toBeVisible();
     }
   });
+
+  test('should allow custom table selection with valid numbers', async ({ page }) => {
+    // Check that the custom input section exists
+    const customLabel = page.getByText('Of kies je eigen getal:');
+    await expect(customLabel).toBeVisible();
+    
+    // Find the custom input field
+    const customInput = page.getByPlaceholder('Bijv. 7 of 1,5');
+    await expect(customInput).toBeVisible();
+    
+    // Test valid inputs (both comma and dot as decimal separator)
+    const validInputs = [
+      { input: '7', expected: '7' },
+      { input: '3.5', expected: '3.5' },
+      { input: '12,75', expected: '12.75' },
+      { input: '0.5', expected: '0.5' },
+      { input: '100', expected: '100' }
+    ];
+
+    for (const { input, expected } of validInputs) {
+      // Clear the input field
+      await customInput.fill('');
+      
+      // Type the test input
+      await customInput.type(input);
+      
+      // Verify the input value is correct (should accept both . and , as decimal separator)
+      const inputValue = await customInput.inputValue();
+      expect(inputValue).toBe(input);
+      
+      // Click the start button
+      const startButton = page.getByRole('button', { name: 'Start' });
+      await startButton.click();
+      
+      // Verify navigation to the practice screen with the correct table
+      await expect(page).toHaveURL(new RegExp(`/practice/${expected}$`));
+      
+      // Verify we're on the practice screen
+      const questionInput = page.getByRole('textbox', { name: /antwoord/i });
+      await expect(questionInput).toBeVisible();
+      
+      // Go back to tables page for the next test case
+      await page.goBack();
+      await page.waitForURL('**/tables');
+    }
+  });
+
+  test('should not allow non-numeric input in custom table field', async ({ page }) => {
+    const customInput = page.getByPlaceholder('Bijv. 7 of 1,5');
+    
+    // Test various invalid inputs
+    const invalidInputs = [
+      'abc',
+      '1a2b',
+      '12!@#',
+      'ten',
+      '1.2.3',
+      '1,2,3',
+      '1.2,3',
+      '1,2.3'
+    ];
+
+    for (const input of invalidInputs) {
+      await customInput.fill('');
+      await customInput.type(input);
+      
+      // Get the actual value after input
+      const actualValue = await customInput.inputValue();
+      
+      // The input should either be empty or contain only numbers and at most one decimal separator
+      const isValid = /^\d*[.,]?\d*$/.test(actualValue);
+      expect(isValid).toBe(true);
+      
+      // The start button should be disabled if the input is invalid
+      const startButton = page.getByRole('button', { name: 'Start' });
+      const isDisabled = await startButton.getAttribute('disabled');
+      
+      // If the input is invalid (not a valid number), the button should be disabled
+      if (!/^\d+([.,]\d+)?$/.test(actualValue) && actualValue !== '') {
+        expect(isDisabled).not.toBeNull();
+      }
+    }
+  });
 });
