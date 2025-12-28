@@ -170,8 +170,38 @@ cd android
 # Generate debug keystore (for testing)
 keytool -genkey -v -keystore debug.keystore -storepass android -alias androiddebugkey -keypass android -keyalg RSA -keysize 2048 -validity 10000
 
+# IMPORTANT: Add keystore files to .gitignore
+echo "*.keystore" >> ../.gitignore
+
 # Return to project root
 cd ..
+```
+
+**Security Note**: Never commit keystore files to version control. Keystore files contain cryptographic keys that should be kept secure. The debug keystore is automatically added to .gitignore above.
+
+```bash
+e.g.h.bulter@MacBook-Pro-van-EGH android % keytool -genkey -v -keystore debug.keystore -storepass android -alias androiddebugkey -keypass android -keyalg RSA -keysize 2048 -validity 10000
+Enter the distinguished name. Provide a single dot (.) to leave a sub-component empty or press ENTER to use the default value in braces.
+Enter the distinguished name. Provide a single dot (.) to leave a sub-component empty or press ENTER to use the default value in braces.
+What is your first and last name?
+  [Unknown]:  
+What is the name of your organizational unit?
+  [Unknown]:  
+What is the name of your organization?
+  [Unknown]:  
+What is the name of your City or Locality?
+  [Unknown]:  
+What is the name of your State or Province?
+  [Unknown]:  
+What is the two-letter country code for this unit?
+  [Unknown]:  
+Is CN=Unknown, OU=Unknown, O=Unknown, L=Unknown, ST=Unknown, C=Unknown correct?
+  [no]:  yes
+
+Generating 2,048 bit RSA key pair and self-signed certificate (SHA384withRSA) with a validity of 10,000 days
+        for: CN=Unknown, OU=Unknown, O=Unknown, L=Unknown, ST=Unknown, C=Unknown
+[Storing debug.keystore]
+e.g.h.bulter@MacBook-Pro-van-EGH android % 
 ```
 
 ### 1.4 Update Android Configuration with Maven
@@ -348,29 +378,103 @@ Create `android/pom.xml` (root POM):
 
 ### 2.1 Project Structure
 
-Create the following folder structure:
+**Important Note**: The Android app is being developed in the `mpt-android` subfolder within the existing multiplication-trainer repository. The original web application files remain untouched in the root `src/` folder. This structure allows both applications to coexist in the same repository while sharing documentation and maintaining separate codebases.
+
+**Create the following folder structure in `mpt-android/` (alphabetical order):**
 
 ```
-MultiplicationTrainer/
-├── src/
-│   ├── components/
-│   │   ├── LoginScreen.jsx
-│   │   ├── TableSelection.jsx
-│   │   ├── PracticeScreen.jsx
-│   │   └── ScoreBoard.jsx
-│   ├── navigation/
-│   │   └── AppNavigator.jsx
-│   ├── utils/
-│   │   ├── storage.js
-│   │   └── styles.js
-│   └── assets/
-│       └── fonts/
-└── App.jsx
+multiplication-trainer/
+├── docs/                         # Shared documentation
+│   ├── android-app.md
+│   └── mobile-app.md
+├── mpt-android/                  # React Native Android app
+│   ├── .gitignore
+│   ├── App.tsx
+│   ├── android/
+│   │   ├── app/
+│   │   │   ├── build.gradle
+│   │   │   ├── debug.keystore
+│   │   │   ├── pom.xml
+│   │   │   └── src/
+│   │   │       └── main/
+│   │   │           ├── AndroidManifest.xml
+│   │   │           ├── java/
+│   │   │           │   └── com/
+│   │   │           │       └── multiplicationtrainer/
+│   │   │           │           ├── MainActivity.kt
+│   │   │           │           └── MainApplication.kt
+│   │   │           └── res/
+│   │   │               ├── drawable/
+│   │   │               ├── mipmap-*/
+│   │   │               │   ├── ic_launcher.png
+│   │   │               │   └── ic_launcher_round.png
+│   │   │               └── values/
+│   │   │                   ├── strings.xml
+│   │   │                   └── styles.xml
+│   │   ├── build.gradle
+│   │   ├── gradle.properties
+│   │   ├── gradle/
+│   │   │   └── wrapper/
+│   │   ├── gradlew
+│   │   ├── gradlew.bat
+│   │   ├── pom.xml
+│   │   └── settings.gradle
+│   ├── app.json
+│   ├── assets/
+│   │   └── fonts/
+│   ├── babel.config.js
+│   ├── index.js
+│   ├── ios/
+│   │   ├── .xcode.env
+│   │   ├── MultiplicationTrainer/
+│   │   │   ├── AppDelegate.swift
+│   │   │   ├── Images.xcassets/
+│   │   │   ├── Info.plist
+│   │   │   ├── LaunchScreen.storyboard
+│   │   │   └── PrivacyInfo.xcprivacy
+│   │   ├── MultiplicationTrainer.xcodeproj/
+│   │   └── Podfile
+│   ├── jest.config.js
+│   ├── metro.config.js
+│   ├── package-lock.json
+│   ├── package.json
+│   ├── src/
+│   │   ├── assets/
+│   │   │   └── fonts/
+│   │   ├── components/
+│   │   │   ├── LoginScreen.jsx
+│   │   │   ├── PracticeScreen.jsx
+│   │   │   ├── ScoreBoard.jsx
+│   │   │   └── TableSelection.jsx
+│   │   ├── navigation/
+│   │   │   └── AppNavigator.jsx
+│   │   └── utils/
+│   │       ├── storage.js
+│   │       └── styles.js
+│   └── tsconfig.json
+└── src/                          # Original web app (DO NOT MODIFY)
+    ├── App.jsx
+    ├── components/
+    │   ├── LoginScreen.jsx
+    │   ├── PracticeScreen.jsx
+    │   ├── ScoreBoard.jsx
+    │   └── TableSelection.jsx
+    ├── index.css
+    └── main.jsx
 ```
+
+**Migration Guidelines:**
+- **Reference**: Use the original web components in `../src/` as reference for functionality
+- **Copy Logic**: Copy business logic and component structure from web to React Native
+- **Adapt UI**: Convert HTML/CSS to React Native components and StyleSheet
+- **Keep Separate**: Maintain complete separation between web and mobile codebases
+- **Shared Docs**: Documentation remains in the shared `docs/` folder
 
 ### 2.2 Migrate LoginScreen Component
 
-Create `src/components/LoginScreen.jsx`:
+**Reference**: Original web component at `../src/components/LoginScreen.jsx`
+
+Create `mpt-android/src/components/LoginScreen.jsx`:
 
 ```jsx
 import React, { useState } from 'react';
@@ -487,7 +591,9 @@ export default LoginScreen;
 
 ### 2.3 Migrate PracticeScreen Component
 
-Create `src/components/PracticeScreen.jsx`:
+**Reference**: Original web component at `../src/components/PracticeScreen.jsx`
+
+Create `mpt-android/src/components/PracticeScreen.jsx`:
 
 ```jsx
 import React, { useState, useEffect } from 'react';
@@ -767,7 +873,7 @@ export default PracticeScreen;
 
 ### 2.4 Setup Navigation
 
-Create `src/navigation/AppNavigator.jsx`:
+Create `mpt-android/src/navigation/AppNavigator.jsx`:
 
 ```jsx
 import React from 'react';
@@ -826,7 +932,7 @@ export default AppNavigator;
 
 ### 2.5 Update Main App Component
 
-Update `App.jsx`:
+Update `mpt-android/App.jsx`:
 
 ```jsx
 import React from 'react';
@@ -843,6 +949,8 @@ export default App;
 
 ### 3.1 Unit Testing Setup
 
+Run the following commands from the React Native project root (`multiplication-trainer/mpt-android`).
+
 ```bash
 # Install testing dependencies
 npm install --save-dev jest @testing-library/react-native @testing-library/jest-native
@@ -851,7 +959,7 @@ npm install --save-dev jest @testing-library/react-native @testing-library/jest-
 npm install --save-dev react-test-renderer
 ```
 
-Create `jest.config.js`:
+Create `jest.config.js` in the React Native project root (`multiplication-trainer/mpt-android`):
 
 ```javascript
 module.exports = {
