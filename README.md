@@ -279,7 +279,7 @@ De GitHub Action kan **alleen handmatig** gestart worden:
 - **Eenvoudig**: Één klik deployment vanuit GitHub console
 
 ## Playwright tests
-Voor het testen van de user interface zijn Playwright tests toegevoegd.  
+Voor het testen van de user interface zijn Playwright tests toegevoegd in de tests folder.  
 Playwright is geïnstalleerd voor dit project dmv:
 ```shell
 npm init playwright@latest
