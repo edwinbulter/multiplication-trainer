@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/loginFragment">
+
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="ebulter.multiply.LoginFragment"
+        android:label="fragment_login"
+        tools:layout="@layout/fragment_login" >
+        <action
+            android:id="@+id/action_loginFragment_to_tableSelectionFragment"
+            app:destination="@id/tableSelectionFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/tableSelectionFragment"
+        android:name="ebulter.multiply.TableSelectionFragment"
+        android:label="fragment_table_selection"
+        tools:layout="@layout/fragment_table_selection" >
+        <action
+            android:id="@+id/action_tableSelectionFragment_to_practiceFragment"
+            app:destination="@id/practiceFragment" />
+        <action
+            android:id="@+id/action_tableSelectionFragment_to_scoreboardFragment"
+            app:destination="@id/scoreboardFragment" />
+        <action
+            android:id="@+id/action_tableSelectionFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_tableSelectionFragment_to_completionFragment"
+            app:destination="@id/completionFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/practiceFragment"
+        android:name="ebulter.multiply.PracticeFragment"
+        android:label="fragment_practice"
+        tools:layout="@layout/fragment_practice" >
+        <argument
+            android:name="table"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_practiceFragment_to_completionFragment"
+            app:destination="@id/completionFragment" >
+            <argument
+                android:name="table"
+                app:argType="string" />
+            <argument
+                android:name="duration"
+                app:argType="long" />
+        </action>
+    </fragment>
+
+    <fragment
+        android:id="@+id/completionFragment"
+        android:name="ebulter.multiply.CompletionFragment"
+        android:label="fragment_completion"
+        tools:layout="@layout/fragment_completion" >
+        <argument
+            android:name="table"
+            app:argType="string" />
+        <argument
+            android:name="duration"
+            app:argType="long" />
+        <action
+            android:id="@+id/action_completionFragment_to_tableSelectionFragment"
+            app:destination="@id/tableSelectionFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/scoreboardFragment"
+        android:name="ebulter.multiply.ScoreboardFragment"
+        android:label="fragment_scoreboard"
+        tools:layout="@layout/fragment_scoreboard" >
+        <action
+            android:id="@+id/action_scoreboardFragment_to_tableSelectionFragment"
+            app:destination="@id/tableSelectionFragment" />
+    </fragment>
+
+</navigation>
