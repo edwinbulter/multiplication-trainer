@@ -3,9 +3,10 @@
     android:id="@+id/table_button"
     style="@style/Widget.MaterialComponents.Button"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_margin="4dp"
-    android:padding="12dp"
+    android:layout_height="48dp"
+    android:layout_margin="2dp"
+    android:padding="8dp"
     android:textColor="@color/white"
+    android:textSize="14sp"
     app:backgroundTint="@color/primary"
-    app:cornerRadius="8dp" />
+    app:cornerRadius="6dp" />

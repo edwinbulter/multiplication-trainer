@@ -67,7 +67,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="56dp"
                 android:text="Kies een andere tafel"
-                android:textSize="18sp"
+                android:textSize="14sp"
                 android:textStyle="bold"
                 android:textAllCaps="false"
                 android:paddingHorizontal="24dp"

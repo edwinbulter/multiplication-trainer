@@ -84,7 +84,7 @@ class ScoreboardFragment : Fragment() {
         // Update header text to show current sort direction
         // This is a simplified version - you could enhance this to show actual sort state
         binding.headerTable.text = "Tafel ↕"
-        binding.headerDuration.text = "Seconden ↕"
+        binding.headerDuration.text = "Sec ↕"
         binding.headerDatetime.text = "Datum/tijd ↕"
     }
 
