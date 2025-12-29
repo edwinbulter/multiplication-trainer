@@ -1438,4 +1438,5 @@ mvn help:describe -Dplugin=android # Describe Android Maven plugin
 
 ## Conclusion
 
-This guide provides a comprehensive roadmap for converting the Multiplication Trainer web app into a native Android application. Following these steps will result in a performant, user-friendly app ready for the Google Play Store. Remember to test thoroughly and follow Google's guidelines to ensure a smooth approval process.
+This guide provides a comprehensive roadmap for converting the Multiplication Trainer web app into a native Android application.  
+**Be warned: Following these steps will result in lots of frustrations, many hours of debugging stacktraces in the Android Emulator and no working application!!**
