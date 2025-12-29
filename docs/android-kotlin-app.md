@@ -4,6 +4,73 @@
 
 This document describes the process of transforming the multiplication trainer web app into a native Kotlin Android application, providing a more stable and performant solution compared to React Native.
 
+**Project Location**: The Kotlin Android app will be developed in the `mpt-android` subfolder within the existing multiplication-trainer repository. This structure allows both applications to coexist while maintaining separate codebases.
+
+## Repository Structure
+
+```
+multiplication-trainer/
+├── docs/                         # Shared documentation
+│   ├── android-kotlin-app.md     # This guide
+│   └── mobile-app.md
+├── mpt-android/                  # Kotlin Android app (THIS PROJECT)
+│   ├── app/
+│   │   ├── src/main/
+│   │   │   ├── java/com/multiplicationtrainer/
+│   │   │   │   ├── MainActivity.kt
+│   │   │   │   ├── ui/
+│   │   │   │   │   ├── login/
+│   │   │   │   │   │   ├── LoginActivity.kt
+│   │   │   │   │   │   └── LoginViewModel.kt
+│   │   │   │   │   ├── tableselection/
+│   │   │   │   │   │   ├── TableSelectionActivity.kt
+│   │   │   │   │   │   └── TableSelectionViewModel.kt
+│   │   │   │   │   ├── practice/
+│   │   │   │   │   │   ├── PracticeActivity.kt
+│   │   │   │   │   │   └── PracticeViewModel.kt
+│   │   │   │   │   └── scoreboard/
+│   │   │   │   │       ├── ScoreBoardActivity.kt
+│   │   │   │   │       └── ScoreBoardViewModel.kt
+│   │   │   │   ├── data/
+│   │   │   │   │   ├── database/
+│   │   │   │   │   │   ├── AppDatabase.kt
+│   │   │   │   │   │   ├── ScoreDao.kt
+│   │   │   │   │   │   └── entities/
+│   │   │   │   │   │       └── Score.kt
+│   │   │   │   │   ├── preferences/
+│   │   │   │   │   │   └── UserPreferences.kt
+│   │   │   │   │   └── repository/
+│   │   │   │   │       └── ScoreRepository.kt
+│   │   │   │   └── utils/
+│   │   │   │       ├── QuestionGenerator.kt
+│   │   │   │       └── Constants.kt
+│   │   │   └── res/
+│   │   │       ├── layout/
+│   │   │       ├── values/
+│   │   │       ├── drawable/
+│   │   │       └── colors/
+│   │   └── build.gradle.kts
+│   ├── build.gradle.kts
+│   ├── gradle.properties
+│   └── settings.gradle.kts
+└── src/                          # Original web app (DO NOT MODIFY)
+    ├── App.jsx
+    ├── components/
+    │   ├── LoginScreen.jsx
+    │   ├── PracticeScreen.jsx
+    │   ├── ScoreBoard.jsx
+    │   └── TableSelection.jsx
+    ├── index.css
+    └── main.jsx
+```
+
+**Important Notes:**
+- **Reference**: Use the original web components in `../src/` as reference for functionality
+- **Copy Logic**: Copy business logic and component structure from web to Kotlin
+- **Adapt UI**: Convert HTML/CSS to Android XML layouts and Material Design
+- **Keep Separate**: Maintain complete separation between web and mobile codebases
+- **Shared Docs**: Documentation remains in the shared `docs/` folder
+
 ## Why Choose Kotlin Over React Native
 
 ### Advantages
@@ -38,49 +105,12 @@ This document describes the process of transforming the multiplication trainer w
    - **Language**: Kotlin
    - **Minimum SDK**: API 24 (Android 7.0)
    - **Build configuration language**: Kotlin DSL (build.gradle.kts)
+4. **Important**: Set the project location to `/Users/e.g.h.bulter/IdeaProjects/multiplication-trainer/mpt-android`
+5. Click "Finish" to create the project
 
-### 2. Project Structure
+### 2. Verify Project Structure
 
-```
-app/
-├── src/
-│   ├── main/
-│   │   ├── java/com/multiplicationtrainer/
-│   │   │   ├── MainActivity.kt
-│   │   │   ├── ui/
-│   │   │   │   ├── login/
-│   │   │   │   │   ├── LoginActivity.kt
-│   │   │   │   │   └── LoginViewModel.kt
-│   │   │   │   ├── tableselection/
-│   │   │   │   │   ├── TableSelectionActivity.kt
-│   │   │   │   │   └── TableSelectionViewModel.kt
-│   │   │   │   ├── practice/
-│   │   │   │   │   ├── PracticeActivity.kt
-│   │   │   │   │   └── PracticeViewModel.kt
-│   │   │   │   └── scoreboard/
-│   │   │   │       ├── ScoreBoardActivity.kt
-│   │   │   │       └── ScoreBoardViewModel.kt
-│   │   │   ├── data/
-│   │   │   │   ├── database/
-│   │   │   │   │   ├── AppDatabase.kt
-│   │   │   │   │   ├── ScoreDao.kt
-│   │   │   │   │   └── entities/
-│   │   │   │   │       └── Score.kt
-│   │   │   │   ├── preferences/
-│   │   │   │   │   └── UserPreferences.kt
-│   │   │   │   └── repository/
-│   │   │   │       └── ScoreRepository.kt
-│   │   │   └── utils/
-│   │   │       ├── QuestionGenerator.kt
-│   │   │       └── Constants.kt
-│   │   ├── res/
-│   │   │   ├── layout/
-│   │   │   ├── values/
-│   │   │   ├── drawable/
-│   │   │   └── colors/
-│   │   └── AndroidManifest.xml
-└── build.gradle.kts
-```
+After creation, verify the project structure matches the layout shown in the Repository Structure section above. The project should be created directly in the `mpt-android` folder within the multiplication-trainer repository.
 
 ## Implementation Steps
 
