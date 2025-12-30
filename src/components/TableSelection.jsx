@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 const TableSelection = ({ username, onLogout }) => {
   const [customTable, setCustomTable] = useState('');
   const navigate = useNavigate();
-  const DEFAULT_TABLES = [0.125, 0.25, 1, 2, 2.5, 3, 4, 5, 6, 7, 8, 9, 10, 12, 15, 25];
+  const DEFAULT_TABLES = [0.125, 0.2, 0.25, 0.5, 1, 2, 2.5, 3, 4, 5, 6, 7, 8, 9, 10, 12, 15, 25];
 
   const startPractice = (table) => {
     navigate(`/practice/${table}`);
