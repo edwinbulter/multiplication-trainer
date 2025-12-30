@@ -66,8 +66,12 @@ class ScoreboardAdapter : ListAdapter<Score, ScoreboardAdapter.ScoreViewHolder>(
 
     private fun performSort() {
         val sortedList = when (currentSortOrder) {
-            SortOrder.TABLE_ASC -> originalList.sortedBy { it.table.toIntOrNull() ?: Int.MAX_VALUE }
-            SortOrder.TABLE_DESC -> originalList.sortedByDescending { it.table.toIntOrNull() ?: Int.MIN_VALUE }
+            SortOrder.TABLE_ASC -> originalList.sortedBy { 
+                it.table.replace(',', '.').toDoubleOrNull() ?: Double.MAX_VALUE 
+            }
+            SortOrder.TABLE_DESC -> originalList.sortedByDescending { 
+                it.table.replace(',', '.').toDoubleOrNull() ?: Double.MIN_VALUE 
+            }
             SortOrder.DURATION_ASC -> originalList.sortedBy { it.duration }
             SortOrder.DURATION_DESC -> originalList.sortedByDescending { it.duration }
             SortOrder.DATETIME_ASC -> originalList.sortedBy { it.timestamp }

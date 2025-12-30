@@ -39,8 +39,11 @@ class PracticeViewModel(private val repository: ScoreRepository) : ViewModel() {
     }
 
     fun checkAnswer(answer: String, username: String) {
-        val correctAnswer = table.toDouble() * questions[currentQuestionIndexValue]
-        if (answer.replace(',', '.').toDoubleOrNull() == correctAnswer) {
+        val correctAnswer = table.replace(',', '.').toDouble() * questions[currentQuestionIndexValue]
+        val userAnswer = answer.replace(',', '.').toDoubleOrNull()
+        
+        // Use tolerance for floating point comparison to handle precision issues
+        if (userAnswer != null && kotlin.math.abs(userAnswer - correctAnswer) < 0.0001) {
             _isCorrect.value = true
             currentQuestionIndexValue++
             _currentQuestionIndex.value = currentQuestionIndexValue
