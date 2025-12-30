@@ -1,6 +1,6 @@
 # Multiplication Trainer Infrastructure
 
-Deze repository bevat de Terraform infrastructuur voor de [Multiplication Trainer applicatie](https://github.com/edwinbulter/multiplication-trainer). De infrastructuur zorgt voor het hosten van de statische website op AWS met behulp van S3 en CloudFront.
+De infractructure folder in deze repository bevat de Terraform infrastructuur voor de [Multiplication Trainer applicatie](https://github.com/edwinbulter/multiplication-trainer). De infrastructuur zorgt voor het hosten van de statische website op AWS met behulp van S3 en CloudFront.
 
 **🌐 Live Demo**: Een werkende versie van de applicatie is beschikbaar op [https://d2zf8l8tihew58.cloudfront.net/](https://d2zf8l8tihew58.cloudfront.net/)
 

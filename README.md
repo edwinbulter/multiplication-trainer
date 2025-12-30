@@ -1,35 +1,73 @@
 # Multiplication Trainer
 
 Een React-applicatie voor het oefenen van tafeltjes, gebouwd met **React**, **Vite** en **Tailwind CSS**.  
-De applicatie is gedeployed in AWS en kun je uitproberen op [Tafels Oefenen](https://d2zf8l8tihew58.cloudfront.net/).  
-Naast deze repository bestaat de [multiplication-trainer-infrastructure](https://github.com/edwinbulter/multiplication-trainer-infrastructure) repository die de terraform scripts voor deployment van de infrastructuur naar AWS bevat.
+De applicatie is gedeployed in AWS en kun je uitproberen op [Tafels Oefenen](https://d2zf8l8tihew58.cloudfront.net/).
+
+Dit project bevat drie hoofdcomponenten:
+- **Web Applicatie** (src/) - React versie voor browsers
+- [**Infrastructuur voor de Web Applicatie**](infrastructure/README.md) (infrastructure/) - Terraform scripts voor AWS deployment
+- [**Android Applicatie**](mpt-android/README.md) (mpt-android/) - Native Android versie
 
 ## Inhoudsopgave
 
-- [Hoe de applicatie te gebruiken](#hoe-de-applicatie-te-gebruiken)
+- [Functionaliteit](#functionaliteit)
+  - [Hoofdfuncties (Beide Platforms)](#hoofdfuncties-beide-platforms)
+  - [Decimale Ondersteuning](#decimale-ondersteuning)
+  - [Data Management](#data-management)
+  - [Gebruikerservaring](#gebruikerservaring)
+  - [Platform Verschillen](#platform-verschillen)
+- [Web Applicatie lokaal ontwikkelen](#web-applicatie-lokaal-ontwikkelen)
   - [Installatie](#installatie)
   - [Applicatie starten](#applicatie-starten)
   - [Applicatie openen in de browser](#applicatie-openen-in-de-browser)
   - [Applicatie stoppen](#applicatie-stoppen)
   - [Productie build](#productie-build)
-- [Technische Stack](#technische-stack)
+- [Technische Stack Web Applicatie](#technische-stack-web-applicatie)
   - [Tailwind CSS Implementatie](#tailwind-css-implementatie)
   - [React Router Implementatie](#react-router-implementatie)
   - [Component Architectuur](#component-architectuur)
-- [AWS S3 Hosting Setup](#aws-s3-hosting-setup)
-  - [Optie 1: Handmatige Deployment via GitHub Actions](#optie-1-handmatige-deployment-via-github-actions-aanbevolen)
-  - [Optie 2: Handmatige Upload via AWS Console](#optie-2-handmatige-upload-via-aws-console)
-- [Handmatige Deployment via GitHub Actions](#handmatige-deployment-via-github-actions)
-  - [Setup GitHub Actions Deployment](#setup-github-actions-deployment)
-  - [Stap 1: AWS IAM User aanmaken voor GitHub Actions](#stap-1-aws-iam-user-aanmaken-voor-github-actions)
-  - [Stap 2: GitHub Secrets configureren](#stap-2-github-secrets-configureren)
-  - [Stap 3: Deployment starten](#stap-3-deployment-starten)
-  - [Stap 4: Deployment monitoren](#stap-4-deployment-monitoren)
-  - [Workflow Features](#workflow-features)
-  - [Voordelen van GitHub Actions](#voordelen-van-github-actions)
+- [Project Structuur](#project-structuur)
+  - [Web Applicatie](#web-applicatie)
+  - [Android Applicatie](#android-applicatie)
+  - [Infrastructuur voor de Web Applicatie](#infrastructuur-voor-de-web-applicatie)
 - [Playwright tests](#playwright-tests)
 
-## Hoe de applicatie te gebruiken
+## Functionaliteit
+
+Zowel de Web Applicatie als de Android App bieden exact dezelfde kernfunctionaliteit voor het oefenen van tafeltjes:
+
+### Hoofdfuncties (Beide Platforms)
+- **Tafel Selectie**: Keuze uit 18 vooraf gedefinieerde tafels (0,125, 0,2, 0,25, 0,5, 1, 2, 2,5, 3, 4, 5, 6, 7, 8, 9, 10, 12, 15, 25)
+- **Aangepaste Tafels**: Mogelijkheid om elk eigen getal in te voeren voor specifieke oefening
+- **Interactieve Oefening**: Beantwoord 10 vragen per sessie met directe feedback
+- **Virtueel Toetsenbord**: Speciaal ontworpen numeriek toetsenbord voor eenvoudige invoer
+- **Scorebord**: Bekijk en beheer beste tijden per tafel met sorteerfunctionaliteit
+- **Gebruikersprofielen**: Voortgang opgeslagen per gebruikersnaam
+
+### Decimale Ondersteuning
+- **Nederlandse Notatie**: Komma (,) als decimaal scheidingsteken
+- **Floating Point Precision**: Accurate verwerking van decimale getallen
+- **Consistente Weergave**: Alle getallen getoond met Nederlandse formatting
+
+### Data Management
+- **Tijdsmeting**: Precieze meting van oefeningssessies in seconden
+- **Score Opslag**: Permanente opslag van beste prestaties
+- **Sorteerfunctionaliteit**: Sorteren op tafel, tijd, of datum
+- **Data Consistentie**: Identieke datastructuur op beide platforms
+
+### Gebruikerservaring
+- **Intuïtieve Interface**: Duidelijke navigatie en consistent design
+- **Directe Feedback**: Onmiddellijke validatie van antwoorden
+- **Voortgang Tracking**: Zichtbare vraag telling en tijdsindicatie
+- **Mobiel Geoptimaliseerd**: Touch-vriendelijke interface voor alle schermformaten
+
+### Platform Verschillen
+- **Web App**: Werkt in browsers, vereist internetverbinding, wereldwijde toegang via CloudFront
+- **Android App**: Native performance, offline modus, lokale data opslag met Room database
+
+Beide versies garanderen een consistente leerervaring met identieke functionaliteit, ongeacht het gekozen platform.
+
+## Web Applicatie lokaal ontwikkelen
 
 ### Installatie
 Zorg ervoor dat je Node.js hebt geïnstalleerd, installeer vervolgens de dependencies dmv:
@@ -64,7 +102,7 @@ Om de productie-versie lokaal te bekijken:
 npm run preview
 ```
 
-## Technische Stack
+## Technische Stack Web Applicatie
 
 Deze applicatie is gebouwd met moderne web technologieën:
 
@@ -154,129 +192,70 @@ De applicatie is opgebouwd uit modulaire React componenten:
 - **Mobile-first approach** - Ontworpen voor mobiele apparaten met virtual keyboard functionaliteit
 - **State management** - Centralized state in App.jsx met localStorage persistence
 
-## AWS S3 Hosting Setup
+## Project Structuur
 
-Je hebt **twee opties** voor deployment naar AWS S3:
+Dit project bevat drie hoofdcomponenten, elk met hun eigen functionaliteit en documentatie:
 
-### Optie 1: Handmatige Deployment via GitHub Actions (Aanbevolen)
-Gebruik de GitHub Actions workflow voor eenvoudige deployment - zie de sectie "Handmatige Deployment via GitHub Actions" hieronder.
+### Web Applicatie
 
-### Optie 2: Handmatige Upload via AWS Console
+De **React web applicatie** in de `src/` map biedt de volledige functionaliteit voor browsers:
 
-Als je liever handmatig uploadt via de AWS Console:
+**🌐 Live Demo**: [https://d2zf8l8tihew58.cloudfront.net/](https://d2zf8l8tihew58.cloudfront.net/)
 
-#### S3 Bucket aanmaken en configureren
+**Functies:**
+- ✅ Tafel selectie (18 tafels inclusief decimalen)
+- ✅ Interactieve oefening met virtueel toetsenbord
+- ✅ Scorebord met sorteerfunctionaliteit
+- ✅ Responsive design voor alle schermformaten
+- ✅ Local storage voor gebruikersdata
 
-1. **Log in** op de [AWS Console](https://aws.amazon.com/console/)
-2. **Zoek naar "S3"** in de zoekbalk en klik op S3
-3. **Klik op "Create bucket"**
-4. **Bucket naam**: `multiplication-trainer`
-5. **Region**: Kies een regio dichtbij (bijv. Europe (Ireland) eu-west-1)
-6. **Block Public Access**: **Uncheck "Block all public access"** ⚠️
-7. **Acknowledge** dat de bucket publiek toegankelijk wordt
-8. **Klik "Create bucket"**
+**Technologieën:**
+- React 19 + Vite
+- Tailwind CSS (lokale setup)
+- React Router Dom
+- PostCSS
 
-#### Static Website Hosting inschakelen
+### Android Applicatie
 
-1. **Open je bucket** → **Properties** tabblad
-2. **Scroll naar "Static website hosting"** → **Edit**
-3. **Enable** static website hosting
-4. **Index document**: `index.html`
-5. **Error document**: `index.html` (voor React routing)
-6. **Save changes** en **noteer de website URL**
+De **native Android app** in de `mpt-android/` map biedt identieke functionaliteit geoptimaliseerd voor Android apparaten:
 
-#### Bucket Policy instellen
+**📱 Documentatie**: Zie [mpt-android/README.md](mpt-android/README.md) voor complete technische documentatie.
 
-1. **Permissions** tabblad → **Bucket policy** → **Edit**
-2. **Plak deze policy**:
+**Functies:**
+- ✅ Identieke functionaliteit aan web app
+- ✅ Native performance en offline modus
+- ✅ Virtueel toetsenbord geoptimaliseerd voor touch
+- ✅ Room database voor lokale data opslag
+- ✅ MVVM architectuur met Kotlin
 
-```json
-{
-  "Version": "2012-10-17",
-  "Statement": [
-    {
-      "Sid": "PublicReadGetObject",
-      "Effect": "Allow",
-      "Principal": "*",
-      "Action": "s3:GetObject",
-      "Resource": "arn:aws:s3:::multiplication-trainer/*"
-    }
-  ]
-}
-```
+**Technologieën:**
+- Kotlin + Android Jetpack
+- Room Database + SQLite
+- Material Design Components
+- Navigation Component
 
-#### Handmatige Upload
+### Infrastructuur voor de Web Applicatie
 
-1. **Build je app**: `npm run build`
-2. **Objects** tabblad → **Upload**
-3. **Upload inhoud van `dist/` folder** (niet de folder zelf)
-4. **Je app is live** op de website URL!
+De **Terraform infrastructuur** in de `infrastructure/` map beheert de AWS deployment:
 
-### Kosten
+**🏗️ Documentatie**: Zie [infrastructure/README.md](infrastructure/README.md) voor deployment instructies.
+
+**AWS Componenten:**
+- ✅ S3 Bucket voor statische hosting
+- ✅ CloudFront CDN voor wereldwijde distributie
+- ✅ Origin Access Control voor beveiligde toegang
+- ✅ Automatische HTTPS en caching
+
+**Features:**
+- ✅ Infrastructure as Code met Terraform
+- ✅ Moderne Origin Access Control (OAC)
+- ✅ SPA routing support
+- ✅ Cost-effective hosting
+
+#### Kosten
 - **Opslag**: ~€0,02 per GB per maand
 - **Data transfer**: Eerste 1GB gratis per maand
 - **Voor deze app**: Waarschijnlijk < €1 per maand
-
-## Handmatige Deployment via GitHub Actions
-
-Voor handmatige deployment wanneer jij dat wilt, is er een GitHub Action workflow beschikbaar die je kunt starten vanuit de GitHub console.
-
-### Setup GitHub Actions Deployment
-
-#### Stap 1: AWS IAM User aanmaken voor GitHub Actions
-
-1. **Ga naar AWS IAM Console**
-2. **Klik "Users" → "Create user"**
-3. **Username**: `github-actions-s3-deploy`
-4. **Attach policies directly**: Selecteer `AmazonS3FullAccess`
-5. **Create user**
-6. **Klik op de user** → **Security credentials** → **Create access key**
-7. **Use case**: Third-party service
-8. **Noteer de Access Key ID en Secret Access Key** ⚠️
-
-#### Stap 2: GitHub Secrets configureren
-
-1. **Ga naar je GitHub repository**
-2. **Settings** → **Secrets and variables** → **Actions**
-3. **Klik "New repository secret"** en voeg deze secrets toe:
-
-| Secret Name | Value | Voorbeeld |
-|-------------|-------|-----------|
-| `AWS_ACCESS_KEY_ID` | Je AWS Access Key ID | `AKIA...` |
-| `AWS_SECRET_ACCESS_KEY` | Je AWS Secret Access Key | `wJalrXUt...` |
-| `AWS_REGION` | Je AWS regio | `eu-west-1` |
-| `S3_BUCKET_NAME` | Je S3 bucket naam | `multiplication-trainer` |
-| `CLOUDFRONT_DISTRIBUTION_ID` | (Optioneel) CloudFront ID | `E1234567890123` |
-
-#### Stap 3: Deployment starten
-
-De GitHub Action kan **alleen handmatig** gestart worden:
-- **Ga naar je repository** → **Actions tab**
-- **Klik op "Deploy to AWS S3"** workflow
-- **Klik "Run workflow"** → **Run workflow**
-
-#### Stap 4: Deployment monitoren
-
-1. **Ga naar je repository** → **Actions tab**
-2. **Klik op de laatste workflow run** om de voortgang te zien
-3. **Bij succes**: Je app is automatisch bijgewerkt op S3!
-
-### Workflow Features
-
-✅ **Automatische build** van je React app  
-✅ **Upload naar S3** met oude bestanden verwijderen  
-✅ **Correcte content-types** instellen  
-✅ **CloudFront invalidation** (optioneel)  
-✅ **Handmatige triggers** mogelijk  
-✅ **Duidelijke logging** van alle stappen  
-
-### Voordelen van GitHub Actions
-
-- **Handmatige controle**: Deploy alleen wanneer jij dat wilt
-- **Consistent**: Zelfde build proces elke keer
-- **Veilig**: AWS credentials veilig opgeslagen in GitHub
-- **Gratis**: GitHub Actions is gratis voor publieke repositories
-- **Eenvoudig**: Één klik deployment vanuit GitHub console
 
 ## Playwright tests
 Voor het testen van de user interface zijn Playwright tests toegevoegd in de tests folder.  
