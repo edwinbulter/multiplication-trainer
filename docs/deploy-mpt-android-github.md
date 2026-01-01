@@ -8,7 +8,9 @@ This guide describes how to set up GitHub Actions to automatically build and sig
 - [Prerequisites](#prerequisites)
 - [1. GitHub Secrets Configuration](#1-github-secrets-configuration)
 - [2. GitHub Actions Workflow](#2-github-actions-workflow)
-  - [2.1 GitHub Pages Workflow](#21-github-pages-workflow)
+  - [2.1 Manual Workflow Trigger](#21-manual-workflow-trigger)
+  - [2.2 GitHub Pages Branch Management](#22-github-pages-branch-management)
+  - [2.3 Workflow Trigger Summary](#23-workflow-trigger-summary)
 - [3. GitHub Pages Deployment](#3-github-pages-deployment)
   - [3.1 How It Works](#31-how-it-works)
   - [3.2 User Experience](#32-user-experience)
@@ -345,7 +347,115 @@ The GitHub Actions workflow automates the entire build and deployment process fo
 
 The complete workflow is defined in [`.github/workflows/deploy-github-pages.yml`](../.github/workflows/deploy-github-pages.yml).
 
-This workflow is configured for manual triggering only from the GitHub UI, giving you full control over when releases are published.
+### 2.1 Manual Workflow Trigger
+
+#### **How to Trigger the Build**
+
+The workflow is configured for manual triggering only, giving you full control over when releases are published:
+
+1. **Navigate to GitHub Actions**:
+   - Go to your repository on GitHub
+   - Click the **Actions** tab
+
+2. **Select the Workflow**:
+   - Find "Deploy APK to GitHub Pages" in the workflow list
+   - Click on the workflow name
+
+3. **Run the Workflow**:
+   - Click the **"Run workflow"** button
+   - Select the branch to use (usually `main`)
+   - Click **"Run workflow"** to start the build
+
+#### **Branch Selection**
+
+**Which Branch to Choose:**
+- **`main` branch**: Recommended for production releases
+- **Other branches**: Can be used for testing different versions
+- **⚠️ NEVER select `gh-pages` branch**: This branch only contains built files, not source code
+
+### 2.2 GitHub Pages Branch Management
+
+#### **How the gh-pages Branch is Created**
+
+**First Deployment:**
+1. **Workflow Checks**: The `peaceiris/actions-gh-pages@v3` action checks if the `gh-pages` branch exists
+2. **Automatic Creation**: If the branch doesn't exist, it creates a new orphan branch
+3. **Initial Deploy**: Pushes the built files to the new branch
+4. **GitHub Pages Activation**: GitHub Pages starts serving content from the branch
+
+**Process Flow:**
+```bash
+[INFO] first deployment, create new branch gh-pages
+/usr/bin/git checkout --orphan gh-pages
+Switched to a new branch 'gh-pages'
+```
+
+#### **Why gh-pages Branch is Used**
+
+**Separation of Concerns:**
+- **`main` branch**: Contains source code (Kotlin, XML, Gradle files)
+- **`gh-pages` branch**: Contains built content (APK, HTML, assets)
+
+**GitHub Pages Requirement:**
+- GitHub Pages can only serve content from specific branches
+- `gh-pages` is the standard branch for GitHub Pages deployments
+- Only files in this branch are accessible via the web
+
+**Security & Cleanliness:**
+- Keeps built artifacts separate from source code
+- Prevents accidental commits of built files to main branch
+- Maintains clean git history
+
+#### **Subsequent Builds**
+
+**Update Process:**
+1. **Branch Exists**: For subsequent deployments, the `gh-pages` branch already exists
+2. **Content Update**: The workflow updates the existing branch with new files
+3. **Version Replacement**: Old APK and HTML files are replaced with new versions
+4. **Automatic Serving**: GitHub Pages immediately serves the updated content
+
+**No Additional Workflows:**
+- The gh-pages branch is just a storage location
+- It does **NOT** trigger any additional workflows
+- No circular deployment or infinite loops occur
+- Only the manual workflow trigger updates this branch
+
+#### **Branch Structure**
+
+**Main Branch (Development):**
+```bash
+main/
+├── mpt-android/           # Android app source code
+│   ├── app/src/          # Source files
+│   ├── build.gradle.kts  # Build configuration
+│   └── keystore/         # (gitignored)
+├── docs/                 # Documentation
+└── .github/              # Workflow files
+```
+
+**GitHub Pages Branch (Deployment):**
+```bash
+gh-pages/
+├── mpt-android/          # Deployed content
+│   ├── index.html        # Download page
+│   └── tafels-oefenen-1.0.0.apk
+└── .nojekyll            # GitHub Pages config
+```
+
+### 2.3 Workflow Trigger Summary
+
+| Action | Triggers Workflow? | Result |
+|--------|-------------------|--------|
+| Push to main | ❌ No | No deployment |
+| Pull request | ❌ No | No deployment |
+| Manual trigger | ✅ Yes | APK built and deployed |
+| gh-pages update | ❌ No | No additional workflows |
+
+This design ensures that:
+- You have complete control over release timing
+- No accidental deployments occur
+- The gh-pages branch remains a pure deployment target
+- Built artifacts are kept separate from source code
 
 
 ## 3. GitHub Pages Deployment
