@@ -2,7 +2,7 @@
 
 De Android versie van de [Multiplication Trainer applicatie](https://github.com/edwinbulter/multiplication-trainer). Deze native Android app biedt dezelfde functionaliteit aan als de web app, maar is specifiek ontwikkeld voor Android apparaten met een optimale gebruikerservaring voor mobiele apparaten.
 
-**📱 Download**: Installeer de app via de `app-debug.apk` in de `app/build/outputs/apk/debug/` map.
+**📱 Download**: Installeer de app via de [GitHub Pages downloadpagina](https://edwinbulter.github.io/multiplication-trainer/mpt-android/) of via de `app-debug.apk` in de `app/build/outputs/apk/debug/` map.
 
 ## Inhoudsopgave
 
@@ -11,6 +11,7 @@ De Android versie van de [Multiplication Trainer applicatie](https://github.com/
 - [Architectuur](#architectuur)
 - [Implementatie Details](#implementatie-details)
 - [Installatie](#installatie)
+- [Automatische Build en Deploy](#automatische-build-en-deploy)
 - [Ontwikkeling](#ontwikkeling)
 - [Build Instructies](#build-instructies)
 - [Functionaliteit](#functionaliteit)
@@ -202,6 +203,38 @@ fun onDecimalClicked() {
 4. **Run de app**
    - Selecteer een emulator of fysiek apparaat
    - Klik op de 'Run' knop (groen driehoek)
+
+## Automatische Build en Deploy
+
+### 🚀 GitHub Actions Workflow
+
+Deze repository maakt gebruik van een geautomatiseerde GitHub Actions workflow voor het bouwen en deployen van de Android app. De workflow wordt handmatig gestart en voert de volgende stappen uit:
+
+#### **Workflow Features**
+- **Automatische APK Build**: Bouwt de signed release APK
+- **GitHub Pages Deploy**: Genereert een professionele downloadpagina
+- **Version Management**: Extraheert automatisch versie-informatie
+- **Secure Signing**: Gebruikt GitHub Secrets voor veilige keystore beheer
+
+#### **Downloadpagina**
+Na succesvolle build is de app beschikbaar via:
+- **URL**: [https://edwinbulter.github.io/multiplication-trainer/mpt-android/](https://edwinbulter.github.io/multiplication-trainer/mpt-android/)
+- **Features**: Professionele downloadpagina, QR-code, installatie-instructies
+- **Direct APK Download**: Automatische download op Android apparaten
+
+#### **Handmatige Trigger**
+De workflow wordt handmatig gestart via:
+- GitHub Actions tab → "Deploy APK to GitHub Pages" → "Run workflow"
+
+#### **📋 Gedetailleerde Documentatie**
+Voor volledige details over de GitHub Actions workflow, setup instructies, en configuratie, zie: [**deploy-mpt-android-github.md**](../docs/deploy-mpt-android-github.md)
+
+**Belangrijkste onderwerpen in de documentatie:**
+- Volledige workflow stappen en configuratie
+- GitHub Secrets setup en keystore management
+- Security overwegingen en best practices
+- Troubleshooting en veelvoorkomende problemen
+- Lokale ontwikkeling setup
 
 ## Ontwikkeling
 
