@@ -31,8 +31,8 @@ jobs:
       env:
         ENCODED_STRING: ${{ secrets.SIGNING_KEYSTORE_BASE64 }}
       run: |
-        mkdir -p mpt-android/keystore
-        echo $ENCODED_STRING | base64 -di > mpt-android/keystore/mpt-keystore
+        mkdir -p mpt-android/app/keystore
+        echo $ENCODED_STRING | base64 -di > mpt-android/app/keystore/mpt-keystore
         
     - name: Build APK
       env:
