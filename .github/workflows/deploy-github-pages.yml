@@ -1,9 +1,6 @@
 name: Deploy APK to GitHub Pages
-
 on:
-  push:
-    branches: [ main ]
-  workflow_dispatch:
+  workflow_dispatch: # Manual triggering only from GitHub UI
 
 jobs:
   build-and-deploy:
@@ -28,14 +25,14 @@ jobs:
         key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
         
     - name: Setup permissions
-      run: chmod +x gradlew
+      run: chmod +x mpt-android/gradlew
       
     - name: Decode keystore
       env:
         ENCODED_STRING: ${{ secrets.SIGNING_KEYSTORE_BASE64 }}
       run: |
-        mkdir -p keystore
-        echo $ENCODED_STRING | base64 -di > keystore/mpt-keystore
+        mkdir -p mpt-android/keystore
+        echo $ENCODED_STRING | base64 -di > mpt-android/keystore/mpt-keystore
         
     - name: Build APK
       env:
@@ -43,11 +40,12 @@ jobs:
         KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
         KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
         KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
-      run: ./gradlew assembleRelease
+      run: cd mpt-android && ./gradlew assembleRelease
       
     - name: Get version info
       id: version
       run: |
+        cd mpt-android
         VERSION_NAME=$(grep "versionName" app/build.gradle.kts | cut -d'"' -f2)
         VERSION_CODE=$(grep "versionCode" app/build.gradle.kts | cut -d' ' -f3)
         echo "version_name=$VERSION_NAME" >> $GITHUB_OUTPUT
@@ -56,7 +54,7 @@ jobs:
     - name: Prepare deployment files
       run: |
         mkdir -p deploy
-        cp app/build/outputs/apk/release/app-release.apk deploy/${{ steps.version.outputs.apk_name }}
+        cp mpt-android/app/build/outputs/apk/release/app-release.apk deploy/${{ steps.version.outputs.apk_name }}
         
         # Create professional download page
         cat > deploy/index.html << 'EOF'
