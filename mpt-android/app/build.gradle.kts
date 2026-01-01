@@ -1,3 +1,15 @@
+import org.gradle.kotlin.dsl.java
+import java.util.Properties
+import java.io.FileInputStream
+
+// 1. Create a properties object and load the file
+val keystoreProperties = Properties()
+val keystorePropertiesFile = rootProject.file("keystore.properties")
+// Only try to load the properties file if it exists, to avoid errors in other environments (like CI servers)
+if (keystorePropertiesFile.exists()) {
+    keystoreProperties.load(FileInputStream(keystorePropertiesFile))
+}
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
@@ -14,18 +26,42 @@ android {
         minSdk = 24
         targetSdk = 36
         versionCode = 1
-        versionName = "1.0"
+        versionName = "1.0.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
+    signingConfigs {
+        create("release") {
+            // Use environment variables in CI/CD, local properties for development
+            storeFile = file(System.getenv("KEYSTORE_PATH") ?: keystoreProperties["storeFile"] as String)
+            storePassword = System.getenv("KEYSTORE_PASSWORD") ?: keystoreProperties["storePassword"] as String
+            keyAlias = System.getenv("KEY_ALIAS") ?: keystoreProperties["keyAlias"] as String
+            keyPassword = System.getenv("KEY_PASSWORD") ?: keystoreProperties["keyPassword"] as String
+        }
+    }
+
     buildTypes {
         release {
-            isMinifyEnabled = false
+            // Disable debugging for release
+            isDebuggable = false
+            
+            // Enable R8 full mode for code shrinking and obfuscation
+            isMinifyEnabled = true
+            isShrinkResources = true
+            
+            // Signing configuration (will be added in next step)
+            signingConfig = signingConfigs.getByName("release")
+            
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+        }
+        debug {
+            isDebuggable = true
+            applicationIdSuffix = ".debug"
+            versionNameSuffix = "-debug"
         }
     }
     compileOptions {
