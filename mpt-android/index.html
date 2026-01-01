@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="nl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tafels Oefenen - Install</title>
+    <title>Tafels Oefenen - Installeren</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { 
@@ -111,40 +111,40 @@
     <div class="container">
         <div class="app-icon">🧮</div>
         <h1>Tafels Oefenen</h1>
-        <p style="color: #666; margin-bottom: 30px;">Practice multiplication tables the fun way!</p>
+        <p style="color: #666; margin-bottom: 30px;">Oefen je tafels op een leuke manier!</p>
         
         <a href="tafels-oefenen-1.0.0.apk" 
            class="install-btn" 
            id="installBtn"
            download="tafels-oefenen.apk">
-            📥 Install Now
+            📥 Nu Installeren
         </a>
         
         <div class="instructions">
-            <h3>📱 Installation Instructions:</h3>
-            <div class="step">Click the "Install Now" button above</div>
-            <div class="step">Enable "Install from unknown sources" when prompted</div>
-            <div class="step">Tap the downloaded APK to complete installation</div>
+            <h3>📱 Installatie-instructies:</h3>
+            <div class="step">Klik op de "Nu Installeren" knop hierboven</div>
+            <div class="step">Schakel "Installatie uit onbekende bronnen" in wanneer gevraagd</div>
+            <div class="step">Tik op het gedownloade APK-bestand om de installatie te voltooien</div>
         </div>
         
         <div class="qr-code">
             <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://edwinbulter.github.io/multiplication-trainer/mpt-android/" 
                  alt="QR Code for Tafels Oefenen">
-            <p style="margin-top: 10px; color: #666;">Scan QR code on mobile device</p>
+            <p style="margin-top: 10px; color: #666;">Scan QR-code op mobiel apparaat</p>
         </div>
         
         <div class="info">
-            <h4>📋 Requirements:</h4>
-            <p>Android 7.0+ • 50MB storage • No Google Play required</p>
+            <h4>📋 Vereisten:</h4>
+            <p>Android 7.0+ • 50MB opslag • Geen Google Play vereist</p>
         </div>
         
         <div class="security">
-            <h4>🔐 Security:</h4>
-            <p>This APK is officially signed and verified. No modifications.</p>
+            <h4>🔐 Beveiliging:</h4>
+            <p>Deze APK is officieel ondertekend en geverifieerd. Geen wijzigingen.</p>
         </div>
         
         <div style="margin-top: 40px; color: #999; font-size: 14px;">
-            <p>Version: 1.0.0 | Direct download installation</p>
+            <p>Versie: 1.0.0 | Directe download-installatie</p>
         </div>
     </div>
     
@@ -157,7 +157,7 @@
             
             // Show auto-download message
             const autoMsg = document.createElement('div');
-            autoMsg.innerHTML = '<p style="color: #667eea; font-weight: bold;">📥 Downloading automatically...</p>';
+            autoMsg.innerHTML = '<p style="color: #667eea; font-weight: bold;">📥 Downloaden automatisch...</p>';
             autoMsg.className = 'auto-download';
             autoMsg.style.display = 'block';
             autoMsg.style.textAlign = 'center';
@@ -167,7 +167,7 @@
         
         // Track download (optional)
         document.getElementById('installBtn').addEventListener('click', function() {
-            console.log('Download started');
+            console.log('Download gestart');
             // Add analytics tracking here if needed
         });
         
@@ -181,7 +181,7 @@
                 }
             })
             .catch(() => {
-                // File size not available, continue without it
+                // Bestandsgrootte niet beschikbaar, ga verder zonder
             });
     </script>
 </body>
