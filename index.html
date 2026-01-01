@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tafels Oefenen - Install</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; 
+            line-height: 1.6; 
+            color: #333; 
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        .container { 
+            max-width: 600px; 
+            margin: 0 auto; 
+            padding: 40px 20px; 
+            text-align: center; 
+            background: white;
+            min-height: 100vh;
+            box-shadow: 0 0 50px rgba(0,0,0,0.1);
+        }
+        .app-icon { 
+            width: 80px; 
+            height: 80px; 
+            margin: 20px 0; 
+            border-radius: 20px; 
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+            color: white;
+            margin: 0 auto 20px;
+        }
+        .install-btn { 
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); 
+            color: white; 
+            padding: 20px 40px; 
+            text-decoration: none; 
+            border-radius: 30px; 
+            font-size: 20px; 
+            font-weight: bold;
+            display: inline-block;
+            margin: 30px 0;
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+        .install-btn:hover { 
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(102, 126, 234, 0.5);
+        }
+        .instructions { 
+            background: #f8f9fa; 
+            padding: 30px; 
+            border-radius: 20px; 
+            margin: 30px 0; 
+            text-align: left;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        .step { 
+            margin: 15px 0; 
+            padding-left: 40px; 
+            position: relative;
+            font-size: 16px;
+        }
+        .step:before { 
+            content: "📱"; 
+            position: absolute; 
+            left: 0;
+            font-size: 20px;
+        }
+        .qr-code { 
+            margin: 40px 0; 
+            padding: 20px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            display: inline-block;
+        }
+        .qr-code img { 
+            border-radius: 10px;
+        }
+        .info, .security {
+            background: #e3f2fd;
+            padding: 20px;
+            border-radius: 15px;
+            margin: 20px 0;
+            text-align: left;
+        }
+        .security {
+            background: #e8f5e8;
+        }
+        h1 { color: #333; margin-bottom: 10px; font-size: 32px; }
+        h2 { color: #666; margin-bottom: 30px; font-weight: normal; font-size: 18px; }
+        h3 { color: #333; margin-bottom: 15px; }
+        .auto-download { display: none; }
+        @media (max-width: 600px) {
+            .container { padding: 20px 15px; }
+            .install-btn { width: 100%; padding: 18px 30px; }
+            .instructions { padding: 20px; }
+            h1 { font-size: 28px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="app-icon">🧮</div>
+        <h1>Tafels Oefenen</h1>
+        <p style="color: #666; margin-bottom: 30px;">Practice multiplication tables the fun way!</p>
+        
+        <a href="tafels-oefenen-1.0.0.apk" 
+           class="install-btn" 
+           id="installBtn"
+           download="tafels-oefenen.apk">
+            📥 Install Now
+        </a>
+        
+        <div class="instructions">
+            <h3>📱 Installation Instructions:</h3>
+            <div class="step">Click the "Install Now" button above</div>
+            <div class="step">Enable "Install from unknown sources" when prompted</div>
+            <div class="step">Tap the downloaded APK to complete installation</div>
+        </div>
+        
+        <div class="qr-code">
+            <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://edwinbulter.github.io/multiplication-trainer/mpt-android/" 
+                 alt="QR Code for Tafels Oefenen">
+            <p style="margin-top: 10px; color: #666;">Scan QR code on mobile device</p>
+        </div>
+        
+        <div class="info">
+            <h4>📋 Requirements:</h4>
+            <p>Android 7.0+ • 50MB storage • No Google Play required</p>
+        </div>
+        
+        <div class="security">
+            <h4>🔐 Security:</h4>
+            <p>This APK is officially signed and verified. No modifications.</p>
+        </div>
+        
+        <div style="margin-top: 40px; color: #999; font-size: 14px;">
+            <p>Version: 1.0.0 | Direct download installation</p>
+        </div>
+    </div>
+    
+    <script>
+        // Auto-download on mobile devices
+        if (/Android/i.test(navigator.userAgent)) {
+            setTimeout(function() {
+                document.getElementById('installBtn').click();
+            }, 2000);
+            
+            // Show auto-download message
+            const autoMsg = document.createElement('div');
+            autoMsg.innerHTML = '<p style="color: #667eea; font-weight: bold;">📥 Downloading automatically...</p>';
+            autoMsg.className = 'auto-download';
+            autoMsg.style.display = 'block';
+            autoMsg.style.textAlign = 'center';
+            autoMsg.style.margin = '20px 0';
+            document.querySelector('.installBtn').after(autoMsg);
+        }
+        
+        // Track download (optional)
+        document.getElementById('installBtn').addEventListener('click', function() {
+            console.log('Download started');
+            // Add analytics tracking here if needed
+        });
+        
+        // Show file size when available
+        fetch('tafels-oefenen-1.0.0.apk', {method: 'HEAD'})
+            .then(response => {
+                const size = response.headers.get('content-length');
+                if (size) {
+                    const sizeMB = (size / (1024 * 1024)).toFixed(1);
+                    document.querySelector('.info p').innerHTML += ` • ${sizeMB}MB`;
+                }
+            })
+            .catch(() => {
+                // File size not available, continue without it
+            });
+    </script>
+</body>
+</html>
