@@ -67,5 +67,5 @@ jobs:
         track: internal
         status: completed
         whatsNewDirectory: deploy/whatsnew
-        mappingFiles: mpt-android/app/build/outputs/mapping/release/mapping.txt
+        mappingFile: mpt-android/app/build/outputs/mapping/release/mapping.txt
         debugSymbols: mpt-android/app/build/outputs/native-debug-symbols/release/native-debug-symbols.zip
