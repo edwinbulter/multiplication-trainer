@@ -344,7 +344,7 @@
                     </p>
                     <ul>
                         <li><strong>Ontwikkelaar:</strong> Edwin Bulter</li>
-                        <li><strong>E-mail:</strong> [e-mail adres van ontwikkelaar]</li>
+                        <li><strong>E-mail:</strong> code.bulter@gmail.com</li>
                         <li><strong>App:</strong> Tafels Oefenen</li>
                     </ul>
                 </div>
@@ -366,6 +366,16 @@
     </div>
     
     <script>
+        // Check URL parameters to show specific tab
+        function checkUrlParameters() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const tab = urlParams.get('tab');
+            
+            if (tab === 'privacy') {
+                showTabByName('privacy');
+            }
+        }
+        
         // Tab switching functionality
         function showTab(tabName) {
             // Hide all tabs
@@ -380,23 +390,63 @@
             document.getElementById(tabName + '-tab').classList.add('active');
             
             // Add active class to clicked button
-            event.target.classList.add('active');
+            if (event && event.target) {
+                event.target.classList.add('active');
+            } else {
+                // For URL parameter activation, find and activate the correct button
+                const targetBtn = document.querySelector(`[onclick="showTab('${tabName}')"]`);
+                if (targetBtn) {
+                    targetBtn.classList.add('active');
+                }
+            }
         }
         
-        // Auto-download on mobile devices
+        // Function to show tab by name (for URL parameter use)
+        function showTabByName(tabName) {
+            // Hide all tabs
+            const tabs = document.querySelectorAll('.tab-content');
+            tabs.forEach(tab => tab.classList.remove('active'));
+            
+            // Remove active class from all buttons
+            const buttons = document.querySelectorAll('.tab-btn');
+            buttons.forEach(btn => btn.classList.remove('active'));
+            
+            // Show selected tab
+            document.getElementById(tabName + '-tab').classList.add('active');
+            
+            // Add active class to corresponding button
+            const targetBtn = document.querySelector(`[onclick="showTab('${tabName}')"]`);
+            if (targetBtn) {
+                targetBtn.classList.add('active');
+            }
+        }
+        
+        // Check URL parameters when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            checkUrlParameters();
+        });
+        
+        // Auto-download on mobile devices (only if on download tab)
         if (/Android/i.test(navigator.userAgent)) {
             setTimeout(function() {
-                document.getElementById('installBtn').click();
+                // Only auto-download if privacy tab is not active
+                if (!document.getElementById('privacy-tab').classList.contains('active')) {
+                    document.getElementById('installBtn').click();
+                }
             }, 2000);
             
-            // Show auto-download message
-            const autoMsg = document.createElement('div');
-            autoMsg.innerHTML = '<p style="color: #667eea; font-weight: bold;">📥 Downloaden automatisch...</p>';
-            autoMsg.className = 'auto-download';
-            autoMsg.style.display = 'block';
-            autoMsg.style.textAlign = 'center';
-            autoMsg.style.margin = '20px 0';
-            document.querySelector('.installBtn').after(autoMsg);
+            // Show auto-download message (only if on download tab)
+            setTimeout(function() {
+                if (!document.getElementById('privacy-tab').classList.contains('active')) {
+                    const autoMsg = document.createElement('div');
+                    autoMsg.innerHTML = '<p style="color: #667eea; font-weight: bold;">📥 Downloaden automatisch...</p>';
+                    autoMsg.className = 'auto-download';
+                    autoMsg.style.display = 'block';
+                    autoMsg.style.textAlign = 'center';
+                    autoMsg.style.margin = '20px 0';
+                    document.querySelector('.installBtn').after(autoMsg);
+                }
+            }, 2000);
         }
         
         // Track download (optional)
