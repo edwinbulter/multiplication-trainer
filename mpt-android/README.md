@@ -227,7 +227,7 @@ De workflow wordt handmatig gestart via:
 - GitHub Actions tab → "Deploy APK to GitHub Pages" → "Run workflow"
 
 #### **📋 Gedetailleerde Documentatie**
-Voor volledige details over de GitHub Actions workflow, setup instructies, en configuratie, zie: [**deploy-mpt-android-github.md**](../docs/deploy-mpt-android-github.md)
+Voor volledige details over de GitHub Actions workflow, setup instructies, en configuratie, zie: [**deploy-mpt-android-github.md**](docs/deploy-mpt-android-github.md)
 
 **Belangrijkste onderwerpen in de documentatie:**
 - Volledige workflow stappen en configuratie
