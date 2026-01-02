@@ -49,7 +49,7 @@ jobs:
       id: version
       run: |
         VERSION_NAME=$(grep "versionName.*=" mpt-android/app/build.gradle.kts | grep -v debug | cut -d'"' -f2 | head -1)
-        VERSION_CODE=$(grep "versionCode.*=" mpt-android/app/build.gradle.kts | grep -v debug | cut -d' ' -f3 | head -1)
+        VERSION_CODE=$(grep "versionCode.*=" mpt-android/app/build.gradle.kts | grep -v debug | cut -d'=' -f2 | tr -d ' ')
         echo "version_name=$VERSION_NAME" >> $GITHUB_OUTPUT
         echo "version_code=$VERSION_CODE" >> $GITHUB_OUTPUT
         echo "aab_name=tafels-oefenen-${VERSION_NAME}.aab" >> $GITHUB_OUTPUT
