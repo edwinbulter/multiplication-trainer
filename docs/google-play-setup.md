@@ -126,19 +126,113 @@ Reference this secret in your workflow file using r0adkll/upload-google-play to 
 2. **Decodes signing keystore** from secrets
 3. **Builds AAB file** (Android App Bundle)
 4. **Extracts version info** from build.gradle.kts
-5. **Uploads to Google Play Console** (Internal Testing track)
-6. **Includes release notes** from `deploy/whatsnew/internal.txt`
+5. **Uploads to Google Play Console** (Internal or Closed Testing track)
 
-### 4.3 Deployment Tracks
-- **Internal Testing**: For initial testing and validation
-- Can be modified to deploy to other tracks (alpha, beta, production)
+## 5. Local AAB Build for Manual Deployment
 
-## 5. Release Management
+### 5.1 Prerequisites
+- Android Studio installed
+- JDK 17 or compatible version
+- Keystore file and signing credentials
 
-### 5.1 Update Release Notes
+### 5.2 Set Up Environment Variables
+Create a `keystore.properties` file in the `mpt-android` directory:
+```properties
+storeFile=path/to/your/keystore.jks
+storePassword=your_keystore_password
+keyAlias=your_key_alias
+keyPassword=your_key_password
+```
+
+### 5.3 Build AAB Locally
+Navigate to the `mpt-android` directory and run:
+```bash
+cd mpt-android
+./gradlew clean
+./gradlew bundleRelease
+```
+
+**Note**: Always run `./gradlew clean` before building to ensure a fresh build and avoid "up-to-date" issues where Gradle skips the bundle creation.
+
+### 5.4 Find the Generated AAB
+The AAB file will be located at:
+```
+mpt-android/app/build/outputs/bundle/release/app-release.aab
+```
+
+### 5.5 Manual Upload to Google Play Console
+1. Go to [Google Play Console](https://play.google.com/console)
+2. Select your app
+3. Go to **Release** → **Manage release**
+4. Choose your track (Internal, Closed, etc.)
+5. Click **Create new release**
+6. Upload the AAB file from step 5.4
+7. Fill in release notes and other required information
+8. Click **Save** and then **Review release**
+9. Click **Start rollout**
+
+### 5.6 Version Management
+Before building locally, ensure you update version information in `mpt-android/app/build.gradle.kts`:
+```kotlin
+defaultConfig {
+    versionCode = 5  // Increment this for each release
+    versionName = "1.0.0"  // Update as needed
+}
+```
+
+### 5.7 Troubleshooting
+- **Build fails**: Check that all signing credentials are correct
+- **Upload rejected**: Ensure versionCode is unique and higher than previous releases
+- **Missing keystore**: Verify the keystore.properties file path and contents
+
+## 7. Build AAB Using GitHub Actions
+
+### 7.1 When to Use This Method
+Use this method when you want to:
+- Build AAB with the same signing configuration as your CI/CD pipeline
+- Avoid local keystore management
+- Ensure consistent signing across all builds
+
+### 7.2 Using the Build AAB Workflow
+1. Go to **Actions** tab in GitHub
+2. Select **Build AAB for Manual Upload**
+3. Click **Run workflow**
+4. Set version parameters:
+   - **Version name**: e.g., "1.0.0"
+   - **Version code**: Unique incrementing number (e.g., 5, 6, 7)
+5. Click **Run workflow**
+
+### 7.3 Download the Built AAB
+1. Wait for the workflow to complete
+2. Click on the workflow run
+3. Download the **tafels-oefenen-aab** artifact
+4. Extract the `.aab` file from the downloaded ZIP
+
+### 7.4 Upload to Google Play Console
+1. Go to [Google Play Console](https://play.google.com/console)
+2. Select your app
+3. Go to **Release** → **Manage release**
+4. Click **Create new release**
+5. Upload the downloaded AAB file
+6. Fill in release notes and other required information
+7. Click **Save** → **Review release** → **Start rollout**
+
+### 7.5 Advantages
+- ✅ Uses the same keystore as your automated deployments
+- ✅ No local keystore management required
+- ✅ Consistent signing across all builds
+- ✅ Version control tracking of builds
+
+### 7.6 Artifacts Available
+- **AAB file**: Ready for upload to Google Play Console
+- **Mapping file**: For de-obfuscating crash reports (if needed)
+
+## 8. Release Management
+
+### 6.1 Update Release Notes
 Edit `deploy/whatsnew/internal.txt` to update release notes for each deployment.
 
-### 5.2 Version Management
+### 6.2 Version Management
 The workflow automatically extracts version from `build.gradle.kts`:
 ```kotlin
 versionCode = 1

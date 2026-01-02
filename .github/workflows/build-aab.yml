@@ -37,10 +37,32 @@ jobs:
           ~/.gradle/wrapper
         key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
         
-    - name: Update Version Info
+    - name: Get and Increment Version Code
+      id: version
       run: |
-        sed -i 's/versionCode = .*/versionCode = ${{ github.event.inputs.version_code }}/' mpt-android/app/build.gradle.kts
-        sed -i 's/versionName = .*/versionName = "${{ github.event.inputs.version_name }}"/' mpt-android/app/build.gradle.kts
+        # Get current version code
+        VERSION_CODE=$(grep "versionCode.*=" mpt-android/app/build.gradle.kts | grep -v debug | cut -d'=' -f2 | tr -d ' ')
+        # Use provided version code or increment current one
+        if [ "${{ github.event.inputs.version_code }}" != "" ]; then
+          NEW_VERSION_CODE=${{ github.event.inputs.version_code }}
+        else
+          NEW_VERSION_CODE=$((VERSION_CODE + 1))
+        fi
+        # Update build.gradle.kts with new version code
+        sed -i "s/versionCode = .*/versionCode = $NEW_VERSION_CODE/" mpt-android/app/build.gradle.kts
+        # Get or use provided version name
+        if [ "${{ github.event.inputs.version_name }}" != "" ]; then
+          VERSION_NAME=${{ github.event.inputs.version_name }}
+          sed -i "s/versionName = .*/versionName = \"$VERSION_NAME\"/" mpt-android/app/build.gradle.kts
+        else
+          VERSION_NAME=$(grep "versionName.*=" mpt-android/app/build.gradle.kts | grep -v debug | cut -d'"' -f2 | head -1)
+        fi
+        # Output values
+        echo "version_name=$VERSION_NAME" >> $GITHUB_OUTPUT
+        echo "version_code=$NEW_VERSION_CODE" >> $GITHUB_OUTPUT
+        echo "old_version_code=$VERSION_CODE" >> $GITHUB_OUTPUT
+        echo "aab_name=tafels-oefenen-${VERSION_NAME}.aab" >> $GITHUB_OUTPUT
+        echo "🔄 Version code updated from $VERSION_CODE to $NEW_VERSION_CODE"
         
     - name: Decode Keystore
       env:
@@ -60,10 +82,18 @@ jobs:
         ./gradlew clean
         ./gradlew bundleRelease
         
+    - name: Commit Version Code Update
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git add mpt-android/app/build.gradle.kts
+        git commit -m "🔄 Auto-increment version code to ${{ steps.version.outputs.version_code }}"
+        git push
+        
     - name: Prepare AAB for Download
       run: |
         mkdir -p deploy
-        cp mpt-android/app/build/outputs/bundle/release/app-release.aab deploy/tafels-oefenen-${{ github.event.inputs.version_name }}.aab
+        cp mpt-android/app/build/outputs/bundle/release/app-release.aab deploy/tafels-oefenen-${{ steps.version.outputs.version_name }}.aab
         
     - name: Upload AAB as GitHub Artifact
       uses: actions/upload-artifact@v4

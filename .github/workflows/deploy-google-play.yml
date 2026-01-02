@@ -10,7 +10,9 @@ on:
         type: choice
         options:
           - internal
-          - closed
+          - alpha
+          - beta
+          - production
 
 permissions:
   contents: write
@@ -54,19 +56,36 @@ jobs:
         cd mpt-android
         ./gradlew bundleRelease
       
-    - name: Get version info
+    - name: Get and Increment Version Code
       id: version
       run: |
-        VERSION_NAME=$(grep "versionName.*=" mpt-android/app/build.gradle.kts | grep -v debug | cut -d'"' -f2 | head -1)
+        # Get current version code
         VERSION_CODE=$(grep "versionCode.*=" mpt-android/app/build.gradle.kts | grep -v debug | cut -d'=' -f2 | tr -d ' ')
+        # Increment version code
+        NEW_VERSION_CODE=$((VERSION_CODE + 1))
+        # Update build.gradle.kts with new version code
+        sed -i "s/versionCode = .*/versionCode = $NEW_VERSION_CODE/" mpt-android/app/build.gradle.kts
+        # Get version name
+        VERSION_NAME=$(grep "versionName.*=" mpt-android/app/build.gradle.kts | grep -v debug | cut -d'"' -f2 | head -1)
+        # Output values
         echo "version_name=$VERSION_NAME" >> $GITHUB_OUTPUT
-        echo "version_code=$VERSION_CODE" >> $GITHUB_OUTPUT
+        echo "version_code=$NEW_VERSION_CODE" >> $GITHUB_OUTPUT
+        echo "old_version_code=$VERSION_CODE" >> $GITHUB_OUTPUT
         echo "aab_name=tafels-oefenen-${VERSION_NAME}.aab" >> $GITHUB_OUTPUT
+        echo "🔄 Version code incremented from $VERSION_CODE to $NEW_VERSION_CODE"
         
     - name: Prepare AAB for upload
       run: |
         mkdir -p deploy
         cp mpt-android/app/build/outputs/bundle/release/app-release.aab deploy/${{ steps.version.outputs.aab_name }}
+        
+    - name: Commit Version Code Update
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git add mpt-android/app/build.gradle.kts
+        git commit -m "🔄 Auto-increment version code to ${{ steps.version.outputs.version_code }}"
+        git push
         
     - name: Upload to Google Play Console
       uses: r0adkll/upload-google-play@v1
