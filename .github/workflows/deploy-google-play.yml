@@ -51,6 +51,7 @@ jobs:
         VERSION_NAME=$(grep "versionName.*=" mpt-android/app/build.gradle.kts | grep -v debug | cut -d'"' -f2 | head -1)
         VERSION_CODE=$(grep "versionCode.*=" mpt-android/app/build.gradle.kts | grep -v debug | cut -d' ' -f3 | head -1)
         echo "version_name=$VERSION_NAME" >> $GITHUB_OUTPUT
+        echo "version_code=$VERSION_CODE" >> $GITHUB_OUTPUT
         echo "aab_name=tafels-oefenen-${VERSION_NAME}.aab" >> $GITHUB_OUTPUT
         
     - name: Prepare AAB for upload
@@ -64,7 +65,7 @@ jobs:
         serviceAccountJsonPlainText: ${{ secrets.GOOGLE_PLAY_SERVICE_ACCOUNT }}
         packageName: ebulter.multiply
         releaseFiles: deploy/${{ steps.version.outputs.aab_name }}
-        releaseName: Release ${{ steps.version.outputs.version_name }}/${{ steps.version.outputs.version_name }}/${{ github.run_number }}
+        releaseName: Release ${{ steps.version.outputs.version_name }}/${{ steps.version.outputs.version_code }}/${{ github.run_number }}
         track: internal
         status: draft
         whatsNewDirectory: deploy/whatsnew
