@@ -99,11 +99,100 @@
         h2 { color: #666; margin-bottom: 30px; font-weight: normal; font-size: 18px; }
         h3 { color: #333; margin-bottom: 15px; }
         .auto-download { display: none; }
+        .tab-navigation {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin-bottom: 30px;
+        }
+        .tab-btn {
+            background: #f8f9fa;
+            border: 2px solid #e9ecef;
+            padding: 12px 24px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            color: #666;
+        }
+        .tab-btn:hover {
+            background: #e9ecef;
+            border-color: #667eea;
+        }
+        .tab-btn.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-color: #667eea;
+        }
+        .tab-content {
+            display: none;
+        }
+        .tab-content.active {
+            display: block;
+        }
+        .privacy-policy {
+            text-align: left;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .privacy-policy h2 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 32px;
+        }
+        .privacy-policy h3 {
+            color: #333;
+            margin: 30px 0 15px 0;
+            font-size: 24px;
+            border-bottom: 2px solid #667eea;
+            padding-bottom: 5px;
+        }
+        .privacy-policy h4 {
+            color: #666;
+            margin: 20px 0 10px 0;
+            font-size: 18px;
+        }
+        .privacy-policy p {
+            line-height: 1.8;
+            margin-bottom: 15px;
+            color: #555;
+        }
+        .privacy-policy ul {
+            margin: 15px 0 15px 20px;
+        }
+        .privacy-policy li {
+            margin-bottom: 8px;
+            line-height: 1.6;
+        }
+        .policy-section {
+            margin-bottom: 30px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 15px;
+            border-left: 4px solid #667eea;
+        }
         @media (max-width: 600px) {
             .container { padding: 20px 15px; }
             .install-btn { width: 100%; padding: 18px 30px; }
             .instructions { padding: 20px; }
             h1 { font-size: 28px; }
+            .tab-navigation {
+                flex-direction: column;
+                gap: 10px;
+            }
+            .tab-btn {
+                width: 100%;
+                text-align: center;
+            }
+            .privacy-policy {
+                padding: 0 10px;
+            }
+            .policy-section {
+                padding: 15px;
+                margin-bottom: 20px;
+            }
         }
     </style>
 </head>
@@ -113,34 +202,162 @@
         <h1>Tafels Oefenen</h1>
         <p style="color: #666; margin-bottom: 30px;">Oefen je tafels op een leuke manier!</p>
         
-        <a href="tafels-oefenen-1.0.0.apk" 
-           class="install-btn" 
-           id="installBtn"
-           download="tafels-oefenen.apk">
-            📥 Nu Installeren
-        </a>
-        
-        <div class="instructions">
-            <h3>📱 Installatie-instructies:</h3>
-            <div class="step">Klik op de "Nu Installeren" knop hierboven</div>
-            <div class="step">Schakel "Installatie uit onbekende bronnen" in wanneer gevraagd</div>
-            <div class="step">Tik op het gedownloade APK-bestand om de installatie te voltooien</div>
+        <!-- Tab Navigation -->
+        <div class="tab-navigation" style="margin-bottom: 30px;">
+            <button class="tab-btn active" onclick="showTab('download')">📥 Download</button>
+            <button class="tab-btn" onclick="showTab('privacy')">🔒 Privacy Policy</button>
         </div>
         
-        <div class="qr-code">
-            <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://edwinbulter.github.io/multiplication-trainer/mpt-android/" 
-                 alt="QR Code for Tafels Oefenen">
-            <p style="margin-top: 10px; color: #666;">Scan QR-code op mobiel apparaat</p>
+        <!-- Download Tab -->
+        <div id="download-tab" class="tab-content active">
+            <a href="tafels-oefenen-1.0.0.apk" 
+               class="install-btn" 
+               id="installBtn"
+               download="tafels-oefenen.apk">
+                📥 Nu Installeren
+            </a>
+            
+            <div class="instructions">
+                <h3>📱 Installatie-instructies:</h3>
+                <div class="step">Klik op de "Nu Installeren" knop hierboven</div>
+                <div class="step">Schakel "Installatie uit onbekende bronnen" in wanneer gevraagd</div>
+                <div class="step">Tik op het gedownloade APK-bestand om de installatie te voltooien</div>
+            </div>
+            
+            <div class="qr-code">
+                <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://edwinbulter.github.io/multiplication-trainer/mpt-android/" 
+                     alt="QR Code for Tafels Oefenen">
+                <p style="margin-top: 10px; color: #666;">Scan QR-code op mobiel apparaat</p>
+            </div>
+            
+            <div class="info">
+                <h4>📋 Vereisten:</h4>
+                <p>Android 7.0+ • 50MB opslag • Geen Google Play vereist</p>
+            </div>
+            
+            <div class="security">
+                <h4>🔐 Beveiliging:</h4>
+                <p>Deze APK is officieel ondertekend en geverifieerd. Geen wijzigingen.</p>
+            </div>
         </div>
         
-        <div class="info">
-            <h4>📋 Vereisten:</h4>
-            <p>Android 7.0+ • 50MB opslag • Geen Google Play vereist</p>
-        </div>
-        
-        <div class="security">
-            <h4>🔐 Beveiliging:</h4>
-            <p>Deze APK is officieel ondertekend en geverifieerd. Geen wijzigingen.</p>
+        <!-- Privacy Policy Tab -->
+        <div id="privacy-tab" class="tab-content">
+            <div class="privacy-policy">
+                <h2>Privacy Policy / Privacybeleid</h2>
+                <p style="color: #666; margin-bottom: 30px;">
+                    Laatst bijgewerkt: 1 januari 2026
+                </p>
+                
+                <div class="policy-section">
+                    <h3>📋 Inleiding</h3>
+                    <p>
+                        Tafels Oefenen ("de App") is een educatieve applicatie ontwikkeld door Edwin Bulter. 
+                        Deze privacy policy beschrijft hoe wij uw gegevens verzamelen, gebruiken en beschermen 
+                        wanneer u onze App gebruikt, in overeenstemming met de Algemene Verordening Gegevensbescherming (AVG/GDPR).
+                    </p>
+                </div>
+                
+                <div class="policy-section">
+                    <h3>👤 Gegevens die wij verzamelen</h3>
+                    
+                    <h4>Gegevens die u verstrekt:</h4>
+                    <ul>
+                        <li><strong>Gebruikersnaam:</strong> Wanneer u de App voor het eerst gebruikt, wordt u gevraagd een gebruikersnaam in te voeren</li>
+                        <li><strong>Scores:</strong> Uw oefenresultaten en tijden per tafel</li>
+                    </ul>
+                    
+                    <h4>Automatisch verzamelde gegevens:</h4>
+                    <ul>
+                        <li><strong>App-gebruik:</strong> Welke tafels u oefent en hoe vaak</li>
+                        <li><strong>Technische gegevens:</strong> App-versie, apparaattype (algemeen)</li>
+                    </ul>
+                </div>
+                
+                <div class="policy-section">
+                    <h3>🎯 Hoe wij uw gegevens gebruiken</h3>
+                    <p>Wij gebruiken uw gegevens uitsluitend voor:</p>
+                    <ul>
+                        <li><strong>Personalisatie:</strong> Uw scores en voortgang opslaan</li>
+                        <li><strong>App-functionaliteit:</strong> Scoreborden en voortgangstracking</li>
+                        <li><strong>Verbetering:</strong> Anonieme statistieken voor app-verbetering</li>
+                    </ul>
+                </div>
+                
+                <div class="policy-section">
+                    <h3>🔒 Gegevensopslag en Beveiliging</h3>
+                    <p>
+                        Alle gegevens worden lokaal op uw apparaat opgeslagen. De App verzamelt 
+                        geen persoonsgegevens via internet en deelt geen gegevens met derden.
+                    </p>
+                    <h4>Beveiligingsmaatregelen:</h4>
+                    <ul>
+                        <li>Lokale opslag op uw Android-apparaat</li>
+                        <li>Geen data-overdracht naar externe servers</li>
+                        <li>Geen tracking of analytics van derden</li>
+                    </ul>
+                </div>
+                
+                <div class="policy-section">
+                    <h3>👶 Kindveiligheid</h3>
+                    <p>
+                        Deze App is geschikt voor kinderen en jongeren. Wij verzamelen 
+                        bewust geen persoonlijke gegevens van kinderen onder 16 jaar zonder 
+                        toestemming van ouders/voogd. De App bevat geen advertenties, 
+                        in-app aankopen of externe links.
+                    </p>
+                </div>
+                
+                <div class="policy-section">
+                    <h3>📱 App-permissies</h3>
+                    <p>De App vraagt minimale permissies:</p>
+                    <ul>
+                        <li><strong>Internet-toegang:</strong> Niet vereist voor basisfunctionaliteit</li>
+                        <li><strong>Opslag-toegang:</strong> Alleen voor lokale opslag van scores</li>
+                    </ul>
+                </div>
+                
+                <div class="policy-section">
+                    <h3>⚖️ Uw Rechten</h3>
+                    <p>Onder de AVG/GDPR heeft u de volgende rechten:</p>
+                    <ul>
+                        <li><strong>Inzage:</strong> U kunt uw opgeslagen gegevens in de App bekijken</li>
+                        <li><strong>Rectificatie:</strong> U kunt uw gebruikersnaam wijzigen</li>
+                        <li><strong>Verwijdering:</strong> U kunt al uw gegevens via de App verwijderen</li>
+                        <li><strong>Gegevensoverdracht:</strong> Uw gegevens zijn lokaal beschikbaar</li>
+                    </ul>
+                </div>
+                
+                <div class="policy-section">
+                    <h3>🔄 Wijzigingen in deze Privacy Policy</h3>
+                    <p>
+                        Wij kunnen deze privacy policy van tijd tot tijd bijwerken. 
+                        Wijzigingen worden hier gepubliceerd en de "laatst bijgewerkt" datum wordt aangepast.
+                    </p>
+                </div>
+                
+                <div class="policy-section">
+                    <h3>📞 Contact</h3>
+                    <p>
+                        Als u vragen heeft over deze privacy policy of uw gegevens, 
+                        neem dan contact op met:
+                    </p>
+                    <ul>
+                        <li><strong>Ontwikkelaar:</strong> Edwin Bulter</li>
+                        <li><strong>E-mail:</strong> [e-mail adres van ontwikkelaar]</li>
+                        <li><strong>App:</strong> Tafels Oefenen</li>
+                    </ul>
+                </div>
+                
+                <div class="policy-section">
+                    <h3>🌍 English Translation</h3>
+                    <p>
+                        <em>This privacy policy is provided in Dutch to comply with GDPR requirements 
+                        for Dutch users. For Google Play review purposes, this page serves as the 
+                        official privacy policy for the Tafels Oefenen app.</em>
+                    </p>
+                </div>
+            </div>
         </div>
         
         <div style="margin-top: 40px; color: #999; font-size: 14px;">
@@ -149,6 +366,23 @@
     </div>
     
     <script>
+        // Tab switching functionality
+        function showTab(tabName) {
+            // Hide all tabs
+            const tabs = document.querySelectorAll('.tab-content');
+            tabs.forEach(tab => tab.classList.remove('active'));
+            
+            // Remove active class from all buttons
+            const buttons = document.querySelectorAll('.tab-btn');
+            buttons.forEach(btn => btn.classList.remove('active'));
+            
+            // Show selected tab
+            document.getElementById(tabName + '-tab').classList.add('active');
+            
+            // Add active class to clicked button
+            event.target.classList.add('active');
+        }
+        
         // Auto-download on mobile devices
         if (/Android/i.test(navigator.userAgent)) {
             setTimeout(function() {
