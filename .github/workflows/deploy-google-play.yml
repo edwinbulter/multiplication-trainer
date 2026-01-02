@@ -2,6 +2,15 @@ name: Deploy AAB to Google Play Console
 
 on:
   workflow_dispatch: # Manual triggering only from GitHub UI
+    inputs:
+      track:
+        description: 'Release track'
+        required: true
+        default: 'internal'
+        type: choice
+        options:
+          - internal
+          - closed
 
 permissions:
   contents: write
@@ -59,14 +68,14 @@ jobs:
         mkdir -p deploy
         cp mpt-android/app/build/outputs/bundle/release/app-release.aab deploy/${{ steps.version.outputs.aab_name }}
         
-    - name: Upload to Google Play Console (Internal Testing)
+    - name: Upload to Google Play Console
       uses: r0adkll/upload-google-play@v1
       with:
         serviceAccountJsonPlainText: ${{ secrets.GOOGLE_PLAY_SERVICE_ACCOUNT }}
         packageName: ebulter.multiply
         releaseFiles: deploy/${{ steps.version.outputs.aab_name }}
         releaseName: Release ${{ steps.version.outputs.version_name }}/${{ steps.version.outputs.version_code }}/${{ github.run_number }}
-        track: internal
+        track: ${{ github.event.inputs.track }}
         status: draft
         whatsNewDirectory: deploy/whatsnew
         mappingFile: mpt-android/app/build/outputs/mapping/release/mapping.txt
