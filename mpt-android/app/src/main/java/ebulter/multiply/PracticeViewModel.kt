@@ -11,6 +11,7 @@ import kotlinx.coroutines.launch
 class PracticeViewModel(private val repository: ScoreRepository) : ViewModel() {
 
     private lateinit var table: String
+    private lateinit var operation: String
     private var currentQuestionIndexValue = 0
     private val questions = (1..10).shuffled()
     private var startTime = 0L
@@ -30,8 +31,9 @@ class PracticeViewModel(private val repository: ScoreRepository) : ViewModel() {
     private val _isFinished = MutableLiveData<Boolean>()
     val isFinished: LiveData<Boolean> = _isFinished
 
-    fun setTable(table: String) {
+    fun setTable(table: String, operation: String) {
         this.table = table
+        this.operation = operation
         startTime = System.currentTimeMillis()
         currentQuestionIndexValue = 0
         _totalQuestions.value = questions.size
@@ -39,20 +41,34 @@ class PracticeViewModel(private val repository: ScoreRepository) : ViewModel() {
     }
 
     fun checkAnswer(answer: String, username: String) {
-        val correctAnswer = table.replace(',', '.').toDouble() * questions[currentQuestionIndexValue]
+        val tableValue = table.replace(',', '.').toDouble()
+        val multiplier = questions[currentQuestionIndexValue]
+        
+        val correctAnswer = if (operation == "divide") {
+            multiplier.toDouble() // For division, the answer is the multiplier
+        } else {
+            tableValue * multiplier // For multiplication, the answer is the result
+        }
+        
         val userAnswer = answer.replace(',', '.').toDoubleOrNull()
         
         // Use tolerance for floating point comparison to handle precision issues
-        if (userAnswer != null && kotlin.math.abs(userAnswer - correctAnswer) < 0.0001) {
-            _isCorrect.value = true
-            currentQuestionIndexValue++
-            _currentQuestionIndex.value = currentQuestionIndexValue
-            if (currentQuestionIndexValue >= questions.size) {
-                val duration = System.currentTimeMillis() - startTime
-                viewModelScope.launch {
-                    repository.insert(Score(username = username, table = table, duration = duration, timestamp = System.currentTimeMillis()))
+        if (userAnswer != null) {
+            val difference = kotlin.math.abs(userAnswer - correctAnswer)
+            if (difference < 0.0001) {
+                _isCorrect.value = true
+                currentQuestionIndexValue++
+                _currentQuestionIndex.value = currentQuestionIndexValue
+                if (currentQuestionIndexValue >= questions.size) {
+                    val duration = System.currentTimeMillis() - startTime
+                    val tableLabel = if (operation == "divide") ":$table" else table
+                    viewModelScope.launch {
+                        repository.insert(Score(username = username, table = tableLabel, duration = duration, timestamp = System.currentTimeMillis()))
+                    }
+                    _isFinished.value = true
                 }
-                _isFinished.value = true
+            } else {
+                _isCorrect.value = false
             }
         } else {
             _isCorrect.value = false
@@ -61,7 +77,26 @@ class PracticeViewModel(private val repository: ScoreRepository) : ViewModel() {
 
     fun nextQuestion() {
         if (currentQuestionIndexValue < questions.size) {
-            _question.value = "$table × ${questions[currentQuestionIndexValue]} = "
+            val multiplier = questions[currentQuestionIndexValue]
+            val tableValue = table.replace(',', '.').toDouble()
+            val result = tableValue * multiplier
+            
+            _question.value = if (operation == "divide") {
+                // Format as integers when possible
+                val formattedResult = if (result == result.toInt().toDouble()) {
+                    result.toInt().toString()
+                } else {
+                    result.toString().replace('.', ',')
+                }
+                val formattedTable = if (tableValue == tableValue.toInt().toDouble()) {
+                    tableValue.toInt().toString()
+                } else {
+                    table.toString()
+                }
+                "$formattedResult : $formattedTable = "
+            } else {
+                "$table × $multiplier = "
+            }
             _currentQuestionIndex.value = currentQuestionIndexValue
             _isCorrect.value = null
         } else {

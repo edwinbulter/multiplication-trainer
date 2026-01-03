@@ -45,7 +45,7 @@ class PracticeFragment : Fragment() {
         actionBar?.hide()
         actionBar?.title = ""
 
-        viewModel.setTable(args.table)
+        viewModel.setTable(args.table, args.operation)
 
         viewModel.question.observe(viewLifecycleOwner) {
             binding.questionText.text = "Tafel van ${args.table}"

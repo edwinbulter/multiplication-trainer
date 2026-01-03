@@ -42,6 +42,9 @@
         <argument
             android:name="table"
             app:argType="string" />
+        <argument
+            android:name="operation"
+            app:argType="string" />
         <action
             android:id="@+id/action_practiceFragment_to_completionFragment"
             app:destination="@id/completionFragment" >
