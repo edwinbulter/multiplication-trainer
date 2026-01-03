@@ -27,7 +27,11 @@ class ScoreboardAdapter : ListAdapter<Score, ScoreboardAdapter.ScoreViewHolder>(
 
     override fun onBindViewHolder(holder: ScoreViewHolder, position: Int) {
         val score = getItem(position)
-        holder.binding.tableText.text = score.table
+        val displayTable = when {
+            score.table.startsWith(":") -> score.table  // Keep division tables as ":2"
+            else -> "x${score.table}"  // Show multiplication tables as "x2"
+        }
+        holder.binding.tableText.text = displayTable
         holder.binding.durationText.text = "${score.duration / 1000}"
 
         // Format date as dd/MM/yy HH:mm
@@ -67,10 +71,12 @@ class ScoreboardAdapter : ListAdapter<Score, ScoreboardAdapter.ScoreViewHolder>(
     private fun performSort() {
         val sortedList = when (currentSortOrder) {
             SortOrder.TABLE_ASC -> originalList.sortedBy { 
-                it.table.replace(',', '.').toDoubleOrNull() ?: Double.MAX_VALUE 
+                val tableNumber = it.table.replace(":", "").replace(',', '.')
+                tableNumber.toDoubleOrNull() ?: Double.MAX_VALUE 
             }
             SortOrder.TABLE_DESC -> originalList.sortedByDescending { 
-                it.table.replace(',', '.').toDoubleOrNull() ?: Double.MIN_VALUE 
+                val tableNumber = it.table.replace(":", "").replace(',', '.')
+                tableNumber.toDoubleOrNull() ?: Double.MIN_VALUE 
             }
             SortOrder.DURATION_ASC -> originalList.sortedBy { it.duration }
             SortOrder.DURATION_DESC -> originalList.sortedByDescending { it.duration }

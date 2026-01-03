@@ -95,7 +95,7 @@ class PracticeViewModel(private val repository: ScoreRepository) : ViewModel() {
                 }
                 "$formattedResult : $formattedTable = "
             } else {
-                "$table × $multiplier = "
+                "$multiplier × $table = "
             }
             _currentQuestionIndex.value = currentQuestionIndexValue
             _isCorrect.value = null
