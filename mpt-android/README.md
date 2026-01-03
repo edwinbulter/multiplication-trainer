@@ -25,6 +25,7 @@ De Android app biedt exact dezelfde functionaliteit als de web versie:
 
 ### 🎓 Hoofdfuncties
 - **Tafel Selectie**: Kies uit 18 vooraf gedefinieerde tafels (0,125 tot 25) inclusief decimale tafels
+- **Operatie Keuze**: Schakel tussen **Vermenigvuldigen** (×) en **Delen** (÷) voor elke tafel
 - **Aangepaste Tafels**: Voer elk getal in om specifieke tafels te oefenen
 - **Interactieve Oefening**: Beantwoord 10 vragen per sessie met virtueel toetsenbord
 - **Scorebord**: Bekijk en beheer je beste tijden per tafel
@@ -284,6 +285,7 @@ app/
 
 ### 🎯 Identiek aan Web App
 - **Tafel Selectie**: Zelfde 18 tafels inclusief decimalen
+- **Operatie Keuze**: Schakel tussen **Vermenigvuldigen** (×) en **Delen** (÷) voor elke tafel
 - **Oefening Modus**: 10 vragen per sessie
 - **Score Systeem**: Tijdsmeting en opslag
 - **Gebruikersbeheer**: Per gebruiker voortgang

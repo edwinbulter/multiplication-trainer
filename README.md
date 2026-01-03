@@ -38,9 +38,10 @@ Zowel de Web Applicatie als de Android App bieden exact dezelfde kernfunctionali
 
 ### Hoofdfuncties (Beide Platforms)
 - **Tafel Selectie**: Keuze uit 18 vooraf gedefinieerde tafels (0,125, 0,2, 0,25, 0,5, 1, 2, 2,5, 3, 4, 5, 6, 7, 8, 9, 10, 12, 15, 25)
+- **Operatie Keuze**: Schakel tussen **Vermenigvuldigen** (×) en **Delen** (÷) voor elke tafel
 - **Aangepaste Tafels**: Mogelijkheid om elk eigen getal in te voeren voor specifieke oefening
 - **Interactieve Oefening**: Beantwoord 10 vragen per sessie met directe feedback
-- **Virtueel Toetsenbord**: Speciaal ontworpen numeriek toetsenbord voor eenvoudige invoer
+- **Virtueel Toetsenbord**: Speciaal ontworpen numeriek toetsenbord voor eenvoudige invoer. In de web applicatie komt dit alleen tevoorschijn als het scherm smaller is dan 750 pixels breed. In de Android app is dit altijd zichtbaar.
 - **Scorebord**: Bekijk en beheer beste tijden per tafel met sorteerfunctionaliteit
 - **Gebruikersprofielen**: Voortgang opgeslagen per gebruikersnaam
 
