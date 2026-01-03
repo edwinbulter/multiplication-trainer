@@ -126,36 +126,34 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
         </com.google.android.material.card.MaterialCardView>
 
-        <com.google.android.material.button.MaterialButtonToggleGroup
-            android:id="@+id/operation_toggle_group"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:id="@+id/operation_toggle_container"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:padding="8dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/custom_table_card"
-            app:selectionRequired="true"
-            app:singleSelection="true">
+            app:layout_constraintTop_toBottomOf="@+id/custom_table_card">
 
-            <Button
-                android:id="@+id/multiply_button"
+            <Switch
+                android:id="@+id/operation_switch"
                 android:layout_width="wrap_content"
-                android:layout_height="48dp"
-                android:text="×"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                style="?attr/materialButtonOutlinedStyle" />
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:checked="true" />
 
-            <Button
-                android:id="@+id/divide_button"
+            <TextView
+                android:id="@+id/operation_text"
                 android:layout_width="wrap_content"
-                android:layout_height="48dp"
-                android:text="÷"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                style="?attr/materialButtonOutlinedStyle" />
+                android:layout_height="wrap_content"
+                android:text="Vermenigvuldigen"
+                android:textSize="16sp"
+                android:textColor="@color/primary" />
 
-        </com.google.android.material.button.MaterialButtonToggleGroup>
+        </LinearLayout>
 
         <Button
             android:id="@+id/logout_button"
@@ -167,7 +165,7 @@
             android:textSize="14sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/operation_toggle_group" />
+            app:layout_constraintTop_toBottomOf="@+id/operation_toggle_container" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>
