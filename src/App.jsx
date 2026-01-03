@@ -16,11 +16,12 @@ const App = () => {
   };
 
   // Save a new score
-  const saveScore = (table, duration) => {
+  const saveScore = (table, duration, operation = 'multiply') => {
     const currentScores = getScores();
+    const tableLabel = operation === 'divide' ? `:${table}` : table.toString();
     currentScores.push({
       username,
-      table,
+      table: tableLabel,
       duration,
       timestamp: new Date().toISOString()
     });
@@ -82,7 +83,7 @@ const App = () => {
             } 
           />
           <Route 
-            path="/practice/:table" 
+            path="/practice/:table/:operation" 
             element={
               username ? (
                 <PracticeScreen 

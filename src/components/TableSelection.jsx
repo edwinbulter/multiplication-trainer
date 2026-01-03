@@ -3,11 +3,12 @@ import { useNavigate } from 'react-router-dom';
 
 const TableSelection = ({ username, onLogout }) => {
   const [customTable, setCustomTable] = useState('');
+  const [operation, setOperation] = useState('multiply'); // Default to multiplication
   const navigate = useNavigate();
   const DEFAULT_TABLES = [0.125, 0.2, 0.25, 0.5, 1, 2, 2.5, 3, 4, 5, 6, 7, 8, 9, 10, 12, 15, 25];
 
   const startPractice = (table) => {
-    navigate(`/practice/${table}`);
+    navigate(`/practice/${table}/${operation}`);
   };
 
   const handleCustomTableSubmit = (e) => {
@@ -65,6 +66,21 @@ const TableSelection = ({ username, onLogout }) => {
           </button>
         </form>
       </div>
+      
+      {/* Operation Switch */}
+      <div className="flex items-center justify-start gap-3 mb-4 px-4">
+        <label className="relative inline-flex items-center cursor-pointer">
+          <input
+            type="checkbox"
+            className="sr-only peer"
+            checked={operation === 'multiply'}
+            onChange={(e) => setOperation(e.target.checked ? 'multiply' : 'divide')}
+          />
+          <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
+        </label>
+        <span className="text-slate-800 font-medium min-w-32 text-left">{operation === 'multiply' ? 'Vermenigvuldigen' : 'Delen'}</span>
+      </div>
+      
       <button 
         className="bg-red-600 text-white border-none rounded-lg px-5 py-2.5 text-sm cursor-pointer transition-all hover:bg-red-700" 
         onClick={onLogout}

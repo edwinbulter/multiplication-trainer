@@ -49,8 +49,17 @@ const ScoreBoard = ({ scores, onClearScores }) => {
       });
     } else if (sortOrder.table !== 'none') {
       sortedScores.sort((a, b) => {
-        const aVal = parseFloat(a.table.toString().replace(',', '.'));
-        const bVal = parseFloat(b.table.toString().replace(',', '.'));
+        // Handle division tables (e.g., ":3") and multiplication tables (e.g., "3")
+        const getTableValue = (tableStr) => {
+          const tableString = tableStr.toString();
+          if (tableString.startsWith(':')) {
+            return parseFloat(tableString.substring(1).replace(',', '.'));
+          } else {
+            return parseFloat(tableString.replace(',', '.'));
+          }
+        };
+        const aVal = getTableValue(a.table);
+        const bVal = getTableValue(b.table);
         return sortOrder.table === 'asc' ? aVal - bVal : bVal - aVal;
       });
     }
@@ -119,7 +128,9 @@ const ScoreBoard = ({ scores, onClearScores }) => {
             {/* Score rows */}
             {sortedScores.map((score, index) => (
               <div key={index} className="grid grid-cols-12 gap-2 p-2 border-b border-gray-200 items-center text-center hover:bg-slate-50 sm:gap-1 sm:p-1">
-                <span className="text-black text-sm col-span-3">{score.table.toString().replace('.', ',')}</span>
+                <span className="text-black text-sm col-span-3">
+                  {score.table.toString().startsWith(':') ? `: ${score.table.toString().substring(1)}` : `x ${score.table.toString()}`}
+                </span>
                 <span className="text-black text-sm col-span-3">{Math.round(score.duration)}</span>
                 <span className="text-black text-sm col-span-6">{formatDate(score.timestamp)}</span>
               </div>

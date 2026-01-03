@@ -2,9 +2,10 @@ import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 
 const PracticeScreen = ({ onSaveScore }) => {
-  const { table } = useParams();
+  const { table, operation } = useParams();
   const navigate = useNavigate();
   const selectedTable = parseFloat(table.replace(',', '.'));
+  const selectedOperation = operation || 'multiply';
   
   const [questions, setQuestions] = useState([]);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
@@ -29,14 +30,27 @@ const PracticeScreen = ({ onSaveScore }) => {
   }, []);
 
   // Generate questions for the selected table
-  const generateQuestions = (table) => {
+  const generateQuestions = (table, operation) => {
     const newQuestions = [];
     for (let i = 1; i <= 10; i++) {
-      newQuestions.push({
-        multiplicand: table,
-        multiplier: i,
-        answer: table * i
-      });
+      if (operation === 'divide') {
+        // For division: result : table = multiplier
+        const result = table * i;
+        newQuestions.push({
+          dividend: result,
+          divisor: table,
+          answer: i,
+          displayText: `${result.toString().replace('.', ',')} : ${table.toString().replace('.', ',')} = `
+        });
+      } else {
+        // For multiplication: multiplier × table = answer
+        newQuestions.push({
+          multiplicand: i,
+          multiplier: table,
+          answer: table * i,
+          displayText: `${i} × ${table.toString().replace('.', ',')} = `
+        });
+      }
     }
     // Shuffle questions
     return newQuestions.sort(() => Math.random() - 0.5);
@@ -45,14 +59,14 @@ const PracticeScreen = ({ onSaveScore }) => {
   // Initialize practice session
   useEffect(() => {
     if (selectedTable && !isNaN(selectedTable)) {
-      setQuestions(generateQuestions(selectedTable));
+      setQuestions(generateQuestions(selectedTable, selectedOperation));
       setCurrentQuestionIndex(0);
       setUserAnswer('');
       setStartTime(Date.now());
       setEndTime(null);
       setIsComplete(false);
     }
-  }, [selectedTable]);
+  }, [selectedTable, selectedOperation]);
 
   // Handle answer submission
   const handleSubmit = (e) => {
@@ -77,7 +91,7 @@ const PracticeScreen = ({ onSaveScore }) => {
         setIsComplete(true);
         // Save score
         const duration = ((endTimeNow - startTime) / 1000);
-        onSaveScore(selectedTable, duration);
+        onSaveScore(selectedTable, duration, selectedOperation);
       } else {
         // Move to next question
         setCurrentQuestionIndex(currentQuestionIndex + 1);
@@ -140,7 +154,7 @@ const PracticeScreen = ({ onSaveScore }) => {
     <div className="bg-white rounded-xl p-4 shadow-lg w-full max-w-2xl mx-auto box-border overflow-x-hidden flex flex-col items-center text-center sm:p-3 small-mobile:p-2 small-mobile:rounded-lg small-mobile:mx-auto small-mobile:w-11/12">
       <h2 className="text-teal-600 text-3xl mb-6 font-semibold sm:text-2xl sm:mb-4 small-mobile:text-xl small-mobile:mb-2">Tafel van {selectedTable.toString().replace('.', ',')}</h2>
       <div className="text-3xl my-8 font-bold sm:text-2xl sm:my-4 small-mobile:text-xl small-mobile:my-2">
-        <p>{questions[currentQuestionIndex].multiplicand.toString().replace('.', ',')} × {questions[currentQuestionIndex].multiplier} = <span className="text-blue-600 border-b-2 border-blue-600 min-w-8 inline-block text-center">{userAnswer}</span></p>
+        <p>{questions[currentQuestionIndex].displayText}<span className="text-blue-600 border-b-2 border-blue-600 min-w-8 inline-block text-center">{userAnswer}</span></p>
       </div>
       <button
         onClick={() => navigate('/tables')}
