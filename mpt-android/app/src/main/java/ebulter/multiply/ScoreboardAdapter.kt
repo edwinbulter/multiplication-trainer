@@ -28,8 +28,8 @@ class ScoreboardAdapter : ListAdapter<Score, ScoreboardAdapter.ScoreViewHolder>(
     override fun onBindViewHolder(holder: ScoreViewHolder, position: Int) {
         val score = getItem(position)
         val displayTable = when {
-            score.table.startsWith(":") -> score.table  // Keep division tables as ":2"
-            else -> "x${score.table}"  // Show multiplication tables as "x2"
+            score.table.startsWith(":") -> ": ${score.table.substring(1)}"  // Add space after ":"
+            else -> "× ${score.table}"  // Add space after "×"
         }
         holder.binding.tableText.text = displayTable
         holder.binding.durationText.text = "${score.duration / 1000}"

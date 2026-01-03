@@ -40,7 +40,11 @@ class TableSelectionFragment : Fragment() {
         }
 
         val adapter = TablesAdapter(viewModel.tables) { table ->
-            val operation = if (binding.operationSwitch.isChecked) "multiply" else "divide"
+            val operation = when (binding.operationToggleGroup.checkedButtonId) {
+                R.id.multiply_button -> "multiply"
+                R.id.divide_button -> "divide"
+                else -> "multiply" // Default fallback
+            }
             val action = TableSelectionFragmentDirections.actionTableSelectionFragmentToPracticeFragment(table, operation)
             findNavController().navigate(action)
         }
@@ -55,7 +59,11 @@ class TableSelectionFragment : Fragment() {
         binding.startCustomTableButton.setOnClickListener {
             val customTable = binding.customTableInput.text.toString()
             if (customTable.isNotBlank()) {
-                val operation = if (binding.operationSwitch.isChecked) "multiply" else "divide"
+                val operation = when (binding.operationToggleGroup.checkedButtonId) {
+                    R.id.multiply_button -> "multiply"
+                    R.id.divide_button -> "divide"
+                    else -> "multiply" // Default fallback
+                }
                 val action = TableSelectionFragmentDirections.actionTableSelectionFragmentToPracticeFragment(customTable, operation)
                 findNavController().navigate(action)
             }
@@ -69,13 +77,8 @@ class TableSelectionFragment : Fragment() {
             findNavController().navigate(R.id.action_tableSelectionFragment_to_loginFragment)
         }
 
-        binding.operationSwitch.setOnCheckedChangeListener { _, isChecked ->
-            if (isChecked) {
-                binding.operationText.text = "Vermenigvuldigen"
-            } else {
-                binding.operationText.text = "Delen"
-            }
-        }
+        // Set default selection to multiplication
+        binding.operationToggleGroup.check(R.id.multiply_button)
     }
 
     override fun onDestroyView() {
