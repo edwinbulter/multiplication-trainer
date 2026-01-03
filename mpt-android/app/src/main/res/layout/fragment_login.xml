@@ -16,6 +16,10 @@
         android:textSize="32sp"
         android:textStyle="bold"
         android:textColor="@color/primary"
+        android:shadowColor="#00000000"
+        android:shadowDx="0"
+        android:shadowDy="0"
+        android:shadowRadius="0"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
