@@ -5,7 +5,7 @@
     android:layout_height="wrap_content"
     android:orientation="horizontal"
     android:padding="4dp"
-    android:background="@color/white">
+    android:background="?attr/colorSurface">
 
     <TextView
         android:id="@+id/table_text"
@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:textSize="16sp"
-        android:textColor="@color/black"
+        android:textColor="?attr/colorOnSurface"
         android:gravity="center"
         tools:text="2" />
 
@@ -23,7 +23,7 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:textSize="16sp"
-        android:textColor="@color/black"
+        android:textColor="?attr/colorOnSurface"
         android:gravity="center"
         tools:text="45" />
 
@@ -33,7 +33,7 @@
         android:layout_height="wrap_content"
         android:layout_weight="1.5"
         android:textSize="16sp"
-        android:textColor="@color/black"
+        android:textColor="?attr/colorOnSurface"
         android:gravity="center"
         tools:text="29/12/25 14:30" />
 

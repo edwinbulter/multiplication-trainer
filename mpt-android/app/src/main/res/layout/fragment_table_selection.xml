@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background"
+    android:background="?android:attr/colorBackground"
     android:fillViewport="true">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -34,7 +34,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
-            android:textColor="@color/secondary"
+            android:textColor="?attr/colorSecondary"
             android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -48,7 +48,7 @@
             android:layout_marginTop="6dp"
             android:text="Welk tafeltje wil je oefenen?"
             android:textSize="16sp"
-            android:textColor="@color/text_dark"
+            android:textColor="?attr/colorOnSurfaceVariant"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/welcome_message" />
@@ -58,7 +58,7 @@
             android:layout_width="0dp"
             android:layout_height="48dp"
             android:layout_marginTop="8dp"
-            android:backgroundTint="@color/secondary"
+            android:backgroundTint="?attr/colorSecondary"
             android:text="Bekijk Scorebord"
             android:textSize="14sp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -79,7 +79,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            app:cardBackgroundColor="@color/white"
+            app:cardBackgroundColor="?attr/colorSurface"
             app:cardCornerRadius="8dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -96,7 +96,7 @@
                     android:layout_height="wrap_content"
                     android:text="Of kies je eigen getal:"
                     android:textSize="14sp"
-                    android:textColor="@color/text_dark"
+                    android:textColor="?attr/colorOnSurfaceVariant"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -110,8 +110,8 @@
                     android:inputType="text"
                     android:digits="0123456789,"
                     android:textSize="12sp"
-                    android:textColor="@color/text_input"
-                    android:textColorHint="@color/text_hint"
+                    android:textColor="?attr/colorOnSurface"
+                    android:textColorHint="?attr/colorOnSurfaceVariant"
                     app:layout_constraintEnd_toStartOf="@+id/start_custom_table_button"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/custom_table_title" />
@@ -120,7 +120,7 @@
                     android:id="@+id/start_custom_table_button"
                     android:layout_width="wrap_content"
                     android:layout_height="40dp"
-                    android:backgroundTint="@color/success"
+                    android:backgroundTint="?attr/colorSecondary"
                     android:text="Start"
                     android:textSize="12sp"
                     app:layout_constraintBottom_toBottomOf="@+id/custom_table_input"
@@ -155,7 +155,7 @@
                 android:layout_height="wrap_content"
                 android:text="Vermenigvuldigen"
                 android:textSize="16sp"
-                android:textColor="@color/primary" />
+                android:textColor="?attr/colorPrimary" />
 
         </LinearLayout>
 
@@ -164,7 +164,7 @@
             android:layout_width="0dp"
             android:layout_height="48dp"
             android:layout_marginTop="8dp"
-            android:backgroundTint="@color/error"
+            android:backgroundTint="?attr/colorError"
             android:text="Uitloggen"
             android:textSize="14sp"
             app:layout_constraintEnd_toEndOf="parent"

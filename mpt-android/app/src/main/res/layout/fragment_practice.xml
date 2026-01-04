@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background"
+    android:background="?android:attr/colorBackground"
     tools:context=".PracticeFragment">
 
     <TextView
@@ -14,7 +14,7 @@
         android:layout_marginTop="24dp"
         android:textSize="34sp"
         android:textStyle="bold"
-        android:textColor="@color/success"
+        android:textColor="?attr/colorSecondary"
         android:shadowColor="#00000000"
         android:shadowDx="0"
         android:shadowDy="0"
@@ -32,7 +32,7 @@
         android:layout_marginTop="16dp"
         android:textSize="32sp"
         android:textStyle="bold"
-        android:textColor="@color/black"
+        android:textColor="?attr/colorOnSurface"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/question_text"
         tools:text="2 × 9 = " />
@@ -44,7 +44,7 @@
         android:layout_marginStart="8dp"
         android:textSize="36sp"
         android:textStyle="bold"
-        android:textColor="@color/primary"
+        android:textColor="?attr/colorPrimary"
         android:shadowColor="#00000000"
         android:shadowDx="0"
         android:shadowDy="0"
@@ -64,9 +64,9 @@
         android:layout_marginEnd="32dp"
         android:text="Stop Oefenen"
         android:textSize="18sp"
-        android:textColor="@color/black"
+        android:textColor="?attr/colorOnSurface"
         android:textAllCaps="false"
-        app:backgroundTint="@color/key_dark_gray"
+        app:backgroundTint="?attr/colorSurfaceVariant"
         app:cornerRadius="8dp"
         app:strokeColor="@android:color/transparent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -92,7 +92,7 @@
             android:layout_gravity="center"
             android:textSize="18sp"
             android:textStyle="bold"
-            android:textColor="@color/white"
+            android:textColor="?attr/colorOnPrimary"
             android:background="@drawable/feedback_background"
             android:padding="12dp"
             android:visibility="gone"
@@ -127,10 +127,10 @@
             android:layout_marginTop="1dp"
             android:layout_marginBottom="1dp"
             android:text="7"
-            android:textColor="@color/black"
+            android:textColor="?attr/colorOnSurface"
             android:textStyle="bold"
             android:textSize="20sp"
-            app:backgroundTint="@color/key_gray"
+            app:backgroundTint="?attr/colorSurfaceVariant"
             app:cornerRadius="8dp" />
 
         <com.google.android.material.button.MaterialButton
@@ -143,10 +143,10 @@
             android:layout_marginTop="1dp"
             android:layout_marginBottom="1dp"
             android:text="8"
-            android:textColor="@color/black"
+            android:textColor="?attr/colorOnSurface"
             android:textStyle="bold"
             android:textSize="20sp"
-            app:backgroundTint="@color/key_gray"
+            app:backgroundTint="?attr/colorSurfaceVariant"
             app:cornerRadius="8dp" />
 
         <com.google.android.material.button.MaterialButton
@@ -159,10 +159,10 @@
             android:layout_marginTop="1dp"
             android:layout_marginBottom="1dp"
             android:text="9"
-            android:textColor="@color/black"
+            android:textColor="?attr/colorOnSurface"
             android:textStyle="bold"
             android:textSize="20sp"
-            app:backgroundTint="@color/key_gray"
+            app:backgroundTint="?attr/colorSurfaceVariant"
             app:cornerRadius="8dp" />
 
         <com.google.android.material.button.MaterialButton
@@ -175,10 +175,10 @@
             android:layout_marginTop="1dp"
             android:layout_marginBottom="1dp"
             android:text="4"
-            android:textColor="@color/black"
+            android:textColor="?attr/colorOnSurface"
             android:textStyle="bold"
             android:textSize="20sp"
-            app:backgroundTint="@color/key_gray"
+            app:backgroundTint="?attr/colorSurfaceVariant"
             app:cornerRadius="8dp" />
 
         <com.google.android.material.button.MaterialButton
@@ -191,10 +191,10 @@
             android:layout_marginTop="1dp"
             android:layout_marginBottom="1dp"
             android:text="5"
-            android:textColor="@color/black"
+            android:textColor="?attr/colorOnSurface"
             android:textStyle="bold"
             android:textSize="20sp"
-            app:backgroundTint="@color/key_gray"
+            app:backgroundTint="?attr/colorSurfaceVariant"
             app:cornerRadius="8dp" />
 
         <com.google.android.material.button.MaterialButton
@@ -207,10 +207,10 @@
             android:layout_marginTop="1dp"
             android:layout_marginBottom="1dp"
             android:text="6"
-            android:textColor="@color/black"
+            android:textColor="?attr/colorOnSurface"
             android:textStyle="bold"
             android:textSize="20sp"
-            app:backgroundTint="@color/key_gray"
+            app:backgroundTint="?attr/colorSurfaceVariant"
             app:cornerRadius="8dp" />
 
         <com.google.android.material.button.MaterialButton
@@ -223,10 +223,10 @@
             android:layout_marginTop="1dp"
             android:layout_marginBottom="1dp"
             android:text="1"
-            android:textColor="@color/black"
+            android:textColor="?attr/colorOnSurface"
             android:textStyle="bold"
             android:textSize="20sp"
-            app:backgroundTint="@color/key_gray"
+            app:backgroundTint="?attr/colorSurfaceVariant"
             app:cornerRadius="8dp" />
 
         <com.google.android.material.button.MaterialButton
@@ -239,10 +239,10 @@
             android:layout_marginTop="1dp"
             android:layout_marginBottom="1dp"
             android:text="2"
-            android:textColor="@color/black"
+            android:textColor="?attr/colorOnSurface"
             android:textStyle="bold"
             android:textSize="20sp"
-            app:backgroundTint="@color/key_gray"
+            app:backgroundTint="?attr/colorSurfaceVariant"
             app:cornerRadius="8dp" />
 
         <com.google.android.material.button.MaterialButton
@@ -255,10 +255,10 @@
             android:layout_marginTop="1dp"
             android:layout_marginBottom="1dp"
             android:text="3"
-            android:textColor="@color/black"
+            android:textColor="?attr/colorOnSurface"
             android:textStyle="bold"
             android:textSize="20sp"
-            app:backgroundTint="@color/key_gray"
+            app:backgroundTint="?attr/colorSurfaceVariant"
             app:cornerRadius="8dp" />
 
         <com.google.android.material.button.MaterialButton
@@ -271,10 +271,10 @@
             android:layout_marginTop="1dp"
             android:layout_marginBottom="1dp"
             android:text=","
-            android:textColor="@color/black"
+            android:textColor="?attr/colorOnSurface"
             android:textStyle="bold"
             android:textSize="20sp"
-            app:backgroundTint="@color/key_dark_gray"
+            app:backgroundTint="?attr/colorSurfaceVariant"
             app:cornerRadius="8dp" />
 
         <com.google.android.material.button.MaterialButton
@@ -287,10 +287,10 @@
             android:layout_marginTop="1dp"
             android:layout_marginBottom="1dp"
             android:text="0"
-            android:textColor="@color/black"
+            android:textColor="?attr/colorOnSurface"
             android:textStyle="bold"
             android:textSize="20sp"
-            app:backgroundTint="@color/key_gray"
+            app:backgroundTint="?attr/colorSurfaceVariant"
             app:cornerRadius="8dp" />
 
         <com.google.android.material.button.MaterialButton

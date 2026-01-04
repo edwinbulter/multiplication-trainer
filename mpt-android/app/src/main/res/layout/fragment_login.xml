@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background"
+    android:background="?android:attr/colorBackground"
     tools:context=".LoginFragment">
 
     <TextView
@@ -15,7 +15,7 @@
         android:text="Tafels Oefenen"
         android:textSize="32sp"
         android:textStyle="bold"
-        android:textColor="@color/primary"
+        android:textColor="?attr/colorPrimary"
         android:shadowColor="#00000000"
         android:shadowDx="0"
         android:shadowDy="0"
@@ -31,7 +31,7 @@
         android:layout_marginTop="20dp"
         android:text="Welkom!"
         android:textSize="22sp"
-        android:textColor="@color/success"
+        android:textColor="?attr/colorSecondary"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/app_title" />
@@ -43,7 +43,7 @@
         android:layout_marginTop="12dp"
         android:text="Voer je naam in om te beginnen"
         android:textSize="16sp"
-        android:textColor="@color/text_secondary"
+        android:textColor="?attr/colorOnSurfaceVariant"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/welcome_text" />
@@ -55,7 +55,7 @@
         android:layout_marginStart="32dp"
         android:layout_marginTop="24dp"
         android:layout_marginEnd="32dp"
-        app:cardBackgroundColor="@color/white"
+        app:cardBackgroundColor="?attr/colorSurface"
         app:cardCornerRadius="16dp"
         app:cardElevation="8dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -73,8 +73,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Jouw naam"
-                app:boxStrokeColor="@color/primary"
-                app:hintTextColor="@color/text_secondary"
+                app:boxStrokeColor="?attr/colorPrimary"
+                app:hintTextColor="?attr/colorOnSurfaceVariant"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -83,7 +83,7 @@
                     android:layout_height="wrap_content"
                     android:inputType="textPersonName"
                     android:textSize="18sp"
-                    android:textColor="@color/black" />
+                    android:textColor="?attr/colorOnSurface" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -97,7 +97,7 @@
                 android:textSize="16sp"
                 android:textStyle="bold"
                 android:textAllCaps="false"
-                app:backgroundTint="@color/primary"
+                app:backgroundTint="?attr/colorPrimary"
                 app:cornerRadius="8dp" />
 
         </LinearLayout>
