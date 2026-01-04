@@ -1,0 +1,21 @@
+Tafels Oefenen - Versie 1.0.0
+
+🎓 Nieuwe functies:
+• Complete tafel oefening (1-12 en custom tafels)
+• Scorebord met beste tijden per tafel
+• Gebruikersprofielen voor voortgang bijhouden
+• Virtueel numeriek toetsenbord
+• Offline modus - geen internet verbinding nodig
+
+🔱 Verbeteringen:
+• Optimaliseerd voor Android 7.0+ apparaten
+• Snelle laadtijden en soepele prestaties
+• Kindvriendelijke interface
+• Ondersteuning voor decimale tafels
+
+🔒 Privacy:
+• Geen advertenties of tracking
+• Lokale data opslag alleen
+• Kindveilig volgens GDPR normen
+
+Bedankt voor het gebruiken van Tafels Oefenen! 🧮

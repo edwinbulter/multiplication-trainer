@@ -210,7 +210,7 @@
         
         <!-- Download Tab -->
         <div id="download-tab" class="tab-content active">
-            <a href="tafels-oefenen-1.0.0.apk" 
+            <a href="tafels-oefenen-1.0.3.apk" 
                class="install-btn" 
                id="installBtn"
                download="tafels-oefenen.apk">
@@ -361,7 +361,7 @@
         </div>
         
         <div style="margin-top: 40px; color: #999; font-size: 14px;">
-            <p>Versie: 1.0.0 | Directe download-installatie</p>
+            <p>Versie: 1.0.3 | Directe download-installatie</p>
         </div>
     </div>
     
@@ -456,7 +456,7 @@
         });
         
         // Show file size when available
-        fetch('tafels-oefenen-1.0.0.apk', {method: 'HEAD'})
+        fetch('tafels-oefenen-1.0.3.apk', {method: 'HEAD'})
             .then(response => {
                 const size = response.headers.get('content-length');
                 if (size) {
