@@ -1,5 +1,39 @@
 # iOS App Development Plan - Tafels Oefenen
 
+## Table of Contents
+
+- [Overview](#overview)
+- [App Functionality](#app-functionality)
+  - [Core Features](#core-features)
+  - [Technical Requirements](#technical-requirements)
+- [Screen Designs](#screen-designs-based-on-android-screenshots)
+  - [Login Screen](#1-login-screen)
+  - [Table Selection Screen](#2-table-selection-screen)
+  - [Practice Screen](#3-practice-screen)
+  - [Completion Screen](#4-completion-screen)
+- [Development Steps](#development-steps)
+  - [Phase 1: Project Setup](#phase-1-project-setup)
+  - [Phase 2: Core Models](#phase-2-core-models)
+  - [Phase 3: View Implementation](#phase-3-view-implementation)
+  - [Phase 4: Data Persistence](#phase-4-data-persistence)
+  - [Phase 5: Styling and Polish](#phase-5-styling-and-polish)
+  - [Phase 6: Distribution Setup](#phase-6-distribution-setup)
+- [Technical Considerations](#technical-considerations)
+  - [Localization](#localization)
+  - [Accessibility](#accessibility)
+  - [Performance](#performance)
+  - [Testing](#testing)
+- [GitHub Actions Workflow](#github-actions-workflow)
+  - [Extended Build and Deploy Workflow](#extended-build-and-deploy-workflow)
+  - [Separate iOS-Only Workflow (Optional)](#separate-ios-only-workflow-optional)
+- [Installation Guide for Users](#installation-guide-for-users)
+  - [Prerequisites](#prerequisites)
+  - [Installation Steps](#installation-steps)
+  - [Troubleshooting](#troubleshooting)
+- [Timeline Estimate](#timeline-estimate)
+- [Success Criteria](#success-criteria)
+- [Next Steps](#next-steps)
+
 ## Overview
 
 Create an iOS version of the "Tafels Oefenen" (Multiplication Trainer) app using Swift and SwiftUI that provides identical functionality to the existing Android app. The app will be distributed via GitHub Pages for sideloading, not through the App Store.
@@ -15,14 +49,15 @@ Create an iOS version of the "Tafels Oefenen" (Multiplication Trainer) app using
 
 2. **Table Selection Screen**
    - Personalized welcome message
+   - **Operation Selection**: Switch/toggle to choose between **Vermenigvuldigen** (×) and **Delen** (÷)
    - Grid of multiplication tables (1-12)
    - Custom table input option (including decimals like 1.5)
    - View scoreboard button
    - Logout button
 
 3. **Practice Screen**
-   - Display "Tafel van [table number]" header
-   - Question display (e.g., "2 × 9 = ")
+   - Display "Tafel van [table number]" header (for multiplication) or "Delen door [table number]" (for division)
+   - Question display (e.g., "2 × 9 = " for multiplication, "18 ÷ 9 = " for division)
    - Answer input area
    - Numeric keypad (0-9, decimal comma, backspace)
    - Submit button
@@ -38,7 +73,8 @@ Create an iOS version of the "Tafels Oefenen" (Multiplication Trainer) app using
 
 5. **Scoreboard**
    - List of user scores
-   - Table number, time, and date
+   - Table operation and number (e.g., "× 2", ": 3")
+   - Time, and date
    - Sortable by time or date
 
 ### Technical Requirements
@@ -65,6 +101,7 @@ Create an iOS version of the "Tafels Oefenen" (Multiplication Trainer) app using
 - **Welcome Message**: "Welkom [username]!" (secondary color, 20sp equivalent)
 - **Subtitle**: "Welk tafeltje wil je oefenen?" (16sp equivalent)
 - **Scoreboard Button**: Secondary color button above table grid
+- **Operation Toggle**: iOS-style switch with label "Vermenigvuldigen" (when ON) or "Delen" (when OFF)
 - **Table Grid**: 3-column grid of numbered buttons (1-12)
 - **Custom Table Card**: Input field with hint "Bijv. 7 of 1,5" and "Start" button
 - **Logout Button**: Red button at bottom
