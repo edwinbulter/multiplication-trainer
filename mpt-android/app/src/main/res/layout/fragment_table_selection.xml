@@ -48,6 +48,7 @@
             android:layout_marginTop="6dp"
             android:text="Welk tafeltje wil je oefenen?"
             android:textSize="16sp"
+            android:textColor="@color/text_dark"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/welcome_message" />
@@ -95,6 +96,7 @@
                     android:layout_height="wrap_content"
                     android:text="Of kies je eigen getal:"
                     android:textSize="14sp"
+                    android:textColor="@color/text_dark"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -104,10 +106,12 @@
                     android:layout_height="40dp"
                     android:layout_marginTop="2dp"
                     android:layout_marginEnd="8dp"
-                    android:hint="Bijv. 7 of 1,5"
+                    android:hint="Bijv. 1,5 of 11"
                     android:inputType="text"
                     android:digits="0123456789,"
                     android:textSize="12sp"
+                    android:textColor="@color/text_input"
+                    android:textColorHint="@color/text_hint"
                     app:layout_constraintEnd_toStartOf="@+id/start_custom_table_button"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/custom_table_title" />

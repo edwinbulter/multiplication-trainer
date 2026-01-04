@@ -18,6 +18,7 @@ import androidx.navigation.fragment.navArgs
 import androidx.core.os.bundleOf
 import com.google.android.material.snackbar.Snackbar
 import ebulter.multiply.databinding.FragmentPracticeBinding
+import androidx.activity.OnBackPressedCallback
 
 class PracticeFragment : Fragment() {
 
@@ -44,6 +45,13 @@ class PracticeFragment : Fragment() {
         val actionBar = (requireActivity() as AppCompatActivity).supportActionBar
         actionBar?.hide()
         actionBar?.title = ""
+
+        // Override back button to always return to table selection
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                findNavController().navigate(R.id.action_practiceFragment_to_tableSelectionFragment)
+            }
+        })
 
         viewModel.setTable(args.table, args.operation)
 

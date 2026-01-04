@@ -10,6 +10,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import ebulter.multiply.databinding.FragmentCompletionBinding
+import androidx.activity.OnBackPressedCallback
 
 class CompletionFragment : Fragment() {
 
@@ -33,6 +34,13 @@ class CompletionFragment : Fragment() {
         // Show toolbar
         (requireActivity() as AppCompatActivity).supportActionBar?.show()
         (requireActivity() as AppCompatActivity).supportActionBar?.title = ""
+
+        // Override back button to always return to table selection
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                findNavController().navigate(R.id.action_completionFragment_to_tableSelectionFragment)
+            }
+        })
 
         // Display completion message
         val duration = args.duration / 1000 // Convert milliseconds to seconds

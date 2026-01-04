@@ -11,6 +11,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import ebulter.multiply.databinding.FragmentTableSelectionBinding
+import androidx.activity.OnBackPressedCallback
 
 class TableSelectionFragment : Fragment() {
 
@@ -34,6 +35,13 @@ class TableSelectionFragment : Fragment() {
 
         // Hide toolbar
         (requireActivity() as AppCompatActivity).supportActionBar?.hide()
+
+        // Disable back button on table selection screen
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                // Do nothing - disable back button
+            }
+        })
 
         loginViewModel.getUsername()?.let {
             binding.welcomeMessage.text = "Welkom $it!"

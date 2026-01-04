@@ -9,6 +9,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import ebulter.multiply.databinding.FragmentScoreboardBinding
+import androidx.activity.OnBackPressedCallback
 
 class ScoreboardFragment : Fragment() {
 
@@ -38,6 +39,13 @@ class ScoreboardFragment : Fragment() {
         // Also hide any system UI for full screen experience
         requireActivity().window.decorView.systemUiVisibility = 
             android.view.View.SYSTEM_UI_FLAG_FULLSCREEN
+
+        // Override back button to always return to table selection
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                findNavController().navigate(R.id.action_scoreboardFragment_to_tableSelectionFragment)
+            }
+        })
 
         val adapter = ScoreboardAdapter()
         binding.scoresRecyclerView.adapter = adapter
