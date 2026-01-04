@@ -10,6 +10,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import ebulter.multiply.databinding.FragmentLoginBinding
 import java.util.Locale
+import androidx.activity.OnBackPressedCallback
 
 class LoginFragment : Fragment() {
 
@@ -29,6 +30,13 @@ class LoginFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        // Disable back button on login screen
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                // Do nothing - disable back button
+            }
+        })
 
         // Show toolbar for login screen
         (requireActivity() as AppCompatActivity).supportActionBar?.show()
