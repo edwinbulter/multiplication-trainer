@@ -8,11 +8,20 @@
 import SwiftUI
 
 struct ContentView: View {
+    @EnvironmentObject var appState: AppState
+    
     var body: some View {
-        LoginView()
+        NavigationStack {
+            if appState.currentUser == nil {
+                LoginView()
+            } else {
+                TableSelectionView()
+            }
+        }
     }
 }
 
 #Preview {
     ContentView()
+        .environmentObject(AppState())
 }

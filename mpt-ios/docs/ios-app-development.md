@@ -136,10 +136,10 @@ open TafelsOefenen.xcodeproj
 #### Using Command Line
 ```bash
 # Build project
-xcodebuild -project TafelsOefenen.xcodeproj -scheme TafelsOefenen build
+xcodebuild -project TafelsOefenen.xcodeproj -scheme TafelsOefenen -destination 'platform=iOS Simulator,name=iPhone 17 Pro' build
 
 # Run on simulator
-xcodebuild -project TafelsOefenen.xcodeproj -scheme TafelsOefenen -destination 'platform=iOS Simulator,name=iPhone 14 Pro' run
+xcodebuild -project TafelsOefenen.xcodeproj -scheme TafelsOefenen -destination 'platform=iOS Simulator,name=iPhone 17 Pro' run
 
 # Run on physical device
 xcodebuild -project TafelsOefenen.xcodeproj -scheme TafelsOefenen -destination 'platform=iOS,name=Your iPhone Name' run

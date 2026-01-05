@@ -1,0 +1,64 @@
+/* 
+  Localizable.strings
+  TafelsOefenen
+
+  Created by [Your Name] on [Date].
+  Copyright © 2024 [Your Company]. All rights reserved.
+*/
+
+// MARK: - General
+"app_name" = "Tafels Oefenen";
+"welcome" = "Welkom!";
+"start" = "Start";
+"back" = "Terug";
+"cancel" = "Annuleren";
+"confirm" = "Bevestigen";
+"done" = "Klaar";
+"clear" = "Wissen";
+"delete" = "Verwijderen";
+
+// MARK: - Login
+"enter_name" = "Voer je naam in om te beginnen";
+"your_name" = "Jouw naam";
+"start_practicing" = "Start Oefenen";
+
+// MARK: - Table Selection
+"which_table" = "Welk tafeltje wil je oefenen?";
+"view_scoreboard" = "Bekijk Scorebord";
+"operation" = "Operatie:";
+"multiply" = "Vermenigvuldigen";
+"divide" = "Delen";
+"choose_your_own" = "Of kies je eigen getal:";
+"example_placeholder" = "Bijv. 1,5 of 11";
+"logout" = "Uitloggen";
+
+// MARK: - Practice
+"table_of" = "Tafel van";
+"divide_by" = "Delen door";
+"question_of" = "Vraag";
+"of" = "van";
+"check" = "Controleer";
+"try_again" = "Probeer opnieuw";
+"good" = "Goed!";
+"stop_practicing" = "Stop Oefenen";
+
+// MARK: - Completion
+"well_done" = "Goed gedaan!";
+"completed_in" = "Je hebt de tafel van %@ afgerond in %@!";
+"choose_another_table" = "Kies een andere tafel";
+
+// MARK: - Scoreboard
+"scoreboard" = "Scorebord";
+"no_scores_yet" = "Geen scores yet";
+"practice_to_see_scores" = "Oefen tafels om scores te zien";
+"table" = "Tafel";
+"time" = "Tijd";
+"date" = "Datum";
+"clear_scores" = "Wis Scores";
+
+// MARK: - Time
+"seconds" = "seconden";
+
+// MARK: - Errors
+"error" = "Fout";
+"ok" = "OK";

@@ -1,6 +1,9 @@
 import SwiftUI
 
 struct LoginView: View {
+    @EnvironmentObject var appState: AppState
+    @State private var username = ""
+    
     var body: some View {
         VStack(spacing: 20) {
             Text("Tafels Oefenen")
@@ -16,18 +19,22 @@ struct LoginView: View {
                 .font(.body)
                 .foregroundColor(.gray)
             
-            TextField("Jouw naam", text: .constant(""))
+            TextField("Jouw naam", text: $username)
                 .textFieldStyle(RoundedBorderTextFieldStyle())
                 .padding()
             
             Button("Start Oefenen") {
-                // TODO: Navigate to table selection
+                if !username.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+                    let user = User(username: username.trimmingCharacters(in: .whitespacesAndNewlines))
+                    appState.saveUser(user)
+                }
             }
             .foregroundColor(.white)
             .frame(maxWidth: .infinity)
             .padding()
-            .background(Color.blue)
+            .background(username.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ? Color.gray : Color.blue)
             .cornerRadius(8)
+            .disabled(username.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
             .padding()
         }
         .padding()
@@ -36,4 +43,5 @@ struct LoginView: View {
 
 #Preview {
     LoginView()
+        .environmentObject(AppState())
 }
