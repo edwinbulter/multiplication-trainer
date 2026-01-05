@@ -7,11 +7,11 @@
 	objects = {
 
 /* Begin PBXFileReference section */
-		2F1E7F392F0B197500684FAD /* TafelsOefenen.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TafelsOefenen.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		2F1E80042F0C0B2A00684FAD /* TafelsOefenen.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TafelsOefenen.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		2F1E7F3B2F0B197500684FAD /* TafelsOefenen */ = {
+		2F1E80062F0C0B2A00684FAD /* TafelsOefenen */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = TafelsOefenen;
 			sourceTree = "<group>";
@@ -19,7 +19,7 @@
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		2F1E7F362F0B197500684FAD /* Frameworks */ = {
+		2F1E80012F0C0B2A00684FAD /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -29,18 +29,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		2F1E7F302F0B197500684FAD = {
+		2F1E7FFB2F0C0B2A00684FAD = {
 			isa = PBXGroup;
 			children = (
-				2F1E7F3B2F0B197500684FAD /* TafelsOefenen */,
-				2F1E7F3A2F0B197500684FAD /* Products */,
+				2F1E80062F0C0B2A00684FAD /* TafelsOefenen */,
+				2F1E80052F0C0B2A00684FAD /* Products */,
 			);
 			sourceTree = "<group>";
 		};
-		2F1E7F3A2F0B197500684FAD /* Products */ = {
+		2F1E80052F0C0B2A00684FAD /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				2F1E7F392F0B197500684FAD /* TafelsOefenen.app */,
+				2F1E80042F0C0B2A00684FAD /* TafelsOefenen.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -48,64 +48,64 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		2F1E7F382F0B197500684FAD /* TafelsOefenen */ = {
+		2F1E80032F0C0B2A00684FAD /* TafelsOefenen */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 2F1E7F442F0B197600684FAD /* Build configuration list for PBXNativeTarget "TafelsOefenen" */;
+			buildConfigurationList = 2F1E800F2F0C0B2B00684FAD /* Build configuration list for PBXNativeTarget "TafelsOefenen" */;
 			buildPhases = (
-				2F1E7F352F0B197500684FAD /* Sources */,
-				2F1E7F362F0B197500684FAD /* Frameworks */,
-				2F1E7F372F0B197500684FAD /* Resources */,
+				2F1E80002F0C0B2A00684FAD /* Sources */,
+				2F1E80012F0C0B2A00684FAD /* Frameworks */,
+				2F1E80022F0C0B2A00684FAD /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
-				2F1E7F3B2F0B197500684FAD /* TafelsOefenen */,
+				2F1E80062F0C0B2A00684FAD /* TafelsOefenen */,
 			);
 			name = TafelsOefenen;
 			packageProductDependencies = (
 			);
 			productName = TafelsOefenen;
-			productReference = 2F1E7F392F0B197500684FAD /* TafelsOefenen.app */;
+			productReference = 2F1E80042F0C0B2A00684FAD /* TafelsOefenen.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		2F1E7F312F0B197500684FAD /* Project object */ = {
+		2F1E7FFC2F0C0B2A00684FAD /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 2620;
 				LastUpgradeCheck = 2620;
 				TargetAttributes = {
-					2F1E7F382F0B197500684FAD = {
+					2F1E80032F0C0B2A00684FAD = {
 						CreatedOnToolsVersion = 26.2;
 					};
 				};
 			};
-			buildConfigurationList = 2F1E7F342F0B197500684FAD /* Build configuration list for PBXProject "TafelsOefenen" */;
+			buildConfigurationList = 2F1E7FFF2F0C0B2A00684FAD /* Build configuration list for PBXProject "TafelsOefenen" */;
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
 				Base,
 			);
-			mainGroup = 2F1E7F302F0B197500684FAD;
+			mainGroup = 2F1E7FFB2F0C0B2A00684FAD;
 			minimizedProjectReferenceProxies = 1;
 			preferredProjectObjectVersion = 77;
-			productRefGroup = 2F1E7F3A2F0B197500684FAD /* Products */;
+			productRefGroup = 2F1E80052F0C0B2A00684FAD /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				2F1E7F382F0B197500684FAD /* TafelsOefenen */,
+				2F1E80032F0C0B2A00684FAD /* TafelsOefenen */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		2F1E7F372F0B197500684FAD /* Resources */ = {
+		2F1E80022F0C0B2A00684FAD /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -115,7 +115,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		2F1E7F352F0B197500684FAD /* Sources */ = {
+		2F1E80002F0C0B2A00684FAD /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -125,7 +125,7 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
-		2F1E7F422F0B197600684FAD /* Debug */ = {
+		2F1E800D2F0C0B2B00684FAD /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -188,7 +188,7 @@
 			};
 			name = Debug;
 		};
-		2F1E7F432F0B197600684FAD /* Release */ = {
+		2F1E800E2F0C0B2B00684FAD /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -244,7 +244,7 @@
 			};
 			name = Release;
 		};
-		2F1E7F452F0B197600684FAD /* Debug */ = {
+		2F1E80102F0C0B2B00684FAD /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -275,7 +275,7 @@
 			};
 			name = Debug;
 		};
-		2F1E7F462F0B197600684FAD /* Release */ = {
+		2F1E80112F0C0B2B00684FAD /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -309,25 +309,25 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		2F1E7F342F0B197500684FAD /* Build configuration list for PBXProject "TafelsOefenen" */ = {
+		2F1E7FFF2F0C0B2A00684FAD /* Build configuration list for PBXProject "TafelsOefenen" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				2F1E7F422F0B197600684FAD /* Debug */,
-				2F1E7F432F0B197600684FAD /* Release */,
+				2F1E800D2F0C0B2B00684FAD /* Debug */,
+				2F1E800E2F0C0B2B00684FAD /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		2F1E7F442F0B197600684FAD /* Build configuration list for PBXNativeTarget "TafelsOefenen" */ = {
+		2F1E800F2F0C0B2B00684FAD /* Build configuration list for PBXNativeTarget "TafelsOefenen" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				2F1E7F452F0B197600684FAD /* Debug */,
-				2F1E7F462F0B197600684FAD /* Release */,
+				2F1E80102F0C0B2B00684FAD /* Debug */,
+				2F1E80112F0C0B2B00684FAD /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = 2F1E7F312F0B197500684FAD /* Project object */;
+	rootObject = 2F1E7FFC2F0C0B2A00684FAD /* Project object */;
 }

@@ -1,5 +1,6 @@
 import Foundation
 import SwiftUI
+import Combine
 
 @MainActor
 class PracticeViewModel: ObservableObject {
@@ -34,17 +35,26 @@ class PracticeViewModel: ObservableObject {
         let correct = question.checkAnswer(userAnswer)
         isCorrect = correct
         
+        // Don't auto-advance on correct answers - let the UI handle it
         if correct {
-            session.moveToNextQuestion()
+            // Keep the answer and isCorrect state for UI display
+            // UI will call moveToNextQuestion() after showing success message
+        } else {
+            // Clear answer automatically when wrong
             userAnswer = ""
-            isCorrect = nil
-            
-            if session.isCompleted {
-                finishPractice()
-            }
         }
         
         return correct
+    }
+    
+    func moveToNextQuestion() {
+        session.moveToNextQuestion()
+        userAnswer = ""
+        isCorrect = nil
+        
+        if session.isCompleted {
+            finishPractice()
+        }
     }
     
     private func finishPractice() {

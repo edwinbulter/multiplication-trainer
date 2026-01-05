@@ -3,6 +3,7 @@ import SwiftUI
 struct ScoreboardView: View {
     @StateObject private var viewModel = ScoreboardViewModel()
     @Environment(\.dismiss) private var dismiss
+    @EnvironmentObject private var appState: AppState
     
     var body: some View {
         NavigationStack {
@@ -43,7 +44,7 @@ struct ScoreboardView: View {
                 // Scores List
                 if viewModel.scores.isEmpty {
                     VStack(spacing: 20) {
-                        Text("Geen scores yet")
+                        Text("Nog geen scores")
                             .font(.title2)
                             .foregroundColor(.gray)
                         
@@ -95,8 +96,8 @@ struct ScoreboardView: View {
             }
             .padding()
             .onAppear {
-                // TODO: Get current username from AppState
-                viewModel.loadScores(for: "User")
+                let username = appState.currentUser?.username ?? "Anoniem"
+                viewModel.loadScores(for: username)
             }
         }
     }
