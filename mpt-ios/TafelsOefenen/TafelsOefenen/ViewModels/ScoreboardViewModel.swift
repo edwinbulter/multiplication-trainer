@@ -5,22 +5,27 @@ import Combine
 @MainActor
 class ScoreboardViewModel: ObservableObject {
     @Published var scores: [Score] = []
-    @Published var sortOrder: SortOrder = .table
+    @Published private(set) var sortColumn: SortColumn = .table
+    @Published private(set) var isAscending: Bool = true
     
     private let storageManager = StorageManager()
     
     var sortedScores: [Score] {
-        switch sortOrder {
+        switch sortColumn {
         case .table:
-            return scores.sorted { score1, score2 in
-                let table1 = Double(score1.table.replacingOccurrences(of: ":", with: "").replacingOccurrences(of: ",", with: ".")) ?? 0.0
-                let table2 = Double(score2.table.replacingOccurrences(of: ":", with: "").replacingOccurrences(of: ",", with: ".")) ?? 0.0
-                return table1 < table2
+            return scores.sorted { first, second in
+                let table1 = Double(first.table.replacingOccurrences(of: ":", with: "").replacingOccurrences(of: ",", with: ".")) ?? 0.0
+                let table2 = Double(second.table.replacingOccurrences(of: ":", with: "").replacingOccurrences(of: ",", with: ".")) ?? 0.0
+                return isAscending ? table1 < table2 : table1 > table2
             }
         case .duration:
-            return scores.sorted { $0.duration < $1.duration }
+            return scores.sorted { first, second in
+                return isAscending ? first.duration < second.duration : first.duration > second.duration
+            }
         case .date:
-            return scores.sorted { $0.timestamp > $1.timestamp }
+            return scores.sorted { first, second in
+                return isAscending ? first.timestamp < second.timestamp : first.timestamp > second.timestamp
+            }
         }
     }
     
@@ -33,12 +38,22 @@ class ScoreboardViewModel: ObservableObject {
         scores.removeAll()
     }
     
-    func setSortOrder(_ order: SortOrder) {
-        sortOrder = order
+    func toggleSort(_ column: SortColumn) {
+        if sortColumn == column {
+            isAscending.toggle()
+        } else {
+            sortColumn = column
+            switch column {
+            case .table, .duration:
+                isAscending = true
+            case .date:
+                isAscending = false
+            }
+        }
     }
 }
 
-enum SortOrder {
+enum SortColumn: Equatable {
     case table
     case duration
     case date

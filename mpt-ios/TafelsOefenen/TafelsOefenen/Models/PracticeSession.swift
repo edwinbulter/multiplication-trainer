@@ -64,7 +64,7 @@ struct Question: Identifiable {
         
         if operation == "divide" {
             let result = self.table * Double(multiplier)
-            self.questionText = "\(Int(result)) ÷ \(Int(self.table)) = "
+            self.questionText = "\(Int(result)) : \(Int(self.table)) = "
             self.answer = Double(multiplier)
         } else {
             self.questionText = "\(multiplier) × \(Int(self.table)) = "

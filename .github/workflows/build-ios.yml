@@ -1,14 +1,6 @@
 name: Build and Deploy iOS App
 
 on:
-  push:
-    branches: [ main, master ]
-    paths:
-      - 'mpt-ios/**'
-  pull_request:
-    branches: [ main, master ]
-    paths:
-      - 'mpt-ios/**'
   workflow_dispatch:
 
 jobs:

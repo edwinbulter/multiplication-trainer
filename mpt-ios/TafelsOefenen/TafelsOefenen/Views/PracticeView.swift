@@ -47,12 +47,11 @@ struct PracticeView: View {
                     .font(.title)
                     .fontWeight(.bold)
                     .foregroundColor(AppColors.secondary)
-                    .padding(.top, 20)
-                
+                    .padding(.bottom, 40)
+                                
                 // Question and Answer - No boxes, inline, single equals
                 if let question = viewModel.currentQuestion {
                     HStack(spacing: 8) {
-                        //Spacer()
                         Text(question.questionText.replacingOccurrences(of: "=", with: ""))
                             .font(.title)
                             .fontWeight(.bold)
@@ -68,20 +67,22 @@ struct PracticeView: View {
                             .fontWeight(.bold)
                             .foregroundColor(viewModel.userAnswer.isEmpty ? AppColors.textHint : AppColors.primary)
                         
-                        Spacer()
                     }
-                    .padding(.horizontal, 20)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding(.leading, 100)
+
+                    
                     
                     // Stop Button - Light gray background, black font
-                    Button("Stop Oefenen") {
-                        dismiss()
-                    }
-                    .foregroundColor(AppColors.black)
-                    .frame(maxWidth: .infinity)
-                    .padding(.vertical, 10)
-                    .background(AppColors.keyDarkGray)
-                    .cornerRadius(8)
-                    .padding(.horizontal)
+                    // Button("Stop Oefenen") {
+                    //     dismiss()
+                    // }
+                    // .foregroundColor(AppColors.black)
+                    // .frame(maxWidth: .infinity)
+                    // .padding(.vertical, 10)
+                    // .background(AppColors.keyDarkGray)
+                    // .cornerRadius(8)
+                    // .padding(.horizontal)
                     
                     // Error message - Softer corners, more padding like reference
                     if viewModel.isCorrect == false {
@@ -156,7 +157,9 @@ struct PracticeView: View {
                 .cornerRadius(8)
                 .disabled(viewModel.userAnswer.isEmpty)
                 .font(.headline)
+                .fontWeight(.bold)
                 .padding(.horizontal)
+                .padding(.top, 20)
                 
                 // Progress at bottom
                 Text(viewModel.progress)
@@ -193,6 +196,9 @@ struct PracticeView: View {
         .background(key == "⌫" ? AppColors.error : AppColors.keyGray)
         .cornerRadius(8)
         .font(.title2)
+        .fontWeight(.bold)
+        .padding(.horizontal, 5)
+        .padding(.vertical, 5)
     }
 }
 

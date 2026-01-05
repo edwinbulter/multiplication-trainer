@@ -17,14 +17,14 @@ struct TableSelectionView: View {
                         Text("Tafels Oefenen")
                             .font(.title)
                             .fontWeight(.bold)
-                            .foregroundColor(.blue)
+                            .foregroundColor(AppColors.primary)
                         
                         Text("Welkom, \(appState.currentUser?.username ?? "Gebruiker")!")
                             .font(.headline)
-                            .foregroundColor(.green)
+                            .foregroundColor(AppColors.secondary)
                         
                         Text("Welk tafeltje wil je oefenen?")
-                            .font(.caption)
+                            .font(.subheadline)
                             .foregroundColor(.gray)
                     }
                     .padding(.top, 8)
@@ -34,9 +34,10 @@ struct TableSelectionView: View {
                         showingScoreboard = true
                     }
                     .foregroundColor(.white)
+                    .fontWeight(.bold)
                     .frame(maxWidth: .infinity)
                     .padding(.vertical, 8)
-                    .background(Color.teal)
+                    .background(AppColors.secondary)
                     .cornerRadius(8)
                     .padding(.horizontal)
                     
@@ -57,6 +58,7 @@ struct TableSelectionView: View {
                             .background(isMultiply ? Color.blue : Color.gray.opacity(0.3))
                             .cornerRadius(6)
                             .font(.caption)
+                            .fontWeight(.bold)
                             
                             Button("Delen") {
                                 isMultiply = false
@@ -67,6 +69,7 @@ struct TableSelectionView: View {
                             .background(!isMultiply ? Color.blue : Color.gray.opacity(0.3))
                             .cornerRadius(6)
                             .font(.caption)
+                            .fontWeight(.bold)
                         }
                     }
                     .padding(.horizontal)
@@ -120,7 +123,7 @@ struct TableSelectionView: View {
                             .foregroundColor(.white)
                             .padding(.horizontal, 12)
                             .padding(.vertical, 8)
-                            .background(Color.green)
+                            .background(AppColors.secondary)
                             .cornerRadius(6)
                             .font(.caption)
                             .disabled(customTable.isEmpty || !customTable.isValidNumber())
@@ -137,6 +140,7 @@ struct TableSelectionView: View {
                         appState.logout()
                     }
                     .foregroundColor(.white)
+                    .fontWeight(.bold)
                     .frame(maxWidth: .infinity)
                     .padding(.vertical, 8)
                     .background(Color.red)
