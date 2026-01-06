@@ -46,7 +46,7 @@ struct PracticeView: View {
                 Text(viewModel.headerText)
                     .font(.title)
                     .fontWeight(.bold)
-                    .foregroundColor(AppColors.secondary)
+                    .foregroundColor(AppColors.dynamicSecondary)
                     .padding(.bottom, 40)
                                 
                 // Question and Answer - No boxes, inline, single equals
@@ -55,17 +55,17 @@ struct PracticeView: View {
                         Text(question.questionText.replacingOccurrences(of: "=", with: ""))
                             .font(.title)
                             .fontWeight(.bold)
-                            .foregroundColor(AppColors.black)
+                            .foregroundColor(AppColors.dynamicTextPrimary)
                         
                         Text("=")
                             .font(.title)
                             .fontWeight(.bold)
-                            .foregroundColor(AppColors.black)
+                            .foregroundColor(AppColors.dynamicTextPrimary)
                         
                         Text(viewModel.userAnswer.isEmpty ? "?" : viewModel.userAnswer)
                             .font(.title)
                             .fontWeight(.bold)
-                            .foregroundColor(viewModel.userAnswer.isEmpty ? AppColors.textHint : AppColors.primary)
+                            .foregroundColor(viewModel.userAnswer.isEmpty ? AppColors.dynamicTextHint : AppColors.dynamicPrimary)
                         
                     }
                     .frame(maxWidth: .infinity, alignment: .leading)
@@ -92,7 +92,7 @@ struct PracticeView: View {
                             .frame(maxWidth: .infinity)
                             .padding(.horizontal, 24)
                             .padding(.vertical, 10)
-                            .background(AppColors.error)
+                            .background(AppColors.dynamicError)
                             .cornerRadius(12)
                             .padding(.horizontal)
                     }
@@ -105,7 +105,7 @@ struct PracticeView: View {
                             .frame(maxWidth: .infinity)
                             .padding(.horizontal, 24)
                             .padding(.vertical, 10)
-                            .background(AppColors.success)
+                            .background(AppColors.dynamicSuccess)
                             .cornerRadius(12)
                             .padding(.horizontal)
                             .onAppear {
@@ -154,7 +154,7 @@ struct PracticeView: View {
                         .foregroundColor(AppColors.white)
                         .frame(maxWidth: .infinity)
                         .padding(.vertical, 12)
-                        .background(AppColors.success)
+                        .background(AppColors.dynamicSuccess)
                         .cornerRadius(8)
                         .font(.headline)
                         .fontWeight(.bold)
@@ -166,8 +166,8 @@ struct PracticeView: View {
                 
                 // Progress at bottom
                 Text(viewModel.progress)
-                    .font(.caption)
-                    .foregroundColor(AppColors.textSecondary)
+                    .font(.subheadline)
+                    .foregroundColor(AppColors.dynamicTextSecondary)
                     .padding(.bottom, 20)
             }
             .navigationDestination(isPresented: Binding(

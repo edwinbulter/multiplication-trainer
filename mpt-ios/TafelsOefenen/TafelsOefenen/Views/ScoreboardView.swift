@@ -17,29 +17,35 @@ struct ScoreboardView: View {
                 Text("Scorebord")
                     .font(.largeTitle)
                     .fontWeight(.bold)
-                    .foregroundColor(AppColors.primary)
+                    .foregroundColor(AppColors.dynamicPrimary)
                 
-                Button("Wis Scorebord") {
+                Button(action: {
                     viewModel.clearScores()
+                }) {
+                    Text("Wis Scorebord")
+                        .foregroundColor(.white)
+                        .fontWeight(.bold)
+                        .frame(maxWidth: .infinity)
+                        .padding()
+                        .background(AppColors.dynamicError)
+                        .cornerRadius(8)
                 }
-                .foregroundColor(.white)
-                .fontWeight(.bold)
-                .frame(maxWidth: .infinity)
-                .padding()
-                .background(AppColors.error)
-                .cornerRadius(8)
+                .buttonStyle(.plain)
                 
                 scoreboardContent
                 
-                Button("Terug naar Tafels") {
+                Button(action: {
                     dismiss()
+                }) {
+                    Text("Terug naar Tafels")
+                        .foregroundColor(.white)
+                        .fontWeight(.bold)
+                        .frame(maxWidth: .infinity)
+                        .padding()
+                        .background(AppColors.dynamicPrimary)
+                        .cornerRadius(8)
                 }
-                .foregroundColor(.white)
-                .fontWeight(.bold)
-                .frame(maxWidth: .infinity)
-                .padding()
-                .background(AppColors.primary)
-                .cornerRadius(8)
+                .buttonStyle(.plain)
             }
             .padding()
             .onAppear {
@@ -55,11 +61,11 @@ struct ScoreboardView: View {
             VStack(spacing: 20) {
                 Text("Nog geen scores")
                     .font(.title2)
-                    .foregroundColor(.gray)
+                    .foregroundColor(AppColors.dynamicTextSecondary)
                 
                 Text("Oefen tafels om scores te zien")
                     .font(.body)
-                    .foregroundColor(.gray)
+                    .foregroundColor(AppColors.dynamicTextSecondary)
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
         } else {
@@ -67,7 +73,7 @@ struct ScoreboardView: View {
                 headerRow
                     .padding(.horizontal, 16)
                     .padding(.vertical, 12)
-                    .background(Color.gray.opacity(0.15))
+                    .background(AppColors.dynamicSurface.opacity(0.5))
                 
                 Divider()
                 
@@ -77,14 +83,17 @@ struct ScoreboardView: View {
                             HStack {
                                 Text(score.displayTable)
                                     .font(.headline)
+                                    .foregroundColor(AppColors.dynamicTextPrimary)
                                     .frame(maxWidth: .infinity, alignment: .leading)
                                 
                                 Text(secondsText(for: score))
                                     .font(.headline)
+                                    .foregroundColor(AppColors.dynamicTextPrimary)
                                     .frame(width: 60, alignment: .center)
                                 
                                 Text(formattedDate(score.timestamp))
                                     .font(.subheadline)
+                                    .foregroundColor(AppColors.dynamicTextPrimary)
                                     .frame(maxWidth: .infinity, alignment: .trailing)
                             }
                             .padding(.horizontal, 16)
@@ -96,7 +105,7 @@ struct ScoreboardView: View {
                 }
             }
             .frame(maxWidth: .infinity)
-            .background(Color.white)
+            .background(AppColors.dynamicCardBackground)
             .cornerRadius(12)
             .shadow(color: Color.black.opacity(0.08), radius: 8, x: 0, y: 4)
         }
@@ -114,7 +123,7 @@ struct ScoreboardView: View {
                 .frame(maxWidth: .infinity, alignment: .trailing)
         }
         .font(.headline)
-        .foregroundColor(.blue)
+        .foregroundColor(AppColors.dynamicPrimary)
     }
     
     private func headerButton(title: String, column: SortColumn) -> some View {

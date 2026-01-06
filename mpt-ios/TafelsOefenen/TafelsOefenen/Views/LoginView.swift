@@ -9,19 +9,24 @@ struct LoginView: View {
             Text("Tafels Oefenen")
                 .font(.largeTitle)
                 .fontWeight(.bold)
-                .foregroundColor(.blue)
+                .foregroundColor(AppColors.dynamicPrimary)
             
             Text("Welkom!")
                 .font(.title2)
-                .foregroundColor(.green)
+                .foregroundColor(AppColors.dynamicSecondary)
             
             Text("Voer je naam in om te beginnen")
                 .font(.body)
-                .foregroundColor(.gray)
+                .foregroundColor(AppColors.dynamicTextSecondary)
             
             TextField("Jouw naam", text: $username)
-                .textFieldStyle(RoundedBorderTextFieldStyle())
                 .padding()
+                .background(AppColors.dynamicSurface)
+                .overlay(
+                    RoundedRectangle(cornerRadius: 8)
+                        .stroke(AppColors.dynamicTextSecondary, lineWidth: 1)
+                )
+                .foregroundColor(AppColors.dynamicTextPrimary)
             
             Button(action: {
                 if !username.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
@@ -34,7 +39,7 @@ struct LoginView: View {
                     .fontWeight(.bold)
                     .frame(maxWidth: .infinity)
                     .padding()
-                    .background(username.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ? Color.gray : Color.blue)
+                    .background(username.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ? AppColors.dynamicTextSecondary : AppColors.dynamicPrimary)
                     .cornerRadius(8)
             }
             .buttonStyle(.plain)
