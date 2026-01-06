@@ -33,6 +33,7 @@ struct PracticeView: View {
     
     @StateObject private var viewModel: PracticeViewModel
     @Environment(\.dismiss) private var dismiss
+    @State private var showingCompletion = false
     
     init(table: String, operation: String) {
         self.table = table
@@ -41,7 +42,7 @@ struct PracticeView: View {
     }
     
     var body: some View {
-        NavigationStack {
+        NavigationView {
             VStack(spacing: 12) {
                 Text(viewModel.headerText)
                     .font(.title)
@@ -156,8 +157,7 @@ struct PracticeView: View {
                         .padding(.vertical, 12)
                         .background(AppColors.dynamicSuccess)
                         .cornerRadius(8)
-                        .font(.headline)
-                        .fontWeight(.bold)
+                        .font(.system(size: 17, weight: .bold))
                 }
                 .buttonStyle(.plain)
                 .disabled(viewModel.userAnswer.isEmpty)
@@ -170,15 +170,20 @@ struct PracticeView: View {
                     .foregroundColor(AppColors.dynamicTextSecondary)
                     .padding(.bottom, 20)
             }
-            .navigationDestination(isPresented: Binding(
-                get: { viewModel.isFinished },
-                set: { _ in }
-            )) {
+            .onChange(of: viewModel.isFinished) { finished in
+                if finished {
+                    showingCompletion = true
+                }
+            }
+            .sheet(isPresented: $showingCompletion) {
                 if let duration = viewModel.session.duration {
                     CompletionView(
                         table: table,
                         operation: operation,
-                        duration: duration
+                        duration: duration,
+                        onDismiss: {
+                            dismiss()
+                        }
                     )
                 }
             }
@@ -218,8 +223,7 @@ struct PracticeView: View {
                             .offset(y: -2)
                     }
                 )
-                .font(.title2)
-                .fontWeight(.bold)
+                .font(.system(size: 20, weight: .bold))
         }
         .padding(.horizontal, 5)
         .padding(.vertical, 5)

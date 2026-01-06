@@ -9,7 +9,7 @@ struct TableSelectionView: View {
     @State private var showingPractice = false
     
     var body: some View {
-        NavigationStack {
+        NavigationView {
             ScrollView {
                 VStack(spacing: 12) {
                     // Header
@@ -61,8 +61,7 @@ struct TableSelectionView: View {
                                     .padding(.vertical, 8)
                                     .background(isMultiply ? Color.blue : Color.gray.opacity(0.3))
                                     .cornerRadius(6)
-                                    .font(.caption)
-                                    .fontWeight(.bold)
+                                    .font(.system(size: 11, weight: .bold))
                             }
                             .buttonStyle(.plain)
                             
@@ -75,8 +74,7 @@ struct TableSelectionView: View {
                                     .padding(.vertical, 8)
                                     .background(!isMultiply ? Color.blue : Color.gray.opacity(0.3))
                                     .cornerRadius(6)
-                                    .font(.caption)
-                                    .fontWeight(.bold)
+                                    .font(.system(size: 11, weight: .bold))
                             }
                             .buttonStyle(.plain)
                         }
@@ -125,7 +123,7 @@ struct TableSelectionView: View {
                             TextField("Bijv. 7 of 1,5", text: $customTable)
                                 .textFieldStyle(RoundedBorderTextFieldStyle())
                                 .keyboardType(.decimalPad)
-                                .onChange(of: customTable) { oldValue, newValue in
+                                .onChange(of: customTable) { newValue in
                                     let allowed = CharacterSet(charactersIn: "0123456789,")
                                     let filtered = String(newValue.unicodeScalars.filter { allowed.contains($0) })
                                     if filtered != newValue {
@@ -171,12 +169,23 @@ struct TableSelectionView: View {
                     .padding(.bottom, 16)
                 }
             }
-            .navigationDestination(isPresented: $showingPractice) {
-                PracticeView(table: selectedTable, operation: isMultiply ? "multiply" : "divide")
-            }
-            .navigationDestination(isPresented: $showingScoreboard) {
-                ScoreboardView()
-            }
+            .background(
+                VStack {
+                    NavigationLink(
+                        destination: PracticeView(table: selectedTable.isEmpty ? "1" : selectedTable, operation: isMultiply ? "multiply" : "divide"),
+                        isActive: $showingPractice,
+                        label: { EmptyView() }
+                    )
+                    .opacity(0)
+                    
+                    NavigationLink(
+                        destination: ScoreboardView(),
+                        isActive: $showingScoreboard,
+                        label: { EmptyView() }
+                    )
+                    .opacity(0)
+                }
+            )
         }
     }
 }

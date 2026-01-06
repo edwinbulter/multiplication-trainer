@@ -4,6 +4,7 @@ struct ScoreboardView: View {
     @StateObject private var viewModel = ScoreboardViewModel()
     @Environment(\.dismiss) private var dismiss
     @EnvironmentObject private var appState: AppState
+    @State private var showingClearConfirmation = false
     
     private static let dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
@@ -12,7 +13,7 @@ struct ScoreboardView: View {
     }()
     
     var body: some View {
-        NavigationStack {
+        NavigationView {
             VStack(spacing: 20) {
                 Text("Scorebord")
                     .font(.largeTitle)
@@ -20,7 +21,7 @@ struct ScoreboardView: View {
                     .foregroundColor(AppColors.dynamicPrimary)
                 
                 Button(action: {
-                    viewModel.clearScores()
+                    showingClearConfirmation = true
                 }) {
                     Text("Wis Scorebord")
                         .foregroundColor(.white)
@@ -33,25 +34,20 @@ struct ScoreboardView: View {
                 .buttonStyle(.plain)
                 
                 scoreboardContent
-                
-                Button(action: {
-                    dismiss()
-                }) {
-                    Text("Terug naar Tafels")
-                        .foregroundColor(.white)
-                        .fontWeight(.bold)
-                        .frame(maxWidth: .infinity)
-                        .padding()
-                        .background(AppColors.dynamicPrimary)
-                        .cornerRadius(8)
-                }
-                .buttonStyle(.plain)
             }
             .padding()
             .onAppear {
                 let username = appState.currentUser?.username ?? "Anoniem"
                 viewModel.loadScores(for: username)
             }
+        }
+        .alert("Wis Scorebord", isPresented: $showingClearConfirmation) {
+            Button("Ja", role: .destructive) {
+                viewModel.clearScores()
+            }
+            Button("Nee", role: .cancel) { }
+        } message: {
+            Text("Weet je zeker dat je het scoreboard wilt wissen?")
         }
     }
     

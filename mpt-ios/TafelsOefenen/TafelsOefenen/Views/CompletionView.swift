@@ -4,13 +4,14 @@ struct CompletionView: View {
     let table: String
     let operation: String
     let duration: TimeInterval
+    let onDismiss: () -> Void
     
     @Environment(\.dismiss) private var dismiss
     
     private let storageManager = StorageManager()
     
     var body: some View {
-        NavigationStack {
+        NavigationView {
             ZStack {
                 // Background
                 AppColors.background
@@ -40,6 +41,7 @@ struct CompletionView: View {
                         
                         // Choose Table Button
                         Button(action: {
+                            onDismiss()
                             dismiss()
                         }) {
                             Text("Kies een andere tafel")
@@ -63,6 +65,7 @@ struct CompletionView: View {
                 }
             }
             .navigationBarHidden(true)
+            .navigationBarBackButtonHidden(true)
         }
         .onAppear {
             saveScore()
@@ -82,5 +85,5 @@ struct CompletionView: View {
 }
 
 #Preview {
-    CompletionView(table: "5", operation: "multiply", duration: 45.0)
+    CompletionView(table: "5", operation: "multiply", duration: 45.0, onDismiss: {})
 }

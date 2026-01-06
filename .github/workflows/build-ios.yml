@@ -175,7 +175,7 @@ jobs:
         destination_dir: mpt-ios
         
     - name: Upload artifact
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: tafels-oefenen-ios
         path: deploy/${{ steps.version.outputs.apk_name }}
