@@ -11,22 +11,21 @@ Een eenvoudige en effectieve app om de tafels van vermenigvuldiging en deling te
 
 ## Functionaliteit
 
-### 📚 Leer de Tafels
-- **Tafels van vermenigvuldiging**: Oefen tafels van 1 tot 10
-- **Tafels van deling**: Oefen delingsproblemen gebaseerd op dezelfde tafels
-- **Keuze uit tafels**: Selecteer specifieke tafels om te oefenen of doe ze allemaal
+De iOS app biedt exact dezelfde functionaliteit als de web versie:
 
-### 🎯 Oefenmodus
-- **10 vragen per sessie**: Korte, gerichte oefensessies
-- **Directe feedback**: Zie meteen of je antwoord goed of fout is
-- **Timer**: Meet hoe snel je de tafels kunt
-- **Voortgangsbalk**: Houd bij welke vraag je bent
+### 🎓 Hoofdfuncties
+- **Tafel Selectie**: Kies uit 18 vooraf gedefinieerde tafels (0,125 tot 25) inclusief decimale tafels
+- **Operatie Keuze**: Schakel tussen **Vermenigvuldigen** (×) en **Delen** (÷) voor elke tafel
+- **Aangepaste Tafels**: Voer elk getal in om specifieke tafels te oefenen
+- **Interactieve Oefening**: Beantwoord 10 vragen per sessie met virtueel toetsenbord
+- **Scorebord**: Bekijk en beheer je beste tijden per tafel
+- **Gebruikersprofielen**: Slaat voortgang per gebruiker op
 
-### 📊 Scorebord
-- **Persoonlijke scores**: Al je scores worden opgeslagen
-- **Sorteerfuncties**: Sorteer op tafel, operatie, of duur
-- **Geschiedenis**: Bekijk je voortgang over tijd
-- **Wis functie**: Reset het scoreboard indien nodig
+### 📱 Mobiele Optimalisaties
+- **Virtueel Toetsenbord**: Speciaal ontworpen numeriek toetsenbord voor eenvoudige invoer
+- **Touch-Optimalisatie**: Grote knoppen en intuïtieve navigatie
+- **Offline Modus**: App werkt volledig zonder internetverbinding
+- **Systeem Integratie**: Past zich aan aan iOS thema's en navigatie
 
 ### 🌙 Dark Mode
 - **Automatische ondersteuning**: Volgt de systeeminstellingen van je iPhone

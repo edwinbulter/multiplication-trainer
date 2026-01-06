@@ -37,6 +37,11 @@ De Android app biedt exact dezelfde functionaliteit als de web versie:
 - **Offline Modus**: App werkt volledig zonder internetverbinding
 - **Systeem Integratie**: Past zich aan aan Android thema's en navigatie
 
+### 🌙 Dark Mode
+- **Automatische ondersteuning**: Volgt de systeeminstellingen van je Android apparaat
+- **Handmatige schakeling**: Kies zelf tussen light en dark mode
+- **Optimaliseerde weergave**: Perfect leesbaar in beide modi
+
 ## Technische Stack
 
 ### 🛠️ Ontwikkelomgeving

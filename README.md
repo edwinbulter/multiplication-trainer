@@ -1,12 +1,17 @@
 # Multiplication Trainer
 
-Een React-applicatie voor het oefenen van tafeltjes, gebouwd met **React**, **Vite** en **Tailwind CSS**.  
-De applicatie is gedeployed in AWS en kun je uitproberen op [Tafels Oefenen](https://d2zf8l8tihew58.cloudfront.net/).
+Een multi-platform applicatie voor het oefenen van tafeltjes, beschikbaar in drie versies:
+- **Web Applicatie** - React versie voor browsers
+- **Android Applicatie** - Native Android versie  
+- **iOS Applicatie** - Native iOS versie
 
-Dit project bevat drie hoofdcomponenten:
-- **Web Applicatie** (src/) - React versie voor browsers
-- [**Infrastructuur voor de Web Applicatie**](infrastructure/README.md) (infrastructure/) - Terraform scripts voor AWS deployment
-- [**Android Applicatie**](mpt-android/README.md) (mpt-android/) - Native Android versie
+De web applicatie is gedeployed in AWS en kun je uitproberen op [Tafels Oefenen](https://d2zf8l8tihew58.cloudfront.net/).
+
+Dit document beschrijft de **Web Applicatie**. Voor de andere versies zie:
+- [iOS Applicatie](mpt-ios/README.md) - Complete gids voor de iOS versie
+- [Android Applicatie](mpt-android/README.md) - Complete gids voor de Android versie
+
+Het project bevat ook de [**Infrastructuur voor de Web Applicatie**](infrastructure/README.md) met Terraform scripts voor AWS deployment.
 
 ## Inhoudsopgave
 
