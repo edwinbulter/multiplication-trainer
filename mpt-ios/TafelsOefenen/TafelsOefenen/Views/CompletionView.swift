@@ -14,7 +14,7 @@ struct CompletionView: View {
         NavigationView {
             ZStack {
                 // Background
-                AppColors.background
+                AppColors.dynamicBackground
                     .ignoresSafeArea()
                 
                 VStack(spacing: 0) {
@@ -22,7 +22,7 @@ struct CompletionView: View {
                     Text("Tafels Oefenen")
                         .font(.title2)
                         .fontWeight(.bold)
-                        .foregroundColor(AppColors.primary)
+                        .foregroundColor(AppColors.dynamicTextPrimary)
                         .padding(.top, 32)
                     
                     // Card
@@ -36,7 +36,7 @@ struct CompletionView: View {
                         // Completion Message
                         Text("Je hebt de tafel van \(table) afgerond in \(Int(duration)) seconden!")
                             .font(.body)
-                            .foregroundColor(AppColors.black)
+                            .foregroundColor(AppColors.dynamicTextPrimary)
                             .multilineTextAlignment(.center)
                         
                         // Choose Table Button
@@ -55,7 +55,7 @@ struct CompletionView: View {
                         .buttonStyle(.plain)
                     }
                     .padding(32)
-                    .background(AppColors.white)
+                    .background(AppColors.dynamicCardBackground)
                     .cornerRadius(16)
                     .shadow(color: Color.black.opacity(0.1), radius: 8, x: 0, y: 4)
                     .padding(.horizontal, 32)
