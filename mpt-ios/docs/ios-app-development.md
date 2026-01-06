@@ -24,7 +24,7 @@
   - [Creating a Provisioning Profile](#creating-a-provisioning-profile)
   - [Bundle Identifier](#bundle-identifier)
   - [Installing the Built App](#installing-the-built-app)
-  - [Troubleshooting](#troubleshooting-1)
+  - [Troubleshooting CI/CD](#troubleshooting-cicd)
   - [Alternative: Building Locally](#alternative-building-locally)
 
 ## Overview
@@ -474,7 +474,7 @@ After the build succeeds:
    - Tap your Apple ID under "Developer App"
    - Tap "Trust"
 
-### Troubleshooting
+### Troubleshooting CI/CD
 
 #### Build Fails with "No profiles found"
 - Check that the provisioning profile matches the bundle identifier

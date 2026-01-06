@@ -2,6 +2,13 @@
 
 Een eenvoudige en effectieve app om de tafels van vermenigvuldiging en deling te oefenen. Gebouwd met SwiftUI voor iOS 15+.
 
+## Inhoudsopgave
+- [Functionaliteit](#functionaliteit)
+- [Screenshots](#screenshots)
+- [Development](#development)
+- [Installatie op een iOS Apparaat](#installatie-op-een-ios-apparaat)
+- [Technische Details](#technische-details)
+
 ## Functionaliteit
 
 ### 📚 Leer de Tafels
@@ -50,6 +57,38 @@ Een eenvoudige en effectieve app om de tafels van vermenigvuldiging en deling te
   <img src="docs/screenshots-dark-mode/Simulator Screenshot - iPhone 17 Pro - 2026-01-06 at 17.22.23.png" width="200" alt="Bevestiging">
   <img src="docs/screenshots-dark-mode/Simulator Screenshot - iPhone 17 Pro - 2026-01-06 at 17.22.43.png" width="200" alt="Leeg scoreboard">
 </div>
+
+## Development
+
+### 📖 Development-documentatie
+Bekijk de [gedetailleerde development gids](docs/ios-app-development.md) voor:
+- Installatie van de development omgeving
+- Projectstructuur en architectuur
+- Build-instructies voor local development
+- CI/CD setup voor automatische builds
+- Testprocedures en best practices
+
+### 🔧 Vereisten voor Development
+- **Mac computer** met macOS 12.5+ 
+- **Xcode 14.0+** (gratis via Mac App Store)
+- **iOS Simulator** voor testen
+- **Git** voor versiebeheer
+
+### 🚀 Snel Starten
+```bash
+# Clone de repository
+git clone https://github.com/edwinbulter/multiplication-trainer.git
+cd multiplication-trainer/mpt-ios
+
+# Open in Xcode
+open TafelsOefenen/TafelsOefenen.xcodeproj
+
+# Run in simulator (⌘R)
+```
+
+### 📱 Testen op Echte Apparaten
+Voor het testen op echte iOS-apparaten is een **Apple Developer Program** lidmaatschap vereist ($99/jaar). Zie de [installatie sectie](#installatie-op-een-ios-apparaat) voor meer informatie.
+
 
 ## Installatie op een iOS Apparaat
 
@@ -110,7 +149,3 @@ Om de app op een echt iOS-apparaat (iPhone/iPad) te installeren, heb je nodig:
 - **Architectuur**: MVVM (Model-View-ViewModel)
 - **Dataopslag**: Core Data
 - **Ondersteuning**: iPhone en iPad
-
-## Ondersteuning
-
-Heb je vragen of problemen? Open een issue op GitHub of bekijk de [ontwikkelingsdocumentatie](docs/ios-app-development.md) voor gedetailleerde instructies.
