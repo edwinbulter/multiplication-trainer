@@ -39,15 +39,18 @@ struct CompletionView: View {
                             .multilineTextAlignment(.center)
                         
                         // Choose Table Button
-                        Button("Kies een andere tafel") {
+                        Button(action: {
                             dismiss()
+                        }) {
+                            Text("Kies een andere tafel")
+                                .foregroundColor(AppColors.white)
+                                .font(.headline)
+                                .padding(.horizontal, 24)
+                                .padding(.vertical, 16)
+                                .background(AppColors.primary)
+                                .cornerRadius(8)
                         }
-                        .foregroundColor(AppColors.white)
-                        .font(.headline)
-                        .padding(.horizontal, 24)
-                        .padding(.vertical, 16)
-                        .background(AppColors.primary)
-                        .cornerRadius(8)
+                        .buttonStyle(.plain)
                     }
                     .padding(32)
                     .background(AppColors.white)

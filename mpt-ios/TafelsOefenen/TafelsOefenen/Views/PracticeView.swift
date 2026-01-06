@@ -147,17 +147,20 @@ struct PracticeView: View {
                 }
                 
                 // Controleer Button - Using success color
-                Button("Controleer") {
+                Button(action: {
                     _ = viewModel.checkAnswer()
+                }) {
+                    Text("Controleer")
+                        .foregroundColor(AppColors.white)
+                        .frame(maxWidth: .infinity)
+                        .padding(.vertical, 12)
+                        .background(AppColors.success)
+                        .cornerRadius(8)
+                        .font(.headline)
+                        .fontWeight(.bold)
                 }
-                .foregroundColor(AppColors.white)
-                .frame(maxWidth: .infinity)
-                .padding(.vertical, 12)
-                .background(AppColors.success)
-                .cornerRadius(8)
+                .buttonStyle(.plain)
                 .disabled(viewModel.userAnswer.isEmpty)
-                .font(.headline)
-                .fontWeight(.bold)
                 .padding(.horizontal)
                 .padding(.top, 20)
                 
@@ -184,19 +187,40 @@ struct PracticeView: View {
     
     @ViewBuilder
     private func keypadButton(_ key: String) -> some View {
-        Button(key) {
-            if key == "⌫" {
+        let isDelete = key == "⌫"
+        let baseColor = isDelete ? AppColors.error : AppColors.keyGray
+        let textColor = isDelete ? AppColors.white : AppColors.black
+        
+        Button (action: {
+            if isDelete {
                 viewModel.removeFromAnswer()
             } else {
                 viewModel.appendToAnswer(key)
             }
+        }){
+            Text(key)
+                .foregroundColor(textColor)
+                .frame(width: 60, height: 60)
+                .background(
+                    ZStack {
+                        // Main button face
+                        RoundedRectangle(cornerRadius: 8, style: .continuous)
+                            .fill(baseColor)
+                        
+                        // Bottom/right shadow (dark)
+                        RoundedRectangle(cornerRadius: 8, style: .continuous)
+                            .stroke(AppColors.black.opacity(0.15), lineWidth: 3)
+                            .offset(y: 2)
+                        
+                        // Top/left highlight (light)
+                        RoundedRectangle(cornerRadius: 8, style: .continuous)
+                            .stroke(AppColors.white.opacity(0.3), lineWidth: 2)
+                            .offset(y: -2)
+                    }
+                )
+                .font(.title2)
+                .fontWeight(.bold)
         }
-        .foregroundColor(key == "⌫" ? AppColors.white : AppColors.black)
-        .frame(width: 60, height: 60)
-        .background(key == "⌫" ? AppColors.error : AppColors.keyGray)
-        .cornerRadius(8)
-        .font(.title2)
-        .fontWeight(.bold)
         .padding(.horizontal, 5)
         .padding(.vertical, 5)
     }

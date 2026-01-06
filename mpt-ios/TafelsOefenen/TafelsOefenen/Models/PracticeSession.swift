@@ -58,22 +58,41 @@ struct Question: Identifiable {
     let answer: Double
     
     init(table: String, multiplier: Int, operation: String) {
-        self.table = table.replacingOccurrences(of: ",", with: ".").toDouble() ?? 0.0
+        let formatter = NumberFormatter()
+        formatter.locale = Locale(identifier: "nl_NL")
+        self.table = formatter.number(from: table)?.doubleValue ?? 0.0
         self.multiplier = multiplier
         self.operation = operation
         
+        print("DEBUG: Creating question - table: \(self.table), multiplier: \(multiplier), operation: '\(operation)'")
+        
         if operation == "divide" {
             let result = self.table * Double(multiplier)
-            self.questionText = "\(Int(result)) : \(Int(self.table)) = "
+            let formattedTable = table // Use original string to preserve precision
+            let formattedResult = result.truncatingRemainder(dividingBy: 1) == 0 ? String(Int(result)) : String(format: "%g", result).replacingOccurrences(of: ".", with: ",")
+            self.questionText = "\(formattedResult) : \(formattedTable) = "
             self.answer = Double(multiplier)
+            print("DEBUG: Division case - answer set to: \(self.answer)")
         } else {
-            self.questionText = "\(multiplier) × \(Int(self.table)) = "
-            self.answer = self.table * Double(multiplier)
+            let formattedTable = table // Use original string to preserve precision
+            self.questionText = "\(multiplier) × \(formattedTable) = "
+            self.answer = (self.table * Double(multiplier)).rounded(toPlaces: 10)
+            print("DEBUG: Multiplication case - answer set to: \(self.answer)")
         }
     }
     
     func checkAnswer(_ userAnswer: String) -> Bool {
-        let userAnswerDouble = userAnswer.replacingOccurrences(of: ",", with: ".").toDouble() ?? 0.0
-        return abs(userAnswerDouble - answer) < 0.0001
+        // Use the same Dutch locale parser as toDouble()
+        let formatter = NumberFormatter()
+        formatter.locale = Locale(identifier: "nl_NL")
+        guard let userAnswerDouble = formatter.number(from: userAnswer)?.doubleValue else { 
+            print("DEBUG: Failed to parse '\(userAnswer)'")
+            return false 
+        }
+        
+        print("DEBUG: User answer: \(userAnswerDouble), Expected: \(answer), Diff: \(abs(userAnswerDouble - answer))")
+        
+        // Direct comparison should work for both 1 and 1,0
+        return abs(userAnswerDouble - answer) < 0.001
     }
 }

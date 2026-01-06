@@ -23,17 +23,21 @@ struct LoginView: View {
                 .textFieldStyle(RoundedBorderTextFieldStyle())
                 .padding()
             
-            Button("Start Oefenen") {
+            Button(action: {
                 if !username.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
                     let user = User(username: username.trimmingCharacters(in: .whitespacesAndNewlines))
                     appState.saveUser(user)
                 }
+            }) {
+                Text("Start Oefenen")
+                    .foregroundColor(.white)
+                    .fontWeight(.bold)
+                    .frame(maxWidth: .infinity)
+                    .padding()
+                    .background(username.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ? Color.gray : Color.blue)
+                    .cornerRadius(8)
             }
-            .foregroundColor(.white)
-            .frame(maxWidth: .infinity)
-            .padding()
-            .background(username.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ? Color.gray : Color.blue)
-            .cornerRadius(8)
+            .buttonStyle(.plain)
             .disabled(username.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
             .padding()
         }
