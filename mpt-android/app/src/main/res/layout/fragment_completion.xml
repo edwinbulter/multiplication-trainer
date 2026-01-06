@@ -11,7 +11,7 @@
         android:id="@+id/app_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="@dimen/completion_title_top_margin"
         android:text="Tafels Oefenen"
         android:textSize="24sp"
         android:textStyle="bold"
@@ -29,11 +29,11 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="64dp"
+        android:layout_marginTop="@dimen/completion_card_top_margin"
         android:layout_marginEnd="32dp"
         app:cardCornerRadius="16dp"
         app:cardElevation="8dp"
-        app:cardBackgroundColor="@color/white"
+        app:cardBackgroundColor="?attr/colorSurface"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/app_title">
@@ -61,7 +61,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="18sp"
-                android:textColor="@color/black"
+                android:textColor="?attr/colorOnSurface"
                 android:layout_marginBottom="32dp"
                 android:gravity="center"
                 tools:text="Je hebt de tafel van 2 afgerond in 45 seconden!" />
@@ -77,6 +77,7 @@
                 android:textAllCaps="false"
                 android:paddingHorizontal="24dp"
                 app:backgroundTint="@color/primary"
+                android:textColor="@color/completion_button_text_light"
                 app:cornerRadius="8dp" />
 
         </LinearLayout>

@@ -48,7 +48,7 @@ class TableSelectionFragment : Fragment() {
         }
 
         val adapter = TablesAdapter(viewModel.tables) { table ->
-            val operation = if (binding.operationSwitch.isChecked) "multiply" else "divide"
+            val operation = if (binding.multiplyButton.isSelected) "multiply" else "divide"
             val action = TableSelectionFragmentDirections.actionTableSelectionFragmentToPracticeFragment(table, operation)
             findNavController().navigate(action)
         }
@@ -63,7 +63,7 @@ class TableSelectionFragment : Fragment() {
         binding.startCustomTableButton.setOnClickListener {
             val customTable = binding.customTableInput.text.toString()
             if (customTable.isNotBlank()) {
-                val operation = if (binding.operationSwitch.isChecked) "multiply" else "divide"
+                val operation = if (binding.multiplyButton.isSelected) "multiply" else "divide"
                 val action = TableSelectionFragmentDirections.actionTableSelectionFragmentToPracticeFragment(customTable, operation)
                 findNavController().navigate(action)
             }
@@ -77,12 +77,28 @@ class TableSelectionFragment : Fragment() {
             findNavController().navigate(R.id.action_tableSelectionFragment_to_loginFragment)
         }
 
-        binding.operationSwitch.setOnCheckedChangeListener { _, isChecked ->
-            if (isChecked) {
-                binding.operationText.text = "Vermenigvuldigen"
-            } else {
-                binding.operationText.text = "Delen"
-            }
+        // Set initial state
+        binding.multiplyButton.isSelected = true
+        binding.divideButton.isSelected = false
+        binding.multiplyButton.setTextColor(android.graphics.Color.WHITE)
+        binding.divideButton.setTextColor(android.graphics.Color.WHITE)
+
+        // Handle multiply button click
+        binding.multiplyButton.setOnClickListener {
+            binding.multiplyButton.isSelected = true
+            binding.divideButton.isSelected = false
+            // Refresh the drawable state
+            binding.multiplyButton.refreshDrawableState()
+            binding.divideButton.refreshDrawableState()
+        }
+
+        // Handle divide button click
+        binding.divideButton.setOnClickListener {
+            binding.divideButton.isSelected = true
+            binding.multiplyButton.isSelected = false
+            // Refresh the drawable state
+            binding.divideButton.refreshDrawableState()
+            binding.multiplyButton.refreshDrawableState()
         }
     }
 

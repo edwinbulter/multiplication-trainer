@@ -33,7 +33,7 @@
             android:id="@+id/welcome_message"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
+            android:layout_marginTop="@dimen/table_selection_welcome_top_margin"
             android:textColor="?attr/colorSecondary"
             android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -45,7 +45,7 @@
             android:id="@+id/subtitle_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="6dp"
+            android:layout_marginTop="@dimen/table_selection_subtitle_top_margin"
             android:text="Welk tafeltje wil je oefenen?"
             android:textSize="16sp"
             android:textColor="?attr/colorOnSurfaceVariant"
@@ -57,30 +57,112 @@
             android:id="@+id/view_scoreboard_button"
             android:layout_width="0dp"
             android:layout_height="48dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="@dimen/table_selection_scoreboard_top_margin"
             android:backgroundTint="?attr/colorSecondary"
             android:text="Bekijk Scorebord"
-            android:textSize="14sp"
+            android:textSize="17sp"
+            app:cornerRadius="8dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/subtitle_text" />
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/operation_card"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/table_selection_operation_top_margin"
+            app:cardBackgroundColor="@color/card_background"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="0dp"
+            app:strokeWidth="0dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/view_scoreboard_button">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="8dp">
+
+                <TextView
+                    android:id="@+id/operation_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Operatie"
+                    android:textSize="15sp"
+                    android:textColor="?attr/colorOnSurface"
+                    android:textStyle="bold"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginBottom="6dp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center">
+
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/multiply_button"
+                        android:layout_width="0dp"
+                        android:layout_height="32dp"
+                        android:layout_weight="1"
+                        android:layout_marginEnd="8dp"
+                        android:background="@drawable/operation_button_background"
+                        android:text="Vermenigvuldigen"
+                        android:textSize="12sp"
+                        android:textColor="@color/operation_button_text"
+                        android:textAllCaps="false" />
+
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/divide_button"
+                        android:layout_width="0dp"
+                        android:layout_height="32dp"
+                        android:layout_weight="1"
+                        android:layout_marginStart="8dp"
+                        android:background="@drawable/operation_button_background"
+                        android:text="Delen"
+                        android:textSize="12sp"
+                        android:textColor="@color/operation_button_text"
+                        android:textAllCaps="false" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <TextView
+            android:id="@+id/table_selection_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/table_selection_title_top_margin"
+            android:text="Kies een tafel"
+            android:textSize="15sp"
+            android:textColor="?attr/colorOnSurface"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/operation_card" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/tables_recycler_view"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="@dimen/table_selection_recycler_top_margin"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/view_scoreboard_button" />
+            app:layout_constraintTop_toBottomOf="@+id/table_selection_title" />
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/custom_table_card"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            app:cardBackgroundColor="?attr/colorSurface"
+            android:layout_marginTop="@dimen/table_selection_custom_top_margin"
+            app:cardBackgroundColor="@color/card_background"
             app:cardCornerRadius="8dp"
+            app:cardElevation="0dp"
+            app:strokeWidth="0dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tables_recycler_view">
@@ -88,23 +170,25 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="4dp">
+                android:padding="6dp">
 
                 <TextView
                     android:id="@+id/custom_table_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Of kies je eigen getal:"
-                    android:textSize="14sp"
-                    android:textColor="?attr/colorOnSurfaceVariant"
+                    android:text="Of kies je eigen getal"
+                    android:textSize="15sp"
+                    android:textColor="?attr/colorOnSurface"
+                    android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <EditText
                     android:id="@+id/custom_table_input"
                     android:layout_width="0dp"
                     android:layout_height="40dp"
-                    android:layout_marginTop="2dp"
+                    android:layout_marginTop="@dimen/table_selection_input_top_margin"
                     android:layout_marginEnd="8dp"
                     android:hint="Bijv. 11 of 1,5"
                     android:inputType="text"
@@ -112,6 +196,8 @@
                     android:textSize="12sp"
                     android:textColor="?attr/colorOnSurface"
                     android:textColorHint="?attr/colorOnSurfaceVariant"
+                    android:background="@drawable/rounded_edittext_background"
+                    android:padding="12dp"
                     app:layout_constraintEnd_toStartOf="@+id/start_custom_table_button"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/custom_table_title" />
@@ -123,6 +209,7 @@
                     android:backgroundTint="?attr/colorSecondary"
                     android:text="Start"
                     android:textSize="12sp"
+                    app:cornerRadius="8dp"
                     app:layout_constraintBottom_toBottomOf="@+id/custom_table_input"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/custom_table_input" />
@@ -130,46 +217,18 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
         </com.google.android.material.card.MaterialCardView>
 
-        <LinearLayout
-            android:id="@+id/operation_toggle_container"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:orientation="horizontal"
-            android:gravity="center_vertical"
-            android:padding="8dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/custom_table_card">
-
-            <Switch
-                android:id="@+id/operation_switch"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
-                android:checked="true" />
-
-            <TextView
-                android:id="@+id/operation_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Vermenigvuldigen"
-                android:textSize="16sp"
-                android:textColor="?attr/colorPrimary" />
-
-        </LinearLayout>
-
         <Button
             android:id="@+id/logout_button"
             android:layout_width="0dp"
             android:layout_height="48dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="@dimen/table_selection_logout_top_margin"
             android:backgroundTint="?attr/colorError"
             android:text="Uitloggen"
-            android:textSize="14sp"
+            android:textSize="17sp"
+            app:cornerRadius="8dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/operation_toggle_container" />
+            app:layout_constraintTop_toBottomOf="@+id/custom_table_card" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

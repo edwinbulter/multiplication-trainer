@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Completion screen specific colors for dark mode -->
+    <color name="completion_card_background">#475569</color>
+    <color name="completion_text_light">#E5E7EB</color>
+    <color name="completion_button_text_light">#F1F5F9</color>
+</resources>

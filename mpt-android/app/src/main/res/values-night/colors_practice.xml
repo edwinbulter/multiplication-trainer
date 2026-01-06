@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Practice screen specific colors for dark mode - maintain original appearance -->
+    <color name="practice_keypad_background">#475569</color>
+    <color name="practice_keypad_text">#E5E7EB</color>
+    <color name="practice_stop_button_background">#64748B</color>
+    <color name="practice_stop_button_text">#F1F5F9</color>
+</resources>

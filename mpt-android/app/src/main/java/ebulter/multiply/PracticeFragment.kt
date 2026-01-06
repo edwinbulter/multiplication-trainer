@@ -56,7 +56,12 @@ class PracticeFragment : Fragment() {
         viewModel.setTable(args.table, args.operation)
 
         viewModel.question.observe(viewLifecycleOwner) {
-            binding.questionText.text = "Tafel van ${args.table}"
+            val title = if (args.operation == "divide") {
+                "Delen door ${args.table}"
+            } else {
+                "Tafel van ${args.table}"
+            }
+            binding.questionText.text = title
             binding.questionDisplay.text = it
             binding.answerDisplay.text = ""
             binding.feedbackMessage.visibility = View.GONE
