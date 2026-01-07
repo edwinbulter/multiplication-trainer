@@ -1,12 +1,7 @@
 name: Build iOS
 
 on:
-  push:
-    branches: [ main ]
-    paths: [ 'mpt-ios/**' ]
-  pull_request:
-    branches: [ main ]
-    paths: [ 'mpt-ios/**' ]
+  workflow_dispatch: # Manual triggering only from GitHub UI
 
 jobs:
   build:
