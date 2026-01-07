@@ -126,11 +126,11 @@ class PracticeFragment : Fragment() {
         )
 
         keypadButtons.forEach { button ->
-            button.setOnClickListener { onNumberClicked(it as MaterialButton) }
+            button?.setOnClickListener { onNumberClicked(it as MaterialButton) }
         }
 
-        binding.keypadDecimal.setOnClickListener { onDecimalClicked() }
-        binding.keypadBackspace.setOnClickListener { onBackspaceClicked() }
+        binding.keypadDecimal?.setOnClickListener { onDecimalClicked() }
+        binding.keypadBackspace?.setOnClickListener { onBackspaceClicked() }
     }
 
     private fun onNumberClicked(button: MaterialButton) {
