@@ -53,7 +53,10 @@ class PracticeFragment : Fragment() {
             }
         })
 
-        viewModel.setTable(args.table, args.operation)
+        // Only initialize the ViewModel if it hasn't been initialized yet
+        if (viewModel.question.value == null) {
+            viewModel.setTable(args.table, args.operation)
+        }
 
         viewModel.question.observe(viewLifecycleOwner) {
             val title = if (args.operation == "divide") {
