@@ -6,6 +6,8 @@
     <dimen name="practice_stop_button_top_margin">50dp</dimen>
     <dimen name="completion_title_top_margin">32dp</dimen>
     <dimen name="completion_card_top_margin">64dp</dimen>
+    <dimen name="practice_progress_bottom_margin">50dp</dimen>
+
     
     <!-- Table selection screen dimensions -->
     <dimen name="table_selection_welcome_top_margin">12dp</dimen>

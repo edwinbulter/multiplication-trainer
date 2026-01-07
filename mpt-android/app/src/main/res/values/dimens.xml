@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- Smaller dimensions for short screens (height < 700dp) -->
-    <dimen name="practice_title_top_margin">16dp</dimen>
-    <dimen name="practice_question_top_margin">16dp</dimen>
+    <dimen name="practice_title_top_margin">10dp</dimen>
+    <dimen name="practice_question_top_margin">10dp</dimen>
     <dimen name="practice_stop_button_top_margin">10dp</dimen>
     <dimen name="completion_title_top_margin">16dp</dimen>
     <dimen name="completion_card_top_margin">32dp</dimen>
+    <dimen name="practice_progress_bottom_margin">20dp</dimen>
     
     <!-- Table selection screen dimensions for short screens -->
     <dimen name="table_selection_welcome_top_margin">2dp</dimen>
