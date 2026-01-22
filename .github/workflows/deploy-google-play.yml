@@ -88,13 +88,9 @@ jobs:
         git config --local user.name "GitHub Action"
         git add mpt-android/app/build.gradle.kts
         git commit -m "🔄 Auto-increment version code to ${{ steps.version.outputs.version_code }}"
-        # Get the default branch or use the branch that triggered the workflow
-        BRANCH=${GITHUB_REF#refs/heads/}
-        if [[ "$BRANCH" == "$GITHUB_SHA" ]]; then
-          # We're in detached HEAD (tag trigger), get the default branch
-          BRANCH=$(git remote show origin | grep "HEAD branch" | cut -d' ' -f5)
-        fi
-        git push origin HEAD:$BRANCH
+        # Always push to the default branch (main/master)
+        DEFAULT_BRANCH=$(git remote show origin | grep "HEAD branch" | cut -d' ' -f5)
+        git push origin HEAD:$DEFAULT_BRANCH
         
     - name: Upload to Google Play Console
       uses: r0adkll/upload-google-play@v1
