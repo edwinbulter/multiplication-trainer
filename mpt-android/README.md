@@ -2,7 +2,7 @@
 
 De Android versie van de [Multiplication Trainer applicatie](https://github.com/edwinbulter/multiplication-trainer). Deze native Android app biedt dezelfde functionaliteit aan als de web app, maar is specifiek ontwikkeld voor Android apparaten met een optimale gebruikerservaring voor mobiele apparaten.
 
-**📱 Download**: Installeer de app via de [GitHub Pages downloadpagina](https://edwinbulter.github.io/multiplication-trainer/mpt-android/) of via de `app-debug.apk` in de `app/build/outputs/apk/debug/` map.
+**📱 Download**: Installeer de app via de [Play Store](https://play.google.com/store/apps/details?id=ebulter.multiply) de [GitHub Pages downloadpagina](https://edwinbulter.github.io/multiplication-trainer/mpt-android/) of via de `app-debug.apk` in de `app/build/outputs/apk/debug/` map.
 
 ## Inhoudsopgave
 

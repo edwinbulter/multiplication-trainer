@@ -2,7 +2,7 @@
 
 Een multi-platform applicatie voor het oefenen van tafeltjes, beschikbaar in drie versies:
 - **Web Applicatie** - React versie voor browsers
-- **Android Applicatie** - Native Android versie  
+- **Android Applicatie** - Native Android versie - https://play.google.com/store/apps/details?id=ebulter.multiply 
 - **iOS Applicatie** - Native iOS versie
 
 De web applicatie is gedeployed in AWS en kun je uitproberen op [Tafels Oefenen](https://d2zf8l8tihew58.cloudfront.net/).
