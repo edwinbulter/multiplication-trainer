@@ -5,7 +5,7 @@ Een multi-platform applicatie voor het oefenen van tafeltjes, beschikbaar in dri
 - **Android Applicatie** - Native Android versie - https://play.google.com/store/apps/details?id=ebulter.multiply 
 - **iOS Applicatie** - Native iOS versie
 
-De web applicatie is gedeployed in AWS en kun je uitproberen op [Tafels Oefenen](https://d2zf8l8tihew58.cloudfront.net/).
+De web applicatie is gedeployed in AWS en kun je uitproberen op [Tafels Oefenen](https://tafels-oefenen.kabulter.click/tables).
 
 Dit document beschrijft de **Web Applicatie**. Voor de andere versies zie:
 - [iOS Applicatie](mpt-ios/README.md) - Complete gids voor de iOS versie
